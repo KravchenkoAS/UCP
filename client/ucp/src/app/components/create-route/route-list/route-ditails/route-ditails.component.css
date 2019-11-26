@@ -1,0 +1,24 @@
+.container {
+    color: #7D6342;
+}
+
+span {
+    color: #C9842E;
+}
+
+header {
+    color: #7D6342;
+    text-align: center;
+    font-weight: 700;
+    font-size: 150%;
+    padding: 0 0 1em 0;
+}
+
+.seg-info{
+    padding: 0.5em 0em;
+}
+
+.seg-header {
+    font-weight: 600;
+    font-size: 125%;
+}

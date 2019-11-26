@@ -1,0 +1,77 @@
+@media (max-width: 1200px) {
+    a > .table {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas: 
+        "name"
+        "status"
+        "date_price";
+    }
+}
+
+a {
+    color: #FDA43A;
+    padding: 0px .25em; 
+    
+    display: inline-block;
+
+    line-height: 0;
+    text-decoration:none;
+    cursor: pointer;
+}
+
+a:after {
+    background-color: #FDA43A;
+    display: block;
+    content: "";
+    height: 5px;
+    width: 0%;
+    transition: width .3s ease-in-out;
+}
+a:hover:after,
+a:focus:after {
+    width: 100%;
+}
+.project-tile {
+    background-color: #7D521D;
+    text-align: left;
+}
+
+.project-tile:hover {
+    color: #FDA43A;
+}
+
+a > p {
+    display: block;
+    padding: 1em;
+    font-size: 20px;
+}
+
+#project-a {
+    padding: 0px;
+    width: 100%;
+}
+
+a > .table {
+    display: grid;
+    grid-template-columns: 3fr 1fr  1fr;
+    grid-auto-columns: minmax(100px, auto);
+    grid-template-areas: 
+    "name status date_price";
+
+    padding: 1em;
+    font-size: 20px;
+}
+
+.name {
+    grid-area: name;
+}
+
+.status {
+    grid-area: status;
+
+}
+
+.date_price {
+    grid-area: date_price;
+}

@@ -1,0 +1,44 @@
+a {
+    color: #FDA43A;
+    /* padding: 0px .25em;  */
+    
+    display: inline-block;
+
+    line-height: 0;
+    text-decoration:none;
+    cursor: pointer;
+}
+
+a:after {
+    background-color: #FDA43A;
+    display: block;
+    content: "";
+    height: 5px;
+    width: 0%;
+    transition: width .3s ease-in-out;
+}
+a:hover:after,
+a:focus:after {
+    width: 100%;
+}
+
+h2 {
+    display: inline-block;
+    /* text-align: center; */
+    font-size: 33.5px; 
+}
+
+a > img {
+    height: 40px;
+    width: 40px;
+}
+
+header {
+    height: 40px;
+    display: grid;
+    grid-template-columns: 40px auto;
+}
+
+.b {
+    margin: auto;
+}

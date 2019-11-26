@@ -1,0 +1,54 @@
+.container {
+    color: #7D6342;
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(3, auto);
+    grid-template-areas: 
+    "header header header"
+    "route data add"
+    "price price price";
+}
+
+.header{
+    grid-area: header;
+    color: #7D6342;
+    /* background: lemonchiffon; */
+    text-align: center;
+    font-weight: 800;
+    font-size: 200%;
+    padding: 1em 0 .5em 0;
+}
+
+.route{
+    padding: 1em;
+    grid-area: route;
+    /* background: lightgreen; */
+}
+
+.data{
+    padding: 1em;
+    grid-area: data;
+    /* background: lightblue; */
+}
+
+.add{
+    padding: 1em;
+    grid-area: add;
+    /* background: wheat; */
+}
+
+.price {
+    padding: 1em;
+    font-weight: 700;
+    font-size: 125%;
+    grid-area: price;
+}
+
+span {
+    color: #C9842E;
+}
+
+.segment {
+    padding: 1em;
+}

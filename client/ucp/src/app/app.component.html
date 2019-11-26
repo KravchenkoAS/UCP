@@ -1,0 +1,29 @@
+<nav class="navbar">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">UCP</a>
+    </div>
+    <ul class="nav" routerLinkActive="active">
+      <il class="nav-item"><a class="nav-link" routerLink="home">Главная</a></il>
+      <il *ngIf="authority === 'client'" class="nav-item">
+        <a class="nav-link" routerLink="delivery">Доставка груза</a>
+      </il>
+      <il *ngIf="authority === 'admin' || authority === 'analyst'" class="nav-item">
+        <a class="nav-link" routerLink="bidClient">Заявки</a>
+      </il>
+      <il *ngIf="authority" class="nav-item">
+        <a class="nav-link" routerLink="settings">Настройки</a>
+      </il>
+      <il *ngIf="authority" class="nav-item">
+          <a class="nav-link" (click)="logout()" routerLink="home">Выйти</a>
+      </il>
+      <il *ngIf="!authority" class="nav-item">
+        <a class="nav-link" routerLink="auth/login">Войти</a>
+      </il>
+
+    </ul>
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+

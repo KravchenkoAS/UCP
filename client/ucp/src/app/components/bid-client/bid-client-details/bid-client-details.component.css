@@ -1,0 +1,22 @@
+a {
+    color: #FDA43A;
+    padding: 0px .25em;    
+    display: inline-block;
+
+    line-height: 1.5;
+    text-decoration:none;
+    cursor: pointer;
+}
+
+a:after {
+    background-color: #FDA43A;
+    display: block;
+    content: "";
+    height: 5px;
+    width: 0%;
+    transition: width .3s ease-in-out;
+}
+a:hover:after,
+a:focus:after {
+    width: 100%;
+}

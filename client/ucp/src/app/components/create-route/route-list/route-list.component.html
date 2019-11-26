@@ -1,0 +1,90 @@
+<div class="container">
+  <header class="header">Список маршрутов</header>
+  <div class="info">
+    <div>
+      <label>Маршрут: </label>
+      <span>{{startPoint.country}}/{{startPoint.city}} ---> {{endPoint.country}}/{{endPoint.city}}</span>
+    </div>
+    <div *ngIf="route.time == 0 && route.price == 0; else OkTimePrice">
+      <div *ngIf="authority === 'client';else NoClient">
+        Выберете маршрут
+      </div>
+      <ng-template #NoClient>
+        Заказчик еще не выбрал маршрут
+      </ng-template>
+    </div>
+    <ng-template #OkTimePrice>
+      <div>
+        <label>Время в пути: </label><span>{{route.time}} - {{route.time*2}} </span>дн
+      </div>
+      <div>
+        <label>Общее расстояние пути: </label><span>{{route.distance}} </span>км
+      </div>
+      <div>
+          <label>Общее стоимость перевозки: </label><span>$ {{route.price}}</span>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="tab">
+
+    <table>
+      <thead>
+        <tr class="head">
+          <th>№</th>
+          <th class="route">Количество сегментов маршрута</th>
+          <th>Сроки доставки</th>
+          <th>Растояние</th>
+          <th>Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr (click)="active(way)" *ngFor="let way of wayDTO">
+          <td>{{way.way}}</td>
+          <td>{{way.id_segment.length}}</td>
+          <td>{{way.time}} - {{way.time*2}}</td>
+          <td>{{way.distance}}</td>
+          <td>$ {{way.price}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="dit">
+
+    <div *ngIf="isActive; else NoActive">
+      <app-route-ditails [id_segment]=id_segment></app-route-ditails>
+    </div>
+    <ng-template #NoActive>
+        <div class="noActive">
+          Выберите путь
+        </div>
+    </ng-template>
+
+  </div>
+
+  <div class="footer">
+    <div *ngIf="route.time == 0 && route.price == 0; else RouteOK">
+      <div *ngIf="numberWayDTO != 0" [ngSwitch]="authority">
+        <label>Путь №<span>{{numberWayDTO}} </span></label> 
+        <ng-template ngSwitchCase="admin">
+            <button>Admin</button>
+        </ng-template>
+        <ng-template ngSwitchCase="analyst">
+            <button (click)=deleteWay(numberWayDTO)>Удалить</button>
+        </ng-template>
+        <ng-template ngSwitchCase="client">
+            <button (click)=submitOn(numberWayDTO)>Выбрать</button>
+        </ng-template>
+        <ng-template ngSwitchDefault>
+          :)
+        </ng-template>
+      </div>
+   
+    </div>
+    <ng-template #RouteOK>
+      <h2>Маршрут выбран</h2>
+    </ng-template>
+  </div>
+
+</div>

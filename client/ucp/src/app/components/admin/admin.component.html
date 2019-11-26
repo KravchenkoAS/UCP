@@ -1,0 +1,15 @@
+<h4>Content from Server</h4>
+{{board}}
+{{errorMessage}}
+
+
+<div style="padding: 20px;">
+    <h1 style="color: blue">{{title}}</h1>
+    <h2>{{description}}</h2>
+    <nav>
+        <a routerLink="person" class="btn btn-primary active" role="button" routerLinkActive="active">Person</a>
+        <a routerLink="add" class="btn btn-primary active" role="button" routerLinkActive="active">Add</a>
+        <a routerLink="findbyname" class="btn btn-primary active" role="button" routerLinkActive="active">Search</a>
+    </nav>
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,67 @@
+<div>
+    <div>
+        <form [formGroup]="segmentForm" (submit)="onSubmit()">
+      
+          <section>
+            <h2>Cегмент маршрута</h2>
+            
+            <label for="startPoint">Точка отправления</label>
+            <select id="startPoint" formControlName="startPoint">
+              <option disabled>Выберите точку отправления</option>          
+              <option *ngFor="let point of points" value={{point.id_point}}>{{point.country}}/{{point.city}}</option>
+            </select><br />
+      
+            <label for="endPoint">Точка прибытия</label>
+            <select id="endPoint" formControlName="endPoint">
+              <option disabled>Выберите точку прибытия</option>
+              <option *ngFor="let point of points" value={{point.id_point}}>{{point.country}}/{{point.city}}</option>
+            </select><br />
+
+            <label for="type_delivery">Тип доставки</label>
+            <select id="type_delivery" formControlName="type_delivery">
+              <option disabled>Выберите тип доставки</option>
+              <option *ngFor="let type of type_deliveres" value={{type.id_type_delivery}}>{{type.name}}</option>
+            </select>
+            <br />
+      
+            <div>
+              <label for="transport">Транспорт</label>
+            <select id="transport" formControlName="id_transport">
+                <option disabled>Выберите транспорт</option>
+                <option *ngFor="let transport of transports" value={{transport.id_transport}}>{{transport.name}}</option>
+            </select>
+            </div>
+
+            <label for="amount_transport">Количество транспорта</label>
+            <input type="text" id="amount_transport" formControlName="amount_transport" />
+            <br />
+            
+            <label for="distance">Расстояние, км</label>
+            <input type="text" id="distance" formControlName="distance" />
+            <br />
+
+            <label for="time">Количество дней, д: </label>{{segmentForm.value.time}} - {{segmentForm.value.time*2}}<br />
+
+            <div>
+              <label for="price">Цена, $: </label>{{segmentForm.value.price}}
+            </div>
+            
+            </section>
+            <br /> <br />
+      
+            <div *ngIf="segment.type_delivery !== undefind">
+              Сегмент сохранен
+            </div>
+
+          <button type="button" (click)="calculate()">Рассчитать</button>
+          <button type="button" (click)="save()">Сохранить</button>
+        </form>
+
+        {{segmentForm.value | json}}
+        <br />
+        {{segment | json}}
+
+      </div>
+  <button (click)="removeSegment(index)">Удалить сегмент
+  </button>
+</div>

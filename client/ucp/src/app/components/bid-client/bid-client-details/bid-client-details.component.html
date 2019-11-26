@@ -1,0 +1,69 @@
+<div>
+    <section>
+        <h2>Данные о грузе</h2>
+        <div>
+          <label>Тип груза: </label>{{orderDetails.type}}
+        </div>
+        <div>
+          <label for="orderDetails.name">Название груза: </label>{{orderDetails.name}}
+        </div>
+      
+        <section *ngIf="orderDetails.type !== 'Наливной' else Navalochnyy">
+          <div>
+            <label>Габариты груза: </label>{{orderDetails.length}} x {{orderDetails.width}} x {{orderDetails.height}} м
+          </div>
+        </section>
+        <div>
+          <label>Вес груза: </label>{{orderDetails.weight}} кг
+        </div>
+        <div>
+          <label>Количество груза: </label>{{orderDetails.amount}}
+          <container-element [ngSwitch]="orderDetails.type">
+            <ng-template ngSwitchCase="Штучный"> шт.</ng-template>
+            <ng-template ngSwitchCase="Навалочный"> тар.</ng-template>
+            <ng-template ngSwitchCase="Наливной"> куб. м. (объем)</ng-template>
+          </container-element>
+        </div>
+      </section>
+      
+      <section>
+        <h2>Направление</h2>
+        <div>
+          <label>Точка отправления: </label>{{startPoint.country}}/{{startPoint.city}}
+        </div>
+        <div>
+          <label>Точка прибытия: </label>{{endPoint.country}}/{{endPoint.city}}
+        </div>
+        <div>
+          <label>Дата отправления груза: </label>{{orderDetails.date}}
+        </div>
+      </section>
+      
+      <section *ngIf="orderDetails.isContainer || orderDetails.isDocuments; else noDopUslug">
+        <h2>Дополнительные услуги</h2>
+        <div *ngIf="orderDetails.isContainer">
+          Требуется защитная транспортировочная упаковка
+        </div>
+        <div *ngIf="orderDetails.isDocuments">
+          Требуется перевозка сопроводительных документов
+        </div>
+      </section>
+      <ng-template #noDopUslug>
+          <h2>Дополнительные услуги не требуются</h2>
+      </ng-template>
+      
+      <div *ngIf="order.status == 'Обрабатывается'; else anotherStatus">
+        <div>
+          <a routerLink="/route/{{orderDetails.id_order}}">Проложить маршрут</a>
+        </div>
+        <div>
+          <a [routerLink]="['/bidClient/routeList', orderDetails.id_order]"  routerLinkActive="active">Список маршрутов</a>
+        </div>
+      </div>
+
+      <ng-template #anotherStatus>
+        <div>
+          <a routerLink="/">Информация о маршруте</a>
+        </div>
+      </ng-template>
+</div>

@@ -1,0 +1,90 @@
+.container {
+    color: #7D6342;
+    display: grid;
+    height: 100%;
+    background: floralwhite;
+    grid-template-columns: 1fr 1fr;
+    /* grid-template-rows: 80px 100px 1fr 80px; */
+    grid-auto-rows: min-content;
+    grid-template-areas: 
+    "header header"
+    "info info"
+    "tab dit"
+    "footer footer";
+}
+
+.tab {
+    padding: 1em;
+    grid-area: tab;
+    background: black;
+}
+
+.dit { 
+    padding: 1em;
+    grid-area: dit;
+    background: red;
+}
+
+.header{
+    grid-area: header;
+
+    background: blanchedalmond;
+
+    color: #7D6342;
+    text-align: center;
+    font-weight: 800;
+    font-size: 200%;
+    padding: 1em 0 .5em 0;
+}
+
+.footer {
+    grid-area: footer;
+    text-align: center;
+    padding: 1em;
+    background: bisque;
+    font-weight: 700;
+}
+
+.info {
+    grid-area: info;
+    padding: 1em;
+    background: lightblue;
+}
+
+span {
+    color: #C9842E;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse; 
+    background: #FDC786;
+}
+
+td {
+    padding: .5em .1em;
+}
+
+th {
+    padding: 1em 2em;
+    background-color: #FDA43A;
+}
+
+tbody tr:hover {
+    background: #C9842E; 
+    cursor: pointer;
+}
+
+.route {
+    width: 70px;
+}
+
+.noActive {
+    color: #7D6342;
+    text-align: center;
+    font-weight: 700;
+    font-size: 150%;
+    padding: 0 0 1em 0;
+}
+

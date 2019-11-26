@@ -1,0 +1,10 @@
+<div class="project-tile">
+    <a [routerLink]="['./details', order.id_order]" (click)="onClick(order.id_order)" id="project-a"  routerLinkActive="active">
+        <div class="table">
+            <div class="name">{{order.name}}</div>
+            <div class="status">{{order.status}}</div>
+            <div class="date_price">{{order.date}} | {{order.price}}</div>
+        </div>
+    </a>
+</div>
+<app-bid-client-details *ngIf="isDetails" [order]='order'></app-bid-client-details>

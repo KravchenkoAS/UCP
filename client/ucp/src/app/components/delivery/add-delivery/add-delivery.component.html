@@ -1,0 +1,119 @@
+<p>
+  add-delivery works!
+</p>
+
+<div>
+  <form [formGroup]="myFirstReactiveForm" (submit)="onSubmit()">
+
+    <section>
+      <h2>Данные о грузе</h2>
+      <label for="type">Тип груза</label>
+      <select id="type" formControlName="type">
+        <option disabled>Выберите тип груза</option>
+        <option value="Штучный">Штучный</option>
+        <option value="Навалочный">Навалочный</option>
+        <option value="Наливной">Наливной</option>
+      </select>
+      <br />
+
+      <label for="name">Название груза</label>
+      <input type="text" id="name" formControlName="name" maxlength="25" />
+          <p>
+              <ngb-alert *ngIf="isControlInvalid('name')">
+                <strong>Ошибка!</strong> Проверьте корректность ввода. (A-z, А-я, 0-9, -)
+              </ngb-alert>
+            </p>
+  
+      <br />
+
+      <section *ngIf="myFirstReactiveForm.controls['type'].value !== 'Наливной' else Navalochnyy">
+          <br />
+          <h2>Габариты груза, м</h2>
+          <label for="length">Длина груза</label>
+          <input type="text" id="length" formControlName="length" />
+
+          <br />
+          <label for="width">Ширина груза</label>
+          <input type="text" id="width" formControlName="width" />
+
+          <br />
+          <label for="height">Высота груза</label>
+          <input type="text" id="height" formControlName="height" />
+          <br />
+
+      </section>
+
+      <br />
+
+      <label for="weight">Вес груза, кг</label>
+      <input type="text" id="weight" formControlName="weight" />
+      <br />
+
+      <label for="amount">Количество груза</label>
+      <input type="text" id="amount" formControlName="amount" />
+
+      <container-element [ngSwitch]="myFirstReactiveForm.controls['type'].value">
+        <ng-template ngSwitchCase="Штучный">шт.</ng-template>
+        <ng-template ngSwitchCase="Навалочный">тар.</ng-template>
+        <ng-template ngSwitchCase="Наливной">куб. м.  (объем)</ng-template>
+      </container-element>
+      <br />
+
+    </section>
+
+    <br />
+
+    <section>
+      <h2>Направление</h2>
+      <label for="startPoint">Точка отправления</label>
+      <select id="startPoint" formControlName="startPoint">
+        <option disabled>Выберите точку отправления</option>
+        <option value="1">Минск</option>
+    
+          <option *ngFor="let point of points" value={{point.id_point}}>{{point.country}}/{{point.city}}</option>
+       
+      </select>
+
+      <br />
+
+      <label for="endPoint">Точка прибытия</label>
+      <select id="endPoint" formControlName="endPoint">
+        <option disabled>Выберите точку прибытия</option>
+        <option value="1">Минск</option>
+          <option *ngFor="let point of points" value={{point.id_point}}>{{point.country}}/{{point.city}}</option>
+      </select>
+      <br />
+
+      <label for="date">Дата отправления груза</label>
+      <input type="date" id="date" formControlName="date" />
+      <br />
+
+    </section>
+
+    <br />
+
+    <section>
+      <h2>Дополнительные услуги</h2>
+      <input type="checkbox" id="isContainer" formControlName="isContainer" />
+      <label for="isContainer">Защитная транспортировочная упаковка</label>
+      <br />
+      <input type="checkbox" id="isDocuments" formControlName="isDocuments" />
+      <label for="isDocuments">Перевозка сопроводительных документов</label>
+      <br />
+    </section>
+    <br />
+   
+    <br />
+    <br />
+
+    <button type="submit">Отправить</button>
+  </form>
+</div>
+
+<div>
+  {{myFirstReactiveForm.value | json}}
+</div>
+
+<div [hidden]="!submitted">
+    <h3>Заявка принята!</h3>
+  </div>

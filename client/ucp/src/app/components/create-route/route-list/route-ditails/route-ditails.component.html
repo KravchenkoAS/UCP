@@ -1,0 +1,35 @@
+<div class="container">
+    <header>Список сегментов</header>
+    <div *ngIf="segmentsLength == 0; else OkSegmentList">
+      Список сегментов пуст
+    </div>
+    <ng-template #OkSegmentList>
+      <div *ngFor="let segment of segments; let i = index" class="seg-info">
+        <div class="seg-header">
+          <label>Сегмент №{{i + 1}}</label>
+        </div>
+        <div>
+          <label>Маршрут: </label><span>{{segment.startPoint}} ---> {{segment.endPoint}}</span>
+        </div>
+        <div>
+          <label>Тип доставки: </label><span>{{segment.type_delivery}}</span>
+        </div>
+        <div>
+          <label>Транспорта: </label><span>{{segment.transport}}</span>
+        </div>
+        <div>
+          <label>Количество транспорта: </label><span>{{segment.amount_transport}}</span>
+        </div>
+        <div>
+          <label>Расстояние пути: </label><span>{{segment.distance}}</span> км
+        </div>
+        <div>
+          <label>Время в пути: </label><span>{{segment.time}} - {{segment.time*2}} </span>дн
+        </div>
+        <div>
+          <label>Стоимость перевозки: </label><span>$ {{segment.price}}</span>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+  

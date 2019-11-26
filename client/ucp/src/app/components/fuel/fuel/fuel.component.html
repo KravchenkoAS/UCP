@@ -1,0 +1,25 @@
+<table>
+  <tr>
+    <td>№</td>
+    <td>Название</td>
+    <td>Цена, $</td>
+    <td *ngIf="isAdmin"></td>
+  </tr>
+  <tr *ngFor="let fuel of fuels; let i = index">
+    <td>{{i + 1}}</td>
+    <td>{{fuel.name}}</td>
+    <td>{{fuel.price}}</td>
+    <td *ngIf="isAdmin"><a (click)="changePrice(fuel)">Изменить цену</a></td>
+  </tr>
+</table>
+
+<div *ngIf="isChange">
+    <input type="text" placeholder="{{fuelChange.price}}" name="{{fuelChange.price}}" [(ngModel)]="fuelChange.price" required/>
+    <button (click)="saveChange(fuelChange)">Сохранить</button>
+    <p>
+        <ngb-alert *ngIf="!isControlInvalid(fuelChange.price)">
+          <strong>Ошибка!</strong> Проверьте корректность ввода. (0-9)
+        </ngb-alert>
+        <br />
+      </p>
+</div>

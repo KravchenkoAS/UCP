@@ -1,0 +1,60 @@
+/*
+
+#FDA43A - основной
+допцвета:
+    #7D521D +
+    #FDC786
+    #7D6342 +
+    #C9842E
+
+*/
+
+.navbar {
+    font-size: 20px;
+    position: sticky;
+    top: 0;
+    background-color: #7D521D;
+
+    display: grid;
+    grid-template-columns:  1fr 5fr;
+    grid-template-areas: 
+    "navbar-header nav"
+}
+
+.navbar > ul {
+    padding: 0;
+}
+
+.nav {
+    text-align: end;
+}
+
+.navbar-brand, .nav-link {
+    padding: .5em .25em 0em .25em; 
+    text-decoration:none;
+    color: #FDA43A;
+    line-height: 2.5;
+}
+
+.nav-link {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.nav-link:after {
+    background-color: #FDA43A;
+    display: block;
+    content: "";
+    height: 2px;
+    width: 0%;
+    transition: width .3s ease-in-out;
+}
+.nav-link:hover:after,
+.nav-link:focus:after {
+    width: 100%;
+}
+
+.container {
+    height: 92vh;
+    background: blueviolet;
+}

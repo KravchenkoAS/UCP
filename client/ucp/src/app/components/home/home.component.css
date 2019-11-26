@@ -1,0 +1,19 @@
+#fuel, #transport {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+#fuel:checked + .fuel-content,
+#transport:checked + .transport-content {
+    display: block;
+}
+#fuel-label-id, #transport-label-id {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
+
+.fuel-content, .transport-content {
+    margin-top: 10px;
+    display: none;
+}

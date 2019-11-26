@@ -1,0 +1,28 @@
+<div *ngIf="info.token; else loggedOut">
+  <h5 class="text-primary">Your Information</h5>
+  <p>
+    <strong>Username:</strong> {{info.username}}<br/>
+    <strong>Roles:</strong> {{info.authorities}}<br />
+    <strong>Token:</strong> {{info.token}}.
+  </p>
+  <button class="btn btn-secondary" (click)="logout()">Logout</button>
+
+  <div>
+    <header>Тарифы</header>
+    <div>
+      <label class="fuel-label" for="fuel" id="fuel-label-id">Топливо</label>
+      <input type="checkbox" id="fuel">
+      <div class="fuel-content"><app-fuel [authority]="info.authorities"></app-fuel></div>
+    </div>
+    <div>
+      <label class="transport-label" for="transport" id="transport-label-id">Транспорт</label>
+      <input type="checkbox" id="transport">
+      <div class="transport-content"><app-transport [authority]="info.authorities"></app-transport></div>
+    </div>
+  </div>
+
+</div>
+ 
+<ng-template #loggedOut>
+  Please login.
+</ng-template>
