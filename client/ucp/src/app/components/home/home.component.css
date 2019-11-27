@@ -1,19 +1,21 @@
-#fuel, #transport {
+#fuel, #transport, #type-delivery, #point {
     position: absolute;
     top: -9999px;
     left: -9999px;
 }
 #fuel:checked + .fuel-content,
-#transport:checked + .transport-content {
+#point:checked + .point-content,
+#transport:checked + .transport-content,
+#type-delivery:checked + .type-delivery-content {
     display: block;
 }
-#fuel-label-id, #transport-label-id {
+#fuel-label-id, #transport-label-id, #type-delivery-label-id, #point-label-id {
     text-decoration: underline;
     color: blue;
     cursor: pointer;
 }
 
-.fuel-content, .transport-content {
+.fuel-content, .transport-content, .type-delivery-content, .point-content {
     margin-top: 10px;
     display: none;
 }

@@ -111,7 +111,7 @@ public class OrderController {
         return getAllOrdersUserDTOList;
     }
 
-    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST')")
+    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN')")
     @GetMapping(value = "/api/test/client/delivery/delivery-details/{id_order}")
     public Order_Cargo_RouteDTO getOrder(@PathVariable("id_order") Long id_order) {
 
@@ -125,7 +125,7 @@ public class OrderController {
         }
     }
 
-    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST')")
+    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN')")
     @GetMapping(value = "/api/test/getAloneOrder/{id_order}")
     public OrderDTO getAloneOrder(@PathVariable("id_order") Long id_order) {
 
@@ -150,14 +150,19 @@ public class OrderController {
 
         if (optionalOrder.isPresent()) {
             optionalOrder.get().setName(order.getName());
-            optionalOrder.get().setContainer(order.getContainer());
-            optionalOrder.get().setDocuments(order.getDocuments());
-            if (order.getContainer()) {
+            if (order.getContainer() && !optionalOrder.get().getContainer()) {
                 optionalOrder.get().setPrice(optionalOrder.get().getPrice() + 5);
+            } else if(optionalOrder.get().getPrice() > 3 && optionalOrder.get().getContainer() && !order.getContainer()) {
+                optionalOrder.get().setPrice(optionalOrder.get().getPrice() - 5);
             }
-            if (order.getDocuments()) {
+            optionalOrder.get().setContainer(order.getContainer());
+            if (order.getDocuments() && !optionalOrder.get().getDocuments()) {
                 optionalOrder.get().setPrice(optionalOrder.get().getPrice() + 3);
+            } else if(optionalOrder.get().getPrice() >= 3 && optionalOrder.get().getDocuments() && !order.getDocuments()) {
+                optionalOrder.get().setPrice(optionalOrder.get().getPrice() - 3);
             }
+            optionalOrder.get().setDocuments(order.getDocuments());
+            optionalOrder.get().getRoute().setPrice(optionalOrder.get().getPrice());
             return new ResponseEntity<>(Order_Cargo_RouteDTO.fromModel(orderRepository.save(optionalOrder.get())),
                     HttpStatus.OK);
         } else {
@@ -199,4 +204,18 @@ public class OrderController {
         return orderDTOList;
     }
 
+    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN')")
+    @GetMapping("/api/test/order/getStatus/{id_order}")
+    public ResponseEntity<String> getStatus(@PathVariable("id_order") Long id_order) {
+        System.out.printf("getStatus Order with ID = " + id_order);
+
+        Optional<Order> order = orderRepository.findById(id_order);
+
+        if (order.isPresent()) {
+            System.out.println("...");
+            return new ResponseEntity<>(order.get().getStatus(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

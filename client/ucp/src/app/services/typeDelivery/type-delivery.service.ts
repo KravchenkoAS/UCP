@@ -15,11 +15,15 @@ export class TypeDeliveryService {
   constructor(private http: HttpClient, private authService: AuthService,                           // <<<---
         private tokenStorage: TokenStorageService) { }
 
-  createTypeDelivery(type_delivery: TypeDelivery): Observable<Object> {                // <<<---
+  createTypeDelivery(type_delivery: TypeDelivery): Observable<any> {                // <<<---
     return this.http.post(`${this.baseUrl}/createTypeDelivery`, type_delivery);     // <<<---
   }      
 
   getAllTypeDeliveries(): Observable<any> {
     return this.http.get(`${this.baseUrl}/getAllTypeDeliveries`);
   }
+
+  deleteTypeDelivery(type: TypeDelivery): Observable<any> {                         // <<<---
+    return this.http.delete(`${this.baseUrl}/deleteTypeDelivery/${type.id_type_delivery}`, { responseType: 'text' });                  // <<<---
+  }  
 }

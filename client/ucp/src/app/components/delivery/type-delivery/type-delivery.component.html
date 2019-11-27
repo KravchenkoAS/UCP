@@ -1,0 +1,26 @@
+<table>
+    <tr>
+      <td>№</td>
+      <td>Название</td>
+      <td *ngIf="isAdmin"></td>
+    </tr>
+    <tr *ngFor="let type of typeDelivery; let i = index">
+      <td>{{i + 1}}</td>
+      <td>{{type.name}}</td>
+      <td *ngIf="isAdmin"><a (click)="Delete(type, i)">Удалить</a></td>
+    </tr>
+  </table>
+  <div *ngIf="isAdmin">
+    <a (click)="Add(type)">Добавить</a>
+  </div>
+ 
+  <div *ngIf="isAdd">
+      <input type="text" placeholder="Название" name="name" [(ngModel)]="name" required/>
+      <button (click)="Save(name)">Сохранить</button>
+      <p>
+          <ngb-alert *ngIf="!isControlInvalid(name)">
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (А-я)
+          </ngb-alert>
+          <br />
+        </p>
+  </div>

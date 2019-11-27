@@ -5,7 +5,7 @@
       <label>Маршрут: </label>
       <span>{{startPoint.country}}/{{startPoint.city}} ---> {{endPoint.country}}/{{endPoint.city}}</span>
     </div>
-    <div *ngIf="route.time == 0 && route.price == 0; else OkTimePrice">
+    <div *ngIf="route.time == 0 && route.distance == null; else OkTimePrice">
       <div *ngIf="authority === 'client';else NoClient">
         Выберете маршрут
       </div>
@@ -38,7 +38,7 @@
           <th>Цена</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf="wayDTO; else NoWayDTO">
         <tr (click)="active(way)" *ngFor="let way of wayDTO">
           <td>{{way.way}}</td>
           <td>{{way.id_segment.length}}</td>
@@ -47,6 +47,13 @@
           <td>$ {{way.price}}</td>
         </tr>
       </tbody>
+      <ng-template #NoWayDTO>
+        <tr>
+          <td colspan="5">
+            Список маршрутов пуст
+          </td>
+        </tr>
+      </ng-template>
     </table>
 
   </div>

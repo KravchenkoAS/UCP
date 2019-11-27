@@ -9,4 +9,17 @@ export class Transport {
     price: number;
     coefficient: number;
     fuel_consumption: number;
+
+    init(trnsport: any){
+        this.fuel = trnsport.fuel;
+        this.name = trnsport.name;
+        this.type_delivery = trnsport.type_delivery;
+        this.speed = trnsport.speed;
+        this.max_volume = trnsport.max_volume;
+        this.max_weight = trnsport.max_weight;
+        this.price = trnsport.price;
+        this.coefficient = trnsport.coefficient;
+        this.fuel_consumption = trnsport.fuel_consumption;
+      }
+
 }

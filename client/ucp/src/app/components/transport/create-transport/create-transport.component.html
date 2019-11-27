@@ -1,0 +1,100 @@
+<div>
+  <form [formGroup]="transportForm" (submit)="onSubmit()">
+
+    <section>
+
+      <div>
+        <label for="type_delivery">Тип транспорта</label>
+        <select id="type_delivery" formControlName="type_delivery">
+          <option disabled>Выберите тип транспорта</option>
+          <option *ngFor="let type of typeDelivery" value={{type.name}}>{{type.name}}</option> 
+        </select>
+      </div>
+      
+      <div>
+        <label for="fuel">Тип топлива</label>
+        <select id="fuel" formControlName="fuel">
+          <option disabled>Выберите тип топлива</option>
+          <option *ngFor="let f of fuel" value={{f.name}}>{{f.name}}</option> 
+        </select>
+      </div>
+      
+
+      <div>
+        <label for="fuel_consumption">Расход топлива на 100 км: </label>
+        <input type="text" id="fuel_consumption" formControlName="fuel_consumption" maxlength="5" />
+        <p>
+          <ngb-alert *ngIf="isControlInvalid('fuel_consumption')">
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (0-9)
+          </ngb-alert>
+        </p>
+      </div>
+
+      <div>
+        <label for="name">Название транспорта</label>
+        <input type="text" id="name" formControlName="name" maxlength="25" />
+        <p>
+          <ngb-alert *ngIf="isControlInvalid('name')">
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (A-z, А-я, 0-9, -)
+          </ngb-alert>
+        </p>
+      </div>
+
+      <div>
+        <label for="speed">Средняя скорость, км/ч: </label>
+        <input type="text" id="speed" formControlName="speed" maxlength="3" />
+        <p>
+          <ngb-alert *ngIf="isControlInvalid('speed')">
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (0-9)
+          </ngb-alert>
+        </p>
+      </div>
+      
+      <div>
+        <label for="max_volume">Максимальный объем перевозки, куб м: </label>
+        <input type="text" id="max_volume" formControlName="max_volume" maxlength="10" />
+        <p>
+          <ngb-alert *ngIf="isControlInvalid('max_volume')">
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (0-9)
+          </ngb-alert>
+        </p>
+      </div>
+
+      <div>
+        <label for="max_weight">Максимальная грузоподъемность, кг: </label>
+        <input type="text" id="max_weight" formControlName="max_weight" maxlength="20" />
+        <p>
+          <ngb-alert *ngIf="isControlInvalid('max_weight')">
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (0-9)
+          </ngb-alert>
+        </p>
+      </div>
+
+      <div>
+        <label for="price">Стоимость, $: </label>
+        <input type="text" id="price" formControlName="price" maxlength="10" />
+        <p>
+          <ngb-alert *ngIf="isControlInvalid('price')">
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (0-9)
+          </ngb-alert>
+        </p>
+      </div>
+
+      <div>
+        <label for="coefficient">Коэффициент использования: </label>
+        <input type="text" id="coefficient" formControlName="coefficient" maxlength="5" />
+        <p>
+          <ngb-alert *ngIf="isControlInvalid('price')">
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (0-9)
+          </ngb-alert>
+        </p>
+      </div>
+    </section>
+
+    <button type="submit">Сохранить</button>
+  </form>
+</div>
+
+<div>
+  {{transportForm.value | json}}
+</div>

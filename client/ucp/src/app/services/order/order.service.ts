@@ -18,7 +18,7 @@ export class OrderService {
         private tokenStorage: TokenStorageService) { }
 
   createOrder(formCreateOrder: any): Observable<Object> {                // <<<---
-    let orderCreate: OrderCreate = new OrderCreate()
+    let orderCreate: OrderCreate = new OrderCreate();
     orderCreate.type = formCreateOrder.type;
     orderCreate.name = formCreateOrder.name;
     orderCreate.length = formCreateOrder.length;
@@ -59,5 +59,9 @@ export class OrderService {
     return this.http.delete(`${this.baseUrl}/delete/${id_order}`,                    // <<<--- 
                             { responseType: 'text' });                  // <<<---
   }  
+
+  getStatus(id_order: number): Observable<any> {
+    return this.http.get(`${this.baseUrl_2}/order/getStatus/${id_order}`,{responseType:'text'});
+  }
 
 }

@@ -2,7 +2,9 @@ package Application.Controllers;
 
 import Application.DTO.TransportDTO;
 import Application.Entites.Transport;
+import Application.Repositories.FuelRepository;
 import Application.Repositories.TransportRepository;
+import Application.Repositories.Type_deliveryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,25 +22,39 @@ public class TransportController {
     @Autowired
     private TransportRepository transportRepository;
 
+    @Autowired
+    private FuelRepository fuelRepository;
+
+    @Autowired
+    private Type_deliveryRepository typeDeliveryRepository;
+
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/api/test/transport/updateTransport/{id_transport}")
-    public ResponseEntity<TransportDTO> updateTransport(@PathVariable("id_transport") Long id_transport,
-                                                    @RequestBody TransportDTO transportDTO) {
-        System.out.println("Update Transport with ID = " + transportDTO.getId_transport() + "...");
+    @PostMapping("api/test/transport/updateTransport")
+    public ResponseEntity<TransportDTO> updateTransport(@RequestBody TransportDTO transportDTO) {
+        System.out.println("updateTransport");
 
-        Optional<Transport> optionalTransport = transportRepository.findById(id_transport);
+        Optional<Transport> transport = transportRepository.findByName(transportDTO.getName());
 
-        if (optionalTransport.isPresent()) {
-            //ДОБАВИТЬ ИЗМЕНЕНИЕ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            return new ResponseEntity<>(TransportDTO.fromModel(transportRepository.save(optionalTransport.get())),
-                    HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if(!transport.isPresent()) {
+            transport.get().setName(transportDTO.getName());
         }
+
+        transport.get().setCoefficient(transportDTO.getCoefficient());
+        transport.get().setFuel_consumption(transportDTO.getFuel_consumption());
+        transport.get().setMax_volume(transportDTO.getMax_volume());
+        transport.get().setMax_weight(transportDTO.getMax_weight());
+        transport.get().setSpeed(transportDTO.getSpeed());
+        transport.get().setPrice(transportDTO.getPrice());
+        transport.get().setFuel(fuelRepository.findByName(transportDTO.getFuel()));
+        transport.get().setType_delivery(typeDeliveryRepository.findByName(transportDTO.getType_delivery()));
+
+        System.out.println("...");
+        return new ResponseEntity<>(TransportDTO.fromModel(transportRepository.save(transport.get())), HttpStatus.OK);
+
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/api/test/transport/delete/{id_transport}")
+    @DeleteMapping("/api/test/transport/deleteTransport/{id_transport}")
     public ResponseEntity<String> deleteTransport(@PathVariable("id_transport") Long id_transport) {
         System.out.println("Delete Transport with ID = " + id_transport + "...");
 

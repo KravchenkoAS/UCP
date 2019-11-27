@@ -155,6 +155,12 @@ export class CreateRouteComponent implements OnInit {
       time = this.segmentService.calculateAllTime(this.segments);
       distance = this.segmentService.calculateAllDistance(this.segments);
     }
+    if (this.order.isContainer) {
+      price += 5;
+    }
+    if (this.order.isDocuments) {
+      price += 3; 
+    }
     this.order.price += price;
     this.time = time;
     this.distance = distance;

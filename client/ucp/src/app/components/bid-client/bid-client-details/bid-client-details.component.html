@@ -63,7 +63,7 @@
 
       <ng-template #anotherStatus>
         <div>
-          <a routerLink="/">Информация о маршруте</a>
+          <a [routerLink]="['/bidClient/routeList', orderDetails.id_order]"  routerLinkActive="active">Информация о маршруте</a>
         </div>
       </ng-template>
 </div>

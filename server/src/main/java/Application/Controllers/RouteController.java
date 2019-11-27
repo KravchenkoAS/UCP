@@ -74,6 +74,8 @@ public class RouteController {
                 dictionaryList.clear();
                 for (Dictionary dictionary : route.get().getDictionaries()) {
                     if (dictionary.getWay() == i + 1) {
+                        dictionary.getSegment().setPrice(
+                                dictionary.getSegment().getPrice() + route.get().getPrice());
                         dictionaryList.add(dictionary);
                     }
                 }
@@ -165,13 +167,13 @@ public class RouteController {
 
                 Route route = routeRepository.findById(id_route).get();
                 route.setDistance(wayDTO.getDistance());
-                route.setPrice(wayDTO.getPrice());
+                route.setPrice(route.getPrice() + wayDTO.getPrice());
                 route.setTime(wayDTO.getTime());
                 routeRepository.save(route);
 
                 Order order = orderRepository.findById(id_order).get();
                 order.setStatus("Договор");
-                order.setPrice(route.getPrice());
+                order.setPrice(order.getPrice() + route.getPrice());
                 orderRepository.save(order);
 
                 return new ResponseEntity<>(WayDTO.fromModel(dictionaryList), HttpStatus.OK);

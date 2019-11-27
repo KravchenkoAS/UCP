@@ -1,22 +1,41 @@
 <table>
   <tr>
     <td>№</td>
-    <td>Тип</td>
+    <td>Тип транспорта</td>
+    <td>Тип топлива</td>
+    <td>Расход</td>
     <td>Название</td>
-    <td>Максимальный объем перевозки, куб. м</td>
+    <td>Cкорость, км/ч</td>
+    <td>Макс. объем перевозки, куб. м</td>
     <td>Грузоподъемность</td>
     <td>Стоимость, $</td>
+    <td>Коэфф. использования</td>
     <td *ngIf="isAdmin"></td>
     <td *ngIf="isAdmin"></td>
   </tr>
   <tr *ngFor="let transport of transports; let i = index">
     <td>{{i + 1}}</td>
     <td>{{transport.type_delivery}}</td>
+    <td>{{transport.fuel}}</td>
+    <td>{{transport.fuel_consumption}}</td>
     <td>{{transport.name}}</td>
+    <td>{{transport.speed}}</td>
     <td>{{transport.max_volume}}</td>
     <td>{{transport.max_weight}}</td>
     <td>{{transport.price}}</td>
-    <td *ngIf="isAdmin"><a (click)="changeOrAdd(transport)">Изменить</a></td>
-    <td *ngIf="isAdmin"><a (click)="delete(transport.id_transport)">Удалить</a></td>
+    <td>{{transport.coefficient}}</td>
+    <td *ngIf="isAdmin"><a (click)="Change(transport)">Изменить</a></td>
+    <td *ngIf="isAdmin"><a (click)="Delete(transport.id_transport)">Удалить</a></td>
   </tr>
 </table>
+<div *ngIf="isAdmin">
+  <a (click)="Add(transport)">Добавить</a>
+</div>
+
+<div *ngIf="isChange">
+  <app-create-transport [transportChange]="transportChange" (transport)="TransportChange($event)"></app-create-transport>
+</div>
+
+<div *ngIf="isAdd">
+  <app-create-transport (transport)="TransportChange($event)"></app-create-transport>
+</div>

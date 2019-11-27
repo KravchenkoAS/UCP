@@ -1,0 +1,47 @@
+<table>
+  <tr>
+    <td>№</td>
+    <td>Страны</td>
+    <td>Город</td>
+    <td *ngIf="isAdmin"></td>
+  </tr>
+  <tr *ngFor="let point of points; let i = index">
+    <td>{{i + 1}}</td>
+    <td>{{point.country}}</td>
+    <td>{{point.city}}</td>
+    <td *ngIf="isAdmin"><a (click)="Delete(point, i)">Удалить</a></td>
+  </tr>
+</table>
+<div *ngIf="isAdmin">
+  <a (click)="Add()">Добавить</a>
+</div>
+
+<div *ngIf="isAdd">
+  <form [formGroup]="pointForm" (submit)="onSubmit()">
+    <section>
+      <div>
+        <label for="country">Название страны</label>
+        <input type="text" id="country" formControlName="country" maxlength="25" />
+        <p>
+          <ngb-alert *ngIf="isControlInvalid('country')">
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (А-я, -)
+          </ngb-alert>
+        </p>
+      </div>
+
+      <div>
+        <label for="city">Название города</label>
+        <input type="text" id="city" formControlName="city" maxlength="25" />
+        <p>
+          <ngb-alert *ngIf="isControlInvalid('city')">
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (А-я, -)
+          </ngb-alert>
+        </p>
+      </div>
+    </section>
+      <button type="submit">Сохранить</button>
+  </form>
+  <div>
+    {{pointForm.value | json}}
+  </div>
+</div>

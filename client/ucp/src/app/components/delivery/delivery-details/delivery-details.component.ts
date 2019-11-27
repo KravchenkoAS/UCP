@@ -19,6 +19,7 @@ export class DeliveryDetailsComponent implements OnInit {
   startPoint = new Point();
   endPoint = new Point();
   submitted = false;
+  status: string;
 
   constructor(private _router: Router, private orderService: OrderService, private pointService: PointService,
     deliveryComponent: DeliveryComponent) { }
@@ -29,9 +30,10 @@ export class DeliveryDetailsComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data),
-            this.order = data;
+          this.order = data;
           this.getPoint(this.order.startPoint, this.startPoint);
           this.getPoint(this.order.endPoint, this.endPoint);
+          this.getStatus();
         },
         error => {
           console.log(error);
@@ -97,6 +99,17 @@ export class DeliveryDetailsComponent implements OnInit {
           console.log(error);
           alert(error.error.message);
         })
+  }
+
+  getStatus(){
+    this.orderService.getStatus(this.id_order)
+    .subscribe(
+      data => {
+        this.status = data;
+      }, error => {
+        console.log(error);
+        alert(error.error.message);
+      })
   }
 
 }

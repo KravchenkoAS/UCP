@@ -19,6 +19,16 @@
       <input type="checkbox" id="transport">
       <div class="transport-content"><app-transport [authority]="info.authorities"></app-transport></div>
     </div>
+    <div>
+      <label class="type-delivery-label" for="type-delivery" id="type-delivery-label-id">Типы доставок</label>
+      <input type="checkbox" id="type-delivery">
+      <div class="type-delivery-content"><app-type-delivery [authority]="info.authorities"></app-type-delivery></div>
+    </div>
+    <div>
+      <label class="point-label" for="point" id="point-label-id">Пункты доставки</label>
+      <input type="checkbox" id="point">
+      <div class="point-content"><app-point [authority]="info.authorities"></app-point></div>
+    </div>
   </div>
 
 </div>

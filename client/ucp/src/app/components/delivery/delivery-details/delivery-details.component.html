@@ -58,14 +58,27 @@
 
 <section>
   <h2>Дополнительные услуги</h2>
-  <div>
-    <input type="checkbox" id="order.isContainer" [checked]="order.isContainer" [(ngModel)]="order.isContainer"/>
-    <label for="order.isContainer">Защитная транспортировочная упаковка</label>
+  <div *ngIf="status === 'Обрабатывается' || status === 'Договор'; else OtherStatus">
+    <div>
+      <input type="checkbox" id="order.isContainer" [checked]="order.isContainer" [(ngModel)]="order.isContainer"/>
+      <label for="order.isContainer">Защитная транспортировочная упаковка</label>
+    </div>
+    <div>
+      <input type="checkbox" id="order.isDocuments" [checked]="order.isDocuments" [(ngModel)]="order.isDocuments"/>
+      <label for="order.isDocuments">Перевозка сопроводительных документов</label>
+    </div>
   </div>
-  <div>
-    <input type="checkbox" id="order.isDocuments" [checked]="order.isDocuments" [(ngModel)]="order.isDocuments"/>
-    <label for="order.isDocuments">Перевозка сопроводительных документов</label>
-  </div>
+  <ng-template #OtherStatus>
+    <div>
+      <input type="checkbox" id="order.isContainer" [checked]="order.isContainer" [(ngModel)]="order.isContainer" disabled/>
+      <label for="order.isContainer">Защитная транспортировочная упаковка</label>
+    </div>
+    <div>
+      <input type="checkbox" id="order.isDocuments" [checked]="order.isDocuments" [(ngModel)]="order.isDocuments" disabled/>
+      <label for="order.isDocuments">Перевозка сопроводительных документов</label>
+    </div>
+  </ng-template>
+  
 </section>
 
 <div *ngIf="submitted">

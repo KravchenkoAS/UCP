@@ -37,14 +37,16 @@ public class FuelController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/api/test/fuel/updateFuel/{id_fuel}")
-    public ResponseEntity<Fuel> updateFuel(@PathVariable("id_fuel") Long id_fuel,
-                                           @RequestBody Fuel fuel) {
-        System.out.println("Update Fuel with ID = " + fuel.getId_fuel() + "...");
+    public ResponseEntity<FuelDTO> updateFuel(@PathVariable("id_fuel") Long id_fuel,
+                                           @RequestBody FuelDTO fuelDTO) {
+        System.out.println("Update Fuel with ID = " + id_fuel);
 
         Optional<Fuel> optionalFuel = fuelRepository.findById(id_fuel);
 
         if (optionalFuel.isPresent()) {
-            return new ResponseEntity<>(fuelRepository.save(fuel),
+            optionalFuel.get().setPrice(fuelDTO.getPrice());
+            System.out.println("...");
+            return new ResponseEntity<>(FuelDTO.fromModel(fuelRepository.save(optionalFuel.get())),
                     HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

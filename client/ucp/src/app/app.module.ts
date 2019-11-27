@@ -29,6 +29,9 @@ import { TransportComponent } from './components/transport/transport/transport.c
 import { RouteListComponent } from './components/create-route/route-list/route-list.component';
 import { RouteDitailsComponent } from './components/create-route/route-list/route-ditails/route-ditails.component';
 import { ClientRouteListComponent } from './components/client-route-list/client-route-list.component';
+import { CreateTransportComponent } from './components/transport/create-transport/create-transport.component';
+import { TypeDeliveryComponent } from './components/delivery/type-delivery/type-delivery.component';
+import { PointComponent } from './components/point/point/point.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +54,10 @@ import { ClientRouteListComponent } from './components/client-route-list/client-
     TransportComponent,
     RouteListComponent,
     RouteDitailsComponent,
-    ClientRouteListComponent
+    ClientRouteListComponent,
+    CreateTransportComponent,
+    TypeDeliveryComponent,
+    PointComponent
     ],
   imports: [
     BrowserModule,
