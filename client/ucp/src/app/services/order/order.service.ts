@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';                    // <<<---
 import { Observable } from 'rxjs';  
-import { OrderCreate } from './order';
+import { OrderCreate, Order } from './order';
 import { TokenStorageService } from "../../auth/token-storage.service";
 import { AuthService } from "../../auth/auth.service";
 
@@ -30,7 +30,7 @@ export class OrderService {
     orderCreate.endPoint = formCreateOrder.endPoint;
     orderCreate.date = formCreateOrder.date;
     orderCreate.isContainer = formCreateOrder.isContainer;
-    orderCreate.isContainer = formCreateOrder.isContainer;
+    orderCreate.isDocuments = formCreateOrder.isDocuments;
     console.log(this.tokenStorage.getUsername());
     return this.http.post(`${this.baseUrl}` + `/` + this.tokenStorage.getUsername() + `/createOrder`, orderCreate);     // <<<---
   }      
@@ -62,6 +62,10 @@ export class OrderService {
 
   getStatus(id_order: number): Observable<any> {
     return this.http.get(`${this.baseUrl_2}/order/getStatus/${id_order}`,{responseType:'text'});
+  }
+
+  updateOrderStatus(order: Order): Observable<any> {
+    return this.http.put(`${this.baseUrl_2}/order/updateOrderStatus/${order.id_order}`, order);
   }
 
 }

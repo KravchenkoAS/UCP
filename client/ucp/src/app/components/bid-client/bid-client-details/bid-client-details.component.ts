@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { OrderCreate, Order } from 'src/app/services/order/order';
 import { Point } from 'src/app/services/point/point';
 import { OrderService } from 'src/app/services/order/order.service';
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class BidClientDetailsComponent implements OnInit {
 
   @Input() order = new Order();
+  @Output() status = new EventEmitter<string>();
   orderDetails = new OrderCreate();
   startPoint = new Point();
   endPoint = new Point();
@@ -49,6 +50,19 @@ export class BidClientDetailsComponent implements OnInit {
           console.log(error);
           alert(error.error.message);
         })
+  }
+
+  SubmitStatus(){
+    this.orderService.updateOrderStatus(this.order)
+    .subscribe(
+      data => {
+        console.log(data);
+        this.status.emit(this.order.status);
+      }, error => {
+        console.log(error);
+        alert(error.error.message);
+      }
+    )
   }
 
 }

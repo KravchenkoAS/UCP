@@ -58,10 +58,10 @@ export class RouteListComponent implements OnInit {
         })
   }
 
-  active(way: WayDTO) {
+  active(way: WayDTO, index: number) {
     this.isActive = !this.isActive;
     if(this.isActive) {
-      this.numberWayDTO = way.way;
+      this.numberWayDTO = index;
       this.id_segment = way.id_segment;
       this.router.navigate([], {
         queryParams:{
@@ -134,6 +134,7 @@ export class RouteListComponent implements OnInit {
           data => {
             alert(data);
             this.wayDTO.splice(i, 1);
+            this.isActive = false;
           }, error => {
             console.log(error);
             alert(error.error.message);
@@ -148,9 +149,9 @@ export class RouteListComponent implements OnInit {
     this.routeService.submit(this.id_order, this.route.id_route, numberWayDTO)
     .subscribe(
       data => {
-        alert(data);
         this.wayDTO.length = 0;
         this.wayDTO.push(data);
+        this.isActive = false;
       }, error => {
         console.log(error);
         alert(error.error.message);

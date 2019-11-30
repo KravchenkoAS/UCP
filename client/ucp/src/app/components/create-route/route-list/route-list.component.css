@@ -1,8 +1,7 @@
 .container {
-    color: #7D6342;
+    background: rgba(212, 205, 205, 0.699);
     display: grid;
     height: 100%;
-    background: floralwhite;
     grid-template-columns: 1fr 1fr;
     /* grid-template-rows: 80px 100px 1fr 80px; */
     grid-auto-rows: min-content;
@@ -16,19 +15,15 @@
 .tab {
     padding: 1em;
     grid-area: tab;
-    background: black;
 }
 
 .dit { 
     padding: 1em;
     grid-area: dit;
-    background: red;
 }
 
 .header{
     grid-area: header;
-
-    background: blanchedalmond;
 
     color: #7D6342;
     text-align: center;
@@ -41,14 +36,12 @@
     grid-area: footer;
     text-align: center;
     padding: 1em;
-    background: bisque;
     font-weight: 700;
 }
 
 .info {
     grid-area: info;
     padding: 1em;
-    background: lightblue;
 }
 
 span {
@@ -86,5 +79,21 @@ tbody tr:hover {
     font-weight: 700;
     font-size: 150%;
     padding: 0 0 1em 0;
+}
+
+button {
+    background:rgb(238, 238, 238);
+    color:#C9842E;
+    text-decoration:none;
+    width:90px;
+    text-align:center;
+    padding: .5em;
+    transition:all 0.3s;
+    border:rgb(238, 238, 238);
+    cursor: pointer;
+}
+
+button:hover {
+    box-shadow:0px -5px 0 #C9842E inset;
 }
 

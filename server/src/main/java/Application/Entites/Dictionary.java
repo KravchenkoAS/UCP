@@ -26,8 +26,9 @@ public class Dictionary implements Serializable, Comparable<Dictionary> {
         @JoinColumn(name = "id_route", foreignKey = @ForeignKey(name = "fk_dictionary_id_route"))
         private Route route;
 
+
         @JsonManagedReference
-        @ManyToOne(fetch = FetchType.LAZY)
+        @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         @JoinColumn(name = "id_segment", foreignKey = @ForeignKey(name = "fk_dictionary_id_segment"))
         private Segment segment;
 

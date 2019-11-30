@@ -1,7 +1,7 @@
 <table>
   <tr>
     <td>№</td>
-    <td>Страны</td>
+    <td>Страна</td>
     <td>Город</td>
     <td *ngIf="isAdmin"></td>
   </tr>
@@ -16,32 +16,29 @@
   <a (click)="Add()">Добавить</a>
 </div>
 
-<div *ngIf="isAdd">
+<div *ngIf="isAdd" class="container">
   <form [formGroup]="pointForm" (submit)="onSubmit()">
     <section>
-      <div>
-        <label for="country">Название страны</label>
-        <input type="text" id="country" formControlName="country" maxlength="25" />
-        <p>
+      <div class="form-group-error">
+        <label for="country" class="form-label">Название страны</label>
+        <input type="text" id="country" class="form-input" formControlName="country" maxlength="25" />
+        <div class="form-error">
           <ngb-alert *ngIf="isControlInvalid('country')">
             <strong>Ошибка!</strong> Проверьте корректность ввода. (А-я, -)
           </ngb-alert>
-        </p>
+        </div>
       </div>
 
-      <div>
-        <label for="city">Название города</label>
-        <input type="text" id="city" formControlName="city" maxlength="25" />
-        <p>
+      <div class="form-group-error">
+        <label for="city" class="form-label">Название города</label>
+        <input type="text" id="city" class="form-input" formControlName="city" maxlength="25" />
+        <div class="form-error">
           <ngb-alert *ngIf="isControlInvalid('city')">
             <strong>Ошибка!</strong> Проверьте корректность ввода. (А-я, -)
           </ngb-alert>
-        </p>
+        </div>
       </div>
     </section>
       <button type="submit">Сохранить</button>
   </form>
-  <div>
-    {{pointForm.value | json}}
-  </div>
 </div>

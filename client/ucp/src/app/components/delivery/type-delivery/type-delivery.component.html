@@ -14,13 +14,15 @@
     <a (click)="Add(type)">Добавить</a>
   </div>
  
-  <div *ngIf="isAdd">
+  <div *ngIf="isAdd" class="form-group">
       <input type="text" placeholder="Название" name="name" [(ngModel)]="name" required/>
-      <button (click)="Save(name)">Сохранить</button>
-      <p>
+      <div class="form-error">
           <ngb-alert *ngIf="!isControlInvalid(name)">
             <strong>Ошибка!</strong> Проверьте корректность ввода. (А-я)
           </ngb-alert>
           <br />
-        </p>
+      </div>
+      <div class="btn">
+          <button (click)="Save(name)">Сохранить</button>
+        </div>
   </div>

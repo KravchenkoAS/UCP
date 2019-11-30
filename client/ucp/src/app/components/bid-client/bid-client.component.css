@@ -7,6 +7,10 @@
     }
 }
 
+.container {
+    background: rgba(212, 205, 205, 0.699);
+    min-height: 92vh;
+}
 
 .wrapper  {
     padding: 0em;
@@ -17,8 +21,6 @@
     min-height: 100%;
     grid-template-areas: 
     "sd main";
-
-    background: blue;
 }
 
 .content {
@@ -27,13 +29,13 @@
 
 .sidebar {
     grid-area: sd;
-    background: pink;
+    padding-left: .5em;
+    margin-top: 50%;
 }
 
 #projects {
-    background-color: #7D6342;
     padding: 30px 1em;
-    color: #FDA43A;
+    color: #7D521D;
 }
 
 #projects > h2 {
@@ -57,3 +59,5 @@
     width: 100%;
     white-space: nowrap; 
   }
+
+  

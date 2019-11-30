@@ -39,8 +39,8 @@
         </tr>
       </thead>
       <tbody *ngIf="wayDTO; else NoWayDTO">
-        <tr (click)="active(way)" *ngFor="let way of wayDTO">
-          <td>{{way.way}}</td>
+        <tr (click)="active(way, i + 1)" *ngFor="let way of wayDTO; let i = index">
+          <td>{{i + 1}}</td>
           <td>{{way.id_segment.length}}</td>
           <td>{{way.time}} - {{way.time*2}}</td>
           <td>{{way.distance}}</td>
@@ -71,7 +71,7 @@
   </div>
 
   <div class="footer">
-    <div *ngIf="route.time == 0 && route.price == 0; else RouteOK">
+    <div *ngIf="route.time == 0 && route.distance == null; else RouteOK">
       <div *ngIf="numberWayDTO != 0" [ngSwitch]="authority">
         <label>Путь №<span>{{numberWayDTO}} </span></label> 
         <ng-template ngSwitchCase="admin">

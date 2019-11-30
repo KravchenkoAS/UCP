@@ -148,14 +148,16 @@ public class SegmentController {
             }
         }
 
+        Set<Dictionary> dictionaries = new HashSet<>();
         maxNumberWay++;
         for (int i = 0; i < segmentList.size(); i++) {
             Dictionary dictionary = new Dictionary();
             dictionary.setRoute(order.get().getRoute());
-            dictionary.setSegment(segmentList.get(i));
             dictionary.setSequence(i+1);
             dictionary.setWay(maxNumberWay);
-            segmentRepository.save(segmentList.get(i));
+            dictionaries.add(dictionary);
+            dictionary.setSegment(segmentList.get(i));
+//            segmentRepository.save(segmentList.get(i));
             dictionaryRepository.save(dictionary);
         }
         return true;

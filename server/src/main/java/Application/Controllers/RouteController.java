@@ -74,8 +74,13 @@ public class RouteController {
                 dictionaryList.clear();
                 for (Dictionary dictionary : route.get().getDictionaries()) {
                     if (dictionary.getWay() == i + 1) {
-                        dictionary.getSegment().setPrice(
-                                dictionary.getSegment().getPrice() + route.get().getPrice());
+                        if (route.get().getPrice() > 8) {
+                            dictionary.getSegment().setPrice(dictionary.getSegment().getPrice());
+                        } else {
+                            dictionary.getSegment().setPrice(
+                                    dictionary.getSegment().getPrice() + route.get().getPrice());
+                        }
+
                         dictionaryList.add(dictionary);
                     }
                 }
@@ -154,7 +159,6 @@ public class RouteController {
 
                     segmentRepository.delete(dictionary.getSegment());
 
-                    System.out.println(dictionary.getId_dictionary());
                 } else if (dictionary.getWay() == way) {
                     dictionaryList.add(dictionary);
                 }
@@ -166,14 +170,30 @@ public class RouteController {
                 WayDTO wayDTO = WayDTO.fromModel(dictionaryList);
 
                 Route route = routeRepository.findById(id_route).get();
+                Set<Dictionary> set = new HashSet<>();
+                for (Dictionary dictionary : dictionaryList) {
+                    dictionary.getSegment().setPrice(
+                            dictionary.getSegment().getPrice() + route.getPrice()
+                    );
+                    set.add(dictionary);
+                }
+
+                route.setDictionaries(set);
                 route.setDistance(wayDTO.getDistance());
                 route.setPrice(route.getPrice() + wayDTO.getPrice());
                 route.setTime(wayDTO.getTime());
+
+//                Set<Dictionary> set = new HashSet<>();
+//                for (Dictionary dictionary : dictionaryList) {
+//                    set.add(dictionary);
+//                }
+//
+//                route.setDictionaries(set);
                 routeRepository.save(route);
 
                 Order order = orderRepository.findById(id_order).get();
                 order.setStatus("Договор");
-                order.setPrice(order.getPrice() + route.getPrice());
+                order.setPrice(route.getPrice());
                 orderRepository.save(order);
 
                 return new ResponseEntity<>(WayDTO.fromModel(dictionaryList), HttpStatus.OK);

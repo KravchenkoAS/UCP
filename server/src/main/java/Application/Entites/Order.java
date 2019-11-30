@@ -39,10 +39,8 @@ public class Order implements Serializable {
     @NotNull(message = "Цена не может быть пустым")
     private Float price;
 
-    @NotNull
     private Boolean isDocuments;
 
-    @NotNull
     private Boolean isContainer;
 
     @JsonManagedReference
@@ -61,7 +59,8 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(@NotBlank String name, LocalDate date_of_dispatch, @NotNull Boolean isDocuments, @NotNull Boolean isContainer) {
+    public Order(@NotBlank(message = "Название не может быть пустым") @Size(min = 2, max = 25) String name,
+                 LocalDate date_of_dispatch, Boolean isDocuments, Boolean isContainer) {
         this.name = name;
         this.date_of_dispatch = date_of_dispatch;
         this.isDocuments = isDocuments;

@@ -23,12 +23,9 @@ public class Cargo implements Serializable {
     @NotNull(message = "Объем не может быть пустым")
     private Float volume;
 
-
     private Float length;
 
-
     private Float height;
-
 
     private Float width;
 

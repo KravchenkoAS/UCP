@@ -1,33 +1,32 @@
-<div *ngIf="info.token; else loggedOut">
-    <p>
-      bid-client works!
-    </p>
-    <div class="wrapper">
-      <div class="sidebar">
-        <div>
-          <a routerLink="addDelivery" class="btn btn-primary active" role="button" routerLinkActive="active">Заказать
-            доставку</a>
-        </div>
-      </div>
-      <div class="content">
-        <section id="projects">
-        
-          <h2>Список заявок</h2>
-          <div *ngIf="orders; else Empty" class="projects-table">
-            <div *ngFor="let order of orders">
-              <app-bid-client-list [order]='order'></app-bid-client-list>
+<div class="container">
+
+    <div *ngIf="info.token; else loggedOut">
+        <div class="wrapper">
+          <div class="sidebar">
+            <div>
+              
             </div>
           </div>
-  
-          <ng-template #Empty>
-            <h2>Список пуст.</h2>
-          </ng-template>
-        </section>
-
+          <div class="content">
+            <section id="projects">
+            
+              <h2>Список заявок</h2>
+              <div *ngIf="orders; else Empty" class="projects-table">
+                <div *ngFor="let order of orders">
+                  <app-bid-client-list [order]='order'></app-bid-client-list>
+                </div>
+              </div>
+      
+              <ng-template #Empty>
+                <h2>Список пуст.</h2>
+              </ng-template>
+            </section>
+    
+          </div>
+        </div>   
       </div>
-    </div>   
-  </div>
-  
-  <ng-template #loggedOut>
-    Please login.
-  </ng-template>
+      
+      <ng-template #loggedOut>
+        Please login.
+      </ng-template>
+</div>

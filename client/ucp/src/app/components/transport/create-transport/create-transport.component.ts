@@ -15,7 +15,7 @@ import { TransportService } from 'src/app/services/transport/transport.service';
 export class CreateTransportComponent implements OnInit {
 
   @Input() transportChange: Transport;
-  @Output() transport = new EventEmitter<Transport>();
+  @Output() transportUpdate = new EventEmitter<Transport>();
 
   transportForm: FormGroup;
   typeDelivery: TypeDelivery[];
@@ -58,17 +58,17 @@ export class CreateTransportComponent implements OnInit {
   }
 
   Save(){
-    let transportChange = new Transport();
-    this.transportService.updateTransport(this.transportForm.value)
-    .subscribe(
-      data => {
-        transportChange = data;
-        this.transport.emit(transportChange);
-      }, error => {
-        console.log(error);
-        alert(error.error);
-      }
-    )
+    
+      this.transportService.updateTransport(this.transportForm.value)
+      .subscribe(
+        data => {
+          this.transportUpdate.emit(data);
+        }, error => {
+          console.log(error);
+          alert(error.error);
+        })
+    
+    
   }
 
   isControlInvalid(controlName: string): boolean {

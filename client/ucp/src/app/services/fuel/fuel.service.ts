@@ -15,7 +15,7 @@ export class FuelService {
   constructor(private http: HttpClient,private authService: AuthService,                           // <<<---
         private tokenStorage: TokenStorageService) { }
 
-  createFuel(fuel: Fuel): Observable<Object> {                // <<<--
+  createFuel(fuel: Fuel): Observable<any> {                // <<<--
     return this.http.post(`${this.baseUrl}/createFuel`, fuel);     // <<<---
   }      
   

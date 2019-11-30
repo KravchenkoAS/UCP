@@ -1,3 +1,72 @@
 input.ng-touched.ng-invalid{
     border-color: red;
-   }
+}
+
+.container {
+    width: 35%;
+}
+
+h2 {
+    padding-bottom: .25em;
+}
+
+.submitted-div {
+    grid-area: sub-div;
+    padding: 1em;
+    text-align: center;
+    color: green;
+}
+
+button {
+    background:rgb(238, 238, 238);
+    color:#C9842E;
+    text-decoration:none;
+    display:block;
+    text-align:center;
+    padding: .5em;
+    transition:all 0.3s;
+    border:rgb(238, 238, 238);
+    cursor: pointer;
+}
+
+button:hover {
+    box-shadow:0px -5px 0 #C9842E inset;
+}
+
+.segment-container-all {
+    padding: 1em 0;
+    display: grid;
+    grid-template-columns: 100px 100px;
+    grid-template-areas: 
+    "btn-calculate btn-save";
+}
+
+.form-group {
+    padding: 0.25em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "form-label form-input";
+}
+
+.form-input, .form-label, select {
+    padding: .5em;
+}
+
+.size {
+    width: 20%;
+}
+
+.tp {
+    font-weight: 600;
+    font-size: 115%;
+    padding-left: 1em 1.25em;
+}
+
+.tp > p {
+    padding: .25;
+}
+
+.btn-remove {
+    padding-bottom: 1.5em;
+}

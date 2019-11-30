@@ -7,4 +7,4 @@
         </div>
     </a>
 </div>
-<app-bid-client-details *ngIf="isDetails" [order]='order'></app-bid-client-details>
+<app-bid-client-details *ngIf="isDetails" [order]='order' (status)="status($event)"></app-bid-client-details>

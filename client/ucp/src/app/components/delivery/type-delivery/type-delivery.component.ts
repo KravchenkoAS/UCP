@@ -49,6 +49,7 @@ export class TypeDeliveryComponent implements OnInit {
 
   Save(name: string) {
     if(this.isControlInvalid(name)){
+     
       let typeDelivery = new TypeDelivery();
       typeDelivery.name = name;
       this.typeDeliveryService.createTypeDelivery(typeDelivery)

@@ -180,7 +180,6 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_user;
 
-    @NotBlank(message = "Имя не может быть пустым")
     @Size(min=1, max = 50)
     private String name;
 

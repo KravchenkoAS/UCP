@@ -131,6 +131,7 @@ export class CreateRouteComponent implements OnInit {
   }
 
   calculateAll() {
+    this.isSaveAll = false;
     let isPointStart: boolean = false;
     let isPointEnd: boolean = false;
     let idStartPoint = this.orderDetails.startPoint;
@@ -155,6 +156,7 @@ export class CreateRouteComponent implements OnInit {
       time = this.segmentService.calculateAllTime(this.segments);
       distance = this.segmentService.calculateAllDistance(this.segments);
     }
+    this.order.price = 0;
     if (this.order.isContainer) {
       price += 5;
     }

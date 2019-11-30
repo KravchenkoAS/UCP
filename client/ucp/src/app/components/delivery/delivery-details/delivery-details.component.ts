@@ -83,6 +83,10 @@ export class DeliveryDetailsComponent implements OnInit {
           console.log(error);
           alert(error.error.message);
         })
+
+        setTimeout(() => {
+          this.submitted = false;
+        }, 10000);
   }
 
   Delete(){

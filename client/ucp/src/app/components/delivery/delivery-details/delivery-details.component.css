@@ -1,16 +1,16 @@
 a {
-    color: #FDA43A;
+    color: #C9842E;
     /* padding: 0px .25em;  */
     
     display: inline-block;
 
-    line-height: 0;
+    line-height: 1.5;
     text-decoration:none;
     cursor: pointer;
 }
 
 a:after {
-    background-color: #FDA43A;
+    background-color: #C9842E;
     display: block;
     content: "";
     height: 5px;
@@ -39,7 +39,96 @@ header {
     grid-template-columns: 40px auto;
 }
 
-.b {
+.head {
     margin: auto;
+}
+
+button {
+    background:rgb(238, 238, 238);
+    color:#C9842E;
+    text-decoration:none;
+    display:block;
+    
+    text-align:center;
+    padding: .5em;
+    transition:all 0.3s;
+    border:rgb(238, 238, 238);
+    cursor: pointer;
+}
+
+button:hover {
+    box-shadow:0px -5px 0 #C9842E inset;
+}
+
+.info {
+    padding-top: 1.5em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr min-content min-content;
+    grid-template-areas: 
+    "data route"
+    "data add"
+    "sub-div sub-div"
+    "btn-ctr btn-ctr";
+}
+
+.data {
+    grid-area: data;
+}
+
+.route {
+    grid-area: route;
+}
+
+.add {
+    grid-area: add;
+}
+
+span {
+    color: #C9842E;
+}
+
+h2 {
+    padding-top: .5em;
+    padding-bottom: .22em;
+}
+
+input {
+    padding: .5em;
+}
+
+.form-group-add {
+    padding: 0.25em;
+}
+
+.form-input-add {
+    width: 15px; 
+    height: 15px; 
+}
+
+.submitted-div {
+    grid-area: sub-div;
+    padding: 1em;
+    text-align: center;
+    color: green;
+}
+
+.label-div {
+    padding: .2em 0;
+}
+
+.btn-container {
+    grid-area: btn-ctr;
+    margin-left: 0;
+    margin-right: auto;
+    padding: 1em 0;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-areas: 
+    "btn-save btn-delete a-routs";
+}
+
+.btn-save, .btn-delete, .a-routs {
+    padding: 0 1em;
 }
 

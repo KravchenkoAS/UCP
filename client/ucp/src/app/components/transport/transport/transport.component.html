@@ -33,9 +33,9 @@
 </div>
 
 <div *ngIf="isChange">
-  <app-create-transport [transportChange]="transportChange" (transport)="TransportChange($event)"></app-create-transport>
+  <app-create-transport [transportChange]="transportChange" (transportUpdate)="transportUpdate($event)"></app-create-transport>
 </div>
 
 <div *ngIf="isAdd">
-  <app-create-transport (transport)="TransportChange($event)"></app-create-transport>
+  <app-create-transport (transportUpdate)="transportUpdate($event)"></app-create-transport>
 </div>

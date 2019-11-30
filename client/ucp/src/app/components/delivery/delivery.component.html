@@ -1,37 +1,43 @@
-<div *ngIf="info.token; else loggedOut">
-  <div class="wrapper">
-    <div class="sidebar">
-      <div>
-        <a routerLink="addDelivery" class="btn btn-primary active" role="button" routerLinkActive="active">Заказать
-          доставку</a>
+<div class="container">
+
+  <div *ngIf="info.token; else loggedOut">
+    <div class="wrapper">
+      <div class="sidebar">
+        <div>
+          <a routerLink="addDelivery" class="btn btn-primary active" role="button" routerLinkActive="active">Заказать
+            доставку</a>
+        </div>
+      </div>
+      <div class="content">
+        <section *ngIf="!openDetails; else OpenDetails" id="projects">
+        
+          <h2>Список выших заказов</h2>
+          <div *ngIf="orders; else Empty" class="projects-table">
+            <div *ngFor="let order of orders">
+              <app-delivery-list [order]='order' (id_order)="onId_order($event)"></app-delivery-list>
+            </div>
+          </div>
+  
+          <ng-template #Empty>
+            <h2>Список пуст.</h2>
+          </ng-template>
+        </section>
+  
+        <ng-template #OpenDetails>
+            <section id="projects">
+                <!-- <app-delivery-details [id_order]='id_order' (openDetails)='onOpenDetails($event)'></app-delivery-details> -->
+                <app-delivery-details [id_order]='id_order'></app-delivery-details>
+            </section>
+        </ng-template>
+  
+  
+  
       </div>
     </div>
-    <div class="content">
-      <section *ngIf="!openDetails; else OpenDetails" id="projects">
-      
-        <h2>Список выших заказов</h2>
-        <div *ngIf="orders; else Empty" class="projects-table">
-          <div *ngFor="let order of orders">
-            <app-delivery-list [order]='order' (id_order)="onId_order($event)"></app-delivery-list>
-          </div>
-        </div>
-
-        <ng-template #Empty>
-          <h2>Список пуст.</h2>
-        </ng-template>
-      </section>
-
-      <ng-template #OpenDetails>
-          <section id="projects">
-              <!-- <app-delivery-details [id_order]='id_order' (openDetails)='onOpenDetails($event)'></app-delivery-details> -->
-              <app-delivery-details [id_order]='id_order'></app-delivery-details>
-          </section>
-      </ng-template>
-
-    </div>
   </div>
-</div>
+  
+  <ng-template #loggedOut>
+    Please login.
+  </ng-template>
 
-<ng-template #loggedOut>
-  Please login.
-</ng-template>
+</div>

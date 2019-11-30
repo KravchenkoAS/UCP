@@ -1,7 +1,9 @@
 package Application.Controllers;
 
 import Application.DTO.FuelDTO;
+import Application.DTO.TransportDTO;
 import Application.Entites.Fuel;
+import Application.Entites.Transport;
 import Application.Repositories.FuelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,6 +50,32 @@ public class FuelController {
             System.out.println("...");
             return new ResponseEntity<>(FuelDTO.fromModel(fuelRepository.save(optionalFuel.get())),
                     HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("api/test/fuel/createFuel")
+    public ResponseEntity<FuelDTO> createFuel(@RequestBody FuelDTO fuelDTO) {
+        System.out.println("createFuel");
+
+        Fuel fuel = new Fuel();
+        fuel.setName(fuelDTO.getName());
+        fuel.setPrice(fuelDTO.getPrice());
+
+        System.out.println("...");
+        return new ResponseEntity<>(FuelDTO.fromModel(fuelRepository.save(fuel)), HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/api/test/fuel/deleteFuel/{id_fuel}")
+    public ResponseEntity<String> deleteFuel(@PathVariable("id_fuel") Long id_fuel) {
+        System.out.println("Delete Fuel with ID = " + id_fuel + "...");
+
+        if (fuelRepository.findById(id_fuel).isPresent()) {
+            fuelRepository.deleteById(id_fuel);
+            return new ResponseEntity<>("Выбраный тип топлива удален", HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

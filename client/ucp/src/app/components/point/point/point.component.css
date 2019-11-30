@@ -1,3 +1,49 @@
 input.ng-touched.ng-invalid{
     border-color: red;
    }
+
+   table {
+    border-top: solid 3px black;
+    font-size: 80%;
+}
+
+.container {
+    font-size: 80%;
+    width: 24%;
+}
+
+a {
+    background:rgb(238, 238, 238);
+    color:#C9842E;
+    text-decoration:none;
+    display:block;
+    width:90px;
+    text-align:center;
+    padding: .5em;
+    transition:all 0.3s;
+    border:rgb(238, 238, 238);
+    cursor: pointer;
+}
+
+a:hover {
+    box-shadow:0px -5px 0 #C9842E inset;
+}
+
+.form-group-error {
+    padding: 0.1em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+    "form-label form-input"
+    "form-error form-error";
+}
+
+.form-error{
+    grid-area: form-error;
+    padding: .2em;
+}
+
+.form-input, .form-label {
+    padding: .2em .5em;
+}

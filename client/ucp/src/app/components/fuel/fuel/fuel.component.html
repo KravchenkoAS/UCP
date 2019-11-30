@@ -4,22 +4,62 @@
     <td>Название</td>
     <td>Цена, $</td>
     <td *ngIf="isAdmin"></td>
+    <td *ngIf="isAdmin"></td>
   </tr>
   <tr *ngFor="let fuel of fuels; let i = index">
     <td>{{i + 1}}</td>
     <td>{{fuel.name}}</td>
     <td>{{fuel.price}}</td>
     <td *ngIf="isAdmin"><a (click)="changePrice(fuel)">Изменить цену</a></td>
+    <td *ngIf="isAdmin"><a (click)="Delete(fuel, i)">Удалить</a></td>
   </tr>
 </table>
 
+<div *ngIf="isAdmin">
+    <button (click)="Add()">Добавить</button>
+</div>
+
 <div *ngIf="isChange">
-    <input type="text" placeholder="{{fuelChange.price}}" name="{{fuelChange.price}}" [(ngModel)]="fuelChange.price" required/>
+    <br/>
+    <input type="text" class="form-input" placeholder="{{fuelChange.price}}" name="{{fuelChange.price}}" 
+    [(ngModel)]="fuelChange.price" required/>
+    <br/><br/>
     <button (click)="saveChange(fuelChange)">Сохранить</button>
-    <p>
+    <div>
         <ngb-alert *ngIf="!isControlInvalid(fuelChange.price)">
           <strong>Ошибка!</strong> Проверьте корректность ввода. (0-9)
         </ngb-alert>
         <br />
-      </p>
+      </div>
+</div>
+<div class="container">
+
+    <div *ngIf="isAdd" >
+        <form [formGroup]="fuelForm" (submit)="onSubmit()">
+          <section>
+            <div class="form-group-error">
+              <label for="name" class="form-label">Название топлива</label>
+              <input type="text" id="name" class="form-input" formControlName="name" maxlength="25" />
+              <div class="form-error">
+                <ngb-alert *ngIf="isControlInvalid('name')">
+                  <strong>Ошибка!</strong> Проверьте корректность ввода. (А-я, -)
+                </ngb-alert>
+              </div>
+            </div>
+      
+            <div class="form-group-error">
+              <label for="price" class="form-label">Стоимость за литр</label>
+              <input type="text" id="price" class="form-input" formControlName="price" />
+              <div class="form-error">
+                <ngb-alert *ngIf="isControlInvalid('price')">
+                  <strong>Ошибка!</strong> Проверьте корректность ввода. (0-9)
+                </ngb-alert>
+              </div>
+            </div>
+          </section>
+            <button type="submit">Сохранить</button>
+        </form>
+      </div>
+
+
 </div>

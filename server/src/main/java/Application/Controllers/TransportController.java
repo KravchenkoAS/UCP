@@ -33,23 +33,26 @@ public class TransportController {
     public ResponseEntity<TransportDTO> updateTransport(@RequestBody TransportDTO transportDTO) {
         System.out.println("updateTransport");
 
-        Optional<Transport> transport = transportRepository.findByName(transportDTO.getName());
+        Optional<Transport> transportOptional = transportRepository.findByName(transportDTO.getName());
+        Transport transport = new Transport();
 
-        if(!transport.isPresent()) {
-            transport.get().setName(transportDTO.getName());
+        if(!transportOptional.isPresent()) {
+            transport.setName(transportDTO.getName());
+        } else {
+            transport = transportOptional.get();
         }
 
-        transport.get().setCoefficient(transportDTO.getCoefficient());
-        transport.get().setFuel_consumption(transportDTO.getFuel_consumption());
-        transport.get().setMax_volume(transportDTO.getMax_volume());
-        transport.get().setMax_weight(transportDTO.getMax_weight());
-        transport.get().setSpeed(transportDTO.getSpeed());
-        transport.get().setPrice(transportDTO.getPrice());
-        transport.get().setFuel(fuelRepository.findByName(transportDTO.getFuel()));
-        transport.get().setType_delivery(typeDeliveryRepository.findByName(transportDTO.getType_delivery()));
+        transport.setCoefficient(transportDTO.getCoefficient());
+        transport.setFuel_consumption(transportDTO.getFuel_consumption());
+        transport.setMax_volume(transportDTO.getMax_volume());
+        transport.setMax_weight(transportDTO.getMax_weight());
+        transport.setSpeed(transportDTO.getSpeed());
+        transport.setPrice(transportDTO.getPrice());
+        transport.setFuel(fuelRepository.findByName(transportDTO.getFuel()));
+        transport.setType_delivery(typeDeliveryRepository.findByName(transportDTO.getType_delivery()));
 
         System.out.println("...");
-        return new ResponseEntity<>(TransportDTO.fromModel(transportRepository.save(transport.get())), HttpStatus.OK);
+        return new ResponseEntity<>(TransportDTO.fromModel(transportRepository.save(transport)), HttpStatus.OK);
 
     }
 

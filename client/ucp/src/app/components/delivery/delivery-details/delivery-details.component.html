@@ -1,100 +1,112 @@
-<header>
-  <div class="a">
-    <a href="/delivery" class="back">
-      <img src="../../../../assets/icons/left-arrow.png" />
-    </a>
-  </div>
-  <div class="b">
-    <h2>Информация о заявке {{order.name}}</h2>
-  </div>
-</header>
-<!-- <a (click)="clickBack()">Назад</a> -->
-<section>
-  <h2>Данные о грузе</h2>
-  <div>
-    <label>Тип груза: </label>{{order.type}}
-  </div>
-  <div>
-    <label for="order.name">Название груза: </label>
-    <input type="text" id="order.name" value="{{order.name}}" [(ngModel)]="order.name"/>
-  </div>
-  <p>
-    <ngb-alert *ngIf="isControlInvalid('order.name')">
-      <strong>Ошибка!</strong> Проверьте корректность ввода. (A-z, А-я, 0-9, -)
-    </ngb-alert>
-    <br />
-  </p>
+<div class="container">
 
-  <section *ngIf="order.type !== 'Наливной' else Navalochnyy">
-    <div>
-      <label>Габариты груза: </label>{{order.length}} x {{order.width}} x {{order.height}} м
+  <header>
+    <div class="a">
+      <a href="/delivery" class="back">
+        <img src="../../../../assets/icons/left-arrow.png" />
+      </a>
     </div>
-  </section>
-  <div>
-    <label>Вес груза: </label>{{order.weight}} кг
-  </div>
-  <div>
-    <label>Количество груза: </label>{{order.amount}}
-    <container-element [ngSwitch]="order.type">
-      <ng-template ngSwitchCase="Штучный"> шт.</ng-template>
-      <ng-template ngSwitchCase="Навалочный"> тар.</ng-template>
-      <ng-template ngSwitchCase="Наливной"> куб. м. (объем)</ng-template>
-    </container-element>
-  </div>
-</section>
+    <div class="head">
+      <h2>Информация о заявке {{order.name}}</h2>
+    </div>
+  </header>
 
-<section>
-  <h2>Направление</h2>
-  <div>
-    <label>Точка отправления: </label>{{startPoint.country}}/{{startPoint.city}}
-  </div>
-  <div>
-    <label>Точка прибытия: </label>{{endPoint.country}}/{{endPoint.city}}
-  </div>
-  <div>
-    <label>Дата отправления груза: </label>{{order.date}}
-  </div>
-</section>
+  <div class="info">
+    <section class="data">
+      <h2>Данные о грузе</h2>
+      <div class="label-div">
+          <label>Тип груза: </label>
+          <span>{{order.type}}</span>
+      </div>
+      <div>
+          <label for="order.name">Название груза: </label>
+          <input type="text" id="order.name" value="{{order.name}}" [(ngModel)]="order.name"/>
+      </div>
+      <div>
+        <ngb-alert *ngIf="isControlInvalid('order.name')">
+          <strong>Ошибка!</strong> Проверьте корректность ввода. (A-z, А-я, 0-9, -)
+        </ngb-alert>
+      </div>
+      <section *ngIf="order.type !== 'Наливной' else Navalochnyy">
+        <div class="label-div">
+          <label>Габариты груза: </label>
+          <span>{{order.length}} x {{order.width}} x {{order.height}}</span> м
+        </div>
+      </section>
+        <div class="label-div">
+          <label>Вес груза: </label>
+          <soan>{{order.weight}}</soan> кг
+        </div>
+        <div class="label-div">
+          <label>Количество груза: </label>
+          <span>{{order.amount}}</span>
+          <container-element [ngSwitch]="order.type">
+            <ng-template ngSwitchCase="Штучный"> шт.</ng-template>
+            <ng-template ngSwitchCase="Навалочный"> тар.</ng-template>
+            <ng-template ngSwitchCase="Наливной"> куб. м. (объем)</ng-template>
+          </container-element>
+        </div>
+      </section>
 
-<section>
-  <h2>Дополнительные услуги</h2>
-  <div *ngIf="status === 'Обрабатывается' || status === 'Договор'; else OtherStatus">
-    <div>
-      <input type="checkbox" id="order.isContainer" [checked]="order.isContainer" [(ngModel)]="order.isContainer"/>
-      <label for="order.isContainer">Защитная транспортировочная упаковка</label>
-    </div>
-    <div>
-      <input type="checkbox" id="order.isDocuments" [checked]="order.isDocuments" [(ngModel)]="order.isDocuments"/>
-      <label for="order.isDocuments">Перевозка сопроводительных документов</label>
-    </div>
-  </div>
-  <ng-template #OtherStatus>
-    <div>
-      <input type="checkbox" id="order.isContainer" [checked]="order.isContainer" [(ngModel)]="order.isContainer" disabled/>
-      <label for="order.isContainer">Защитная транспортировочная упаковка</label>
-    </div>
-    <div>
-      <input type="checkbox" id="order.isDocuments" [checked]="order.isDocuments" [(ngModel)]="order.isDocuments" disabled/>
-      <label for="order.isDocuments">Перевозка сопроводительных документов</label>
-    </div>
-  </ng-template>
-  
-</section>
+      <section class="route">
+          <h2>Направление</h2>
+          <div class="label-div">
+            <label>Точка отправления: </label>
+            <span>{{startPoint.country}}/{{startPoint.city}}</span>
+          </div>
+          <div class="label-div">
+            <label>Точка прибытия: </label>
+            <span>{{endPoint.country}}/{{endPoint.city}}</span>
+          </div>
+          <div class="label-div">
+            <label>Дата отправления груза: </label>
+            <span>{{order.date}}</span>
+          </div>
+        </section>
 
-<div *ngIf="submitted">
-    <p>
-        Изменения внесены в заявку!
-          </p>
+        <section class="add">
+            <h2>Дополнительные услуги</h2>
+            <div *ngIf="status === 'Обрабатывается' || status === 'Договор'; else OtherStatus">
+              <div class="form-group-add">
+                <input type="checkbox" id="order.isContainer" class="form-input-add" [checked]="order.isContainer" [(ngModel)]="order.isContainer"/>
+                <label for="order.isContainer" class="form-label">Защитная транспортировочная упаковка</label>
+              </div>
+              <div class="form-group-add">
+                <input type="checkbox" id="order.isDocuments" class="form-input-add" [checked]="order.isDocuments" [(ngModel)]="order.isDocuments"/>
+                <label for="order.isDocuments" class="form-label">Перевозка сопроводительных документов</label>
+              </div>
+            </div>
+            <ng-template #OtherStatus>
+              <div class="form-group-add">
+                <input type="checkbox" id="order.isContainer" class="form-input-add" [checked]="order.isContainer" [(ngModel)]="order.isContainer" disabled/>
+                <label for="order.isContainer" class="form-label"> Защитная транспортировочная упаковка</label>
+              </div>
+              <div class="form-group-add">
+                <input type="checkbox" id="order.isDocuments" class="form-input-add" [checked]="order.isDocuments" [(ngModel)]="order.isDocuments" disabled/>
+                <label for="order.isDocuments" class="form-label"> Перевозка сопроводительных документов</label>
+              </div>
+            </ng-template>
+            
+          </section>
+
+          <div *ngIf="submitted" class="submitted-div">
+              <div>
+                Изменения внесены в заявку!
+              </div>
+          </div>
+        
+          <div class="btn-container">
+            <div class="btn-save">
+              <button (click)="Save()">Сохранить</button>
+            </div>
+            <div class="btn-delete">
+              <button (click)='Delete()'>Удалить</button>
+            </div>
+            <div class="a-routs">
+              <a [routerLink]="['./routes', order.id_order]"  routerLinkActive="active">Список маршрутов</a>
+            </div>
+          </div>
+  </div>
+ 
 </div>
 
-<div>
-  <button (click)="Save()">Сохранить</button>
-  <button (click)='Delete()'>Удалить</button>
-  <a [routerLink]="['./routes', order.id_order]"  routerLinkActive="active">Список маршрутов</a>
-</div>
-
-<div>
-  <p>
-    {{order | json}}
-  </p>
-</div>

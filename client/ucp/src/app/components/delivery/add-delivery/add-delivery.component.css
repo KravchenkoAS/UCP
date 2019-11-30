@@ -1,3 +1,128 @@
+.container {
+    background: rgba(212, 205, 205, 0.699);
+    min-height: 92vh;
+}
+
 input.ng-touched.ng-invalid{
     border-color: red;
    }
+
+.wrapper {
+    padding: 1em;
+    width: 65vw;
+    margin: auto;    
+    display: grid;
+    grid-template-rows: min-content min-content;
+    grid-template-areas: 
+    "form"
+    "sub-div";
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr min-content min-content;
+    grid-template-areas: 
+    "data data"
+    "dimensions route"
+    "dimensions add"
+    "btn btn"
+}
+
+h2 {
+    padding-bottom: .25em;
+}
+
+button {
+    background:rgb(238, 238, 238);
+    color:#C9842E;
+    text-decoration:none;
+    display:block;
+    width:90px;
+    text-align:center;
+    padding: .5em;
+    transition:all 0.3s;
+    border:rgb(238, 238, 238);
+    cursor: pointer;
+}
+
+button:hover {
+    box-shadow:0px -5px 0 #C9842E inset;
+}
+
+.data {
+    grid-area: data;
+    width: 35%;
+}
+
+.dimensions {
+    grid-area: dimensions;
+    width: 75%;
+}
+
+.route {
+    grid-area: route;
+}
+
+.add {
+    grid-area: add;
+}
+
+.btn {
+    padding: 1em;
+}
+
+.form-group {
+    padding: 0.25em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "form-label form-input";
+}
+
+.form-group-error {
+    padding: 0.25em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+    "form-label form-input"
+    "form-error form-error";
+}
+
+.form-group-add {
+    padding: 0.25em;
+}
+
+.form-input-add {
+    width: 15px; 
+    height: 15px; 
+}
+
+.submitted-div {
+    grid-area: sub-div;
+    padding: 1em;
+    text-align: center;
+    color: green;
+}
+
+.form-group-amount {
+    padding: 0.25em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "form-label form-input-amount";
+}
+
+.form-error{
+    grid-area: form-error;
+    padding: .5em;
+}
+
+.form-input, .form-label, .alert, select, .form-input-amount > input {
+    padding: .5em;
+}
+
+.size {
+    width: 25%;
+}

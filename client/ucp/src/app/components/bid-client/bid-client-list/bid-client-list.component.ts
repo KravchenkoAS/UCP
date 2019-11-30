@@ -53,4 +53,8 @@ export class BidClientListComponent implements OnInit {
       }
    }
 
+  status(status:any){
+    this.order.status = status;
+  }
+
 }

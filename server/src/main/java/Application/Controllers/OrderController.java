@@ -45,7 +45,7 @@ public class OrderController {
     public ResponseEntity<Order_Cargo_RouteDTO> createOrder(@PathVariable("username") String username,
                                                             @RequestBody Order_Cargo_RouteDTO orderCargoRouteDTO) {
 
-        System.out.println(orderCargoRouteDTO.getType());
+        System.out.printf("createOrder");
 
         if (orderRepository.findByNameAndUser(orderCargoRouteDTO.getName(),
                 userRepository.findByUsername(username).get()) != null) {
@@ -69,26 +69,28 @@ public class OrderController {
 
         newOrder.setCargo(newCargo);
         newOrder.setRoute(newRoute);
-        System.out.println(newOrder.getName());
         //newRoute.setOrders(newOrder);
         newCargo.setOrder(newOrder);
 
         newOrder.setUser(userRepository.findUserByUsername(username));
 
         try {
-            cargoRepository.save(newCargo);
-            routeRepository.save(newRoute);
             if (newOrder.getContainer()) {
                 newOrder.setPrice(newOrder.getPrice() + 5);
             }
             if (newOrder.getDocuments()) {
                 newOrder.setPrice(newOrder.getPrice() + 3);
             }
+            newRoute.setPrice(newOrder.getPrice());
+            cargoRepository.save(newCargo);
+            routeRepository.save(newRoute);
             orderRepository.save(newOrder);
         } catch (Exception e) {
             System.out.println(e);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
+        System.out.println("...");
 
         return new ResponseEntity<>(orderCargoRouteDTO, HttpStatus.OK);
     }
@@ -164,6 +166,23 @@ public class OrderController {
             optionalOrder.get().setDocuments(order.getDocuments());
             optionalOrder.get().getRoute().setPrice(optionalOrder.get().getPrice());
             return new ResponseEntity<>(Order_Cargo_RouteDTO.fromModel(orderRepository.save(optionalOrder.get())),
+                    HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PreAuthorize("hasRole('ANALYST') or hasRole('ADMIN')")
+    @PutMapping("/api/test/order/updateOrderStatus/{id_order}")
+    public ResponseEntity<OrderDTO> updateOrderStatus(@PathVariable("id_order") Long id_order,
+                                                            @RequestBody OrderDTO order) {
+        System.out.println("updateOrderStatus with ID = " + id_order + "...");
+
+        Optional<Order> optionalOrder = orderRepository.findById(id_order);
+
+        if (optionalOrder.isPresent()) {
+            optionalOrder.get().setStatus(order.getStatus());
+            return new ResponseEntity<>(OrderDTO.fromModel(orderRepository.save(optionalOrder.get())),
                     HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

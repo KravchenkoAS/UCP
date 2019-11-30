@@ -50,20 +50,27 @@ export class TransportComponent implements OnInit {
     this.isChange = !this.isChange;
   }
 
-  TransportChange(transportChange: any){
+  transportUpdate(transportUpdate: any){
     if (this.isChange) {
       this.isChange = false;
       this.transports.forEach(function (transport: Transport) {
-        console.log(transport.id_transport + " - " + transportChange.id_transport);
-        if(transport.id_transport == transportChange.id_transport) {
-          transport = transportChange;
-          console.log(transport);
+        console.log(transport.id_transport + " - " + transportUpdate.id_transport);
+        if(transport.id_transport == transportUpdate.id_transport) {
+          transport.fuel = transportUpdate.fuel;
+          transport.name = transportUpdate.name;
+          transport.type_delivery = transportUpdate.type_delivery;
+          transport.speed = transportUpdate.speed;
+          transport.max_volume = transportUpdate.max_volume;
+          transport.max_weight = transportUpdate.max_weight;
+          transport.price = transportUpdate.price;
+          transport.coefficient = transportUpdate.coefficient;
+          transport.fuel_consumption = transportUpdate.fuel_consumption;
         }
       })
       console.log(this.transports);
     } else if (this.isAdd) {
       this.isAdd = false;
-      this.transports.push(transportChange);
+      this.transports.push(transportUpdate);
     }
   }
 

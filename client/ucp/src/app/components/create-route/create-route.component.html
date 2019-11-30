@@ -1,97 +1,107 @@
-<div *ngIf="info.token; else loggedOut">
 <div class="container">
-  <header class="header">
-    Создание маршрута
-  </header>
-  <section class="route">
-      <h2>Направление</h2>
-      <div>
-          <label>Точка отправления: </label>
-          <span>{{startPoint.country}}/{{startPoint.city}}</span>
+    <div *ngIf="info.token; else loggedOut">
+        <div class="wrapper">
+          <header class="header">
+            Создание маршрута
+          </header>
+          <section class="route">
+              <h2>Направление</h2>
+              <div>
+                  <label>Точка отправления: </label>
+                  <span>{{startPoint.country}}/{{startPoint.city}}</span>
+                </div>
+                <div>
+                  <label>Точка прибытия: </label>
+                  <span>{{endPoint.country}}/{{endPoint.city}}</span>
+                </div>
+                <div>
+                  <label>Дата отправления груза: </label>
+                  <span>{{order.date_of_dispatch}}</span>
+                </div>
+          </section>
+          <section class="data">
+              <h2>Данные о грузе</h2>
+              <div>
+                  <label>Тип груза: </label>
+                  <span>{{orderDetails.type}}</span>
+                </div>
+                <div>
+                  <label for="order.name">Название груза: </label>
+                  <span>{{orderDetails.name}}</span>
+                </div>
+                <section *ngIf="order.type !== 'Наливной' else Navalochnyy">
+                  <div>
+                    <label>Габариты груза: </label>
+                    <span>{{orderDetails.length}} x {{orderDetails.width}} x {{orderDetails.height}} м</span>
+                  </div>
+                </section>
+                <div>
+                  <label>Вес груза: </label>
+                  <span>{{orderDetails.weight}} кг</span>
+                </div>
+                <div>
+                  <label>Количество груза: </label>
+                  <span>{{orderDetails.amount}}
+                  <container-element [ngSwitch]="order.type">
+                    <ng-template ngSwitchCase="Штучный"> шт.</ng-template>
+                    <ng-template ngSwitchCase="Навалочный"> тар.</ng-template>
+                    <ng-template ngSwitchCase="Наливной"> куб. м. (объем)</ng-template>
+                  </container-element>
+                </span>
+                </div>
+          </section>
+          <section class="add">
+              <h2>Дополнительные услуги</h2>
+              <div *ngIf="orderDetails.isContainer">
+                  <span>Требуется защитная транспортировочная упаковка</span>
+                </div>
+                <div *ngIf="order.isDocuments">
+                  <span>Требуется перевозка сопроводительных документов</span>
+                </div>
+                <div *ngIf="!orderDetails.isContainer && !order.isDocuments">
+                    <span>Не указаны</span>
+                </div>
+          </section>
+          <section class="price">
+              <div><label>Дата поступления заявки: </label>
+              <span>{{order.date}}</span></div>
+              <div><label>Общая стоимость доставки: </label>
+              <span>{{order.price}}</span></div>
+              <div><label>Общее время доставки: </label>
+                <span>{{time}} - {{time*2}}</span></div>
+                <div><label>Общее растояние доставки: </label>
+                  <span>{{distance}}</span></div>
+          </section>
         </div>
-        <div>
-          <label>Точка прибытия: </label>
-          <span>{{endPoint.country}}/{{endPoint.city}}</span>
+        
+        <div *ngIf="isSaveAll" class="submitted-div">
+          Маршрут сохранен
         </div>
-        <div>
-          <label>Дата отправления груза: </label>
-          <span>{{order.date_of_dispatch}}</span>
-        </div>
-  </section>
-  <section class="data">
-      <h2>Данные о грузе</h2>
-      <div>
-          <label>Тип груза: </label>
-          <span>{{orderDetails.type}}</span>
-        </div>
-        <div>
-          <label for="order.name">Название груза: </label>
-          <span>{{orderDetails.name}}</span>
-        </div>
-        <section *ngIf="order.type !== 'Наливной' else Navalochnyy">
-          <div>
-            <label>Габариты груза: </label>
-            <span>{{orderDetails.length}} x {{orderDetails.width}} x {{orderDetails.height}} м</span>
+        
+        <div class="segment-container">
+          <div class="segment-container-all">
+            <div class="btn-calculate">
+              <button type="button" (click)="calculateAll()">Рассчитать</button>
+            </div>
+            <div class="btn-save">
+              <button type="button" (click)="saveAll()">Сохранить</button>
+            </div>
           </div>
-        </section>
-        <div>
-          <label>Вес груза: </label>
-          <span>{{orderDetails.weight}} кг</span>
+          
+          <div class="segment">
+            <div>
+              <ng-template #viewContainerRef></ng-template>
+            </div>
+            <button type="button" (click)="addSegment()">
+                + Добавить сегмент
+            </button>
+          </div>
         </div>
-        <div>
-          <label>Количество груза: </label>
-          <span>{{orderDetails.amount}}
-          <container-element [ngSwitch]="order.type">
-            <ng-template ngSwitchCase="Штучный"> шт.</ng-template>
-            <ng-template ngSwitchCase="Навалочный"> тар.</ng-template>
-            <ng-template ngSwitchCase="Наливной"> куб. м. (объем)</ng-template>
-          </container-element>
-        </span>
+        
         </div>
-  </section>
-  <section class="add">
-      <h2>Дополнительные услуги</h2>
-      <div *ngIf="orderDetails.isContainer">
-          <span>Требуется защитная транспортировочная упаковка</span>>
-        </div>
-        <div *ngIf="order.isDocuments">
-          <span>Требуется перевозка сопроводительных документов</span>
-        </div>
-        <div *ngIf="!orderDetails.isContainer && !order.isDocuments">
-            <span>Не указаны</span>
-        </div>
-  </section>
-  <section class="price">
-      <div><label>Дата поступления заявки: </label>
-      <span>{{order.date}}</span></div>
-      <div><label>Общая стоимость доставки: </label>
-      <span>{{order.price}}</span></div>
-      <div><label>Общее время доставки: </label>
-        <span>{{time}} - {{time*2}}</span></div>
-        <div><label>Общее растояние доставки: </label>
-          <span>{{distance}}</span></div>
-  </section>
+        
+        <ng-template #loggedOut>
+          Please login.
+        </ng-template>
+        
 </div>
-
-<div *ngIf="isSaveAll">
-  Маршрут сохранен
-</div>
-
-<div>
-  <button type="button" (click)="calculateAll()">Рассчитать</button>
-  <button type="button" (click)="saveAll()">Сохранить</button>
-</div>
-
-<div class="segment">
-    <div>
-      <ng-template #viewContainerRef></ng-template>
-    </div>
-    <button type="button" (click)="addSegment()">
-        + Добавить сегмент
-    </button>
-</div>
-</div>
-
-<ng-template #loggedOut>
-  Please login.
-</ng-template>

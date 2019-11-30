@@ -1,4 +1,9 @@
 .container {
+    background: rgba(212, 205, 205, 0.699);
+    min-height: 92vh;
+}
+
+.wrapper {
     color: #7D6342;
     display: grid;
     height: 100%;
@@ -49,6 +54,36 @@ span {
     color: #C9842E;
 }
 
-.segment {
+.segment, .segment-container {
     padding: 1em;
+}
+
+.segment-container-all {
+    display: grid;
+    grid-template-columns: 100px 100px;
+    grid-template-areas: 
+    "btn-calculate btn-save";
+}
+
+.submitted-div {
+    grid-area: sub-div;
+    padding: 1em;
+    text-align: center;
+    color: green;
+}
+
+button {
+    background:rgb(238, 238, 238);
+    color:#C9842E;
+    text-decoration:none;
+    display:block;
+    text-align:center;
+    padding: .5em;
+    transition:all 0.3s;
+    border:rgb(238, 238, 238);
+    cursor: pointer;
+}
+
+button:hover {
+    box-shadow:0px -5px 0 #C9842E inset;
 }
