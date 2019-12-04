@@ -43,6 +43,10 @@ export class OrderService {
     return this.http.get(`${this.baseUrl_2}/analyst/getAllOrders`);
   }
 
+  getAllOrCaRoDTO(): Observable<any> {
+    return this.http.get(`${this.baseUrl_2}/delivery/getAllOrCaRoDTO`);
+  }
+
   getOrder(id_order: number): Observable<any> {
    return this.http.get(`${this.baseUrl}/delivery-details/${id_order}`);
   }

@@ -1,5 +1,5 @@
 <div>
-  <div class="select-status">
+  <div *ngIf="info.authorities === 'ROLE_TRANSPORTER'" class="select-status">
     <div *ngIf="order.status === 'Обрабатывается'; else OtherStatus">
     <select id="order.status" class="form-input" name="order.status">
       <option disabled>Выберите статус заказа</option>

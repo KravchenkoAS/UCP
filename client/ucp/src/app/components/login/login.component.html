@@ -6,6 +6,7 @@
             <ng-template ngSwitchCase="ROLE_CLIENT">Клиент</ng-template>
             <ng-template ngSwitchCase="ROLE_ADMIN">Администратор</ng-template>
             <ng-template ngSwitchCase="ROLE_ANALYST">Аналитик</ng-template>
+            <ng-template ngSwitchCase="ROLE_TRANSPORTER">Перевозчик</ng-template>
           </container-element>.
       </div>
        
@@ -17,7 +18,7 @@
               <input type="text" class="form-input" name="username" [(ngModel)]="form.username" #username="ngModel"
                 required />
               <div *ngIf="f.submitted && username.invalid" class="form-error">
-                <div *ngIf="username.errors.required">Необходимов ввести логин</div>
+                <div *ngIf="username.errors.required">Необходимо ввести логин</div>
               </div>
             </div>
             <div class="form-group">
@@ -25,7 +26,7 @@
               <input type="password" class="form-input" name="password" [(ngModel)]="form.password" #password="ngModel"
                 required minlength="4" />
               <div *ngIf="f.submitted && password.invalid" class="form-error">
-                <div *ngIf="password.errors.required">Необходимов ввести пароль</div>
+                <div *ngIf="password.errors.required">Необходимо ввести пароль</div>
                 <div *ngIf="password.errors.minlength">Пароль должен содержать не менее 4 символов</div>
               </div>
             </div>

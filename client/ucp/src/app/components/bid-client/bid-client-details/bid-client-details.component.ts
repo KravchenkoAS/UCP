@@ -4,6 +4,7 @@ import { Point } from 'src/app/services/point/point';
 import { OrderService } from 'src/app/services/order/order.service';
 import { PointService } from 'src/app/services/point/point.service';
 import { Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
   selector: 'app-bid-client-details',
@@ -12,16 +13,26 @@ import { Router } from '@angular/router';
 })
 export class BidClientDetailsComponent implements OnInit {
 
+  info: any;    
+
   @Input() order = new Order();
   @Output() status = new EventEmitter<string>();
   orderDetails = new OrderCreate();
   startPoint = new Point();
   endPoint = new Point();
 
-  constructor(private orderService: OrderService, private pointService: PointService,
-    private router: Router) { }
+  constructor(private orderService: OrderService, 
+    private pointService: PointService,
+    private router: Router,
+    private token: TokenStorageService) { }
 
   ngOnInit() {
+    this.info = {                                                     // <<<---
+      token: this.token.getToken(),                                   // <<<---
+      username: this.token.getUsername(),                             // <<<---
+      authorities: this.token.getAuthorities()                        // <<<---
+    };   
+
     console.log(this.order);
     this.orderService.getOrder(this.order.id_order)
       .subscribe(

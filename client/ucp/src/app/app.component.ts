@@ -26,7 +26,10 @@ export class AppComponent {
         } else if (role === 'ROLE_ANALYST') {
           this.authority = 'analyst';                                     // <<<---
           return false;
-        }                                                            // <<<---
+        } else if (role === 'ROLE_TRANSPORTER') {
+          this.authority = 'transporter';
+          return false;
+        }                                                        // <<<---
         this.authority = 'client';                                      // <<<---
         return true;                                                    // <<<---
       });                                                               // <<<---

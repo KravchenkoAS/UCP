@@ -14,19 +14,25 @@ export class SignupComponent implements OnInit {
   signupInfo: SignUpInfo;                                       // <<<---
   isSignedUp = false;                                           // <<<---
   isSignUpFailed = false;                                       // <<<---
-  errorMessage = '';                                            // <<<---
+  errorMessage = '';   
+  role = new Array<string>();                                         // <<<---
  
   constructor(private authService: AuthService) { }             // <<<---
  
-  ngOnInit() { }                                                // <<<---
+  ngOnInit() {}                                                // <<<---
  
   onSubmit() {                                                  // <<<---
-    console.log(this.form);                                     // <<<---
- 
+    console.log(this.form.role);  
+    this.role.length = 0;                                   // <<<---
+    this.role.push(this.form.role)
+    console.log(this.role);
     this.signupInfo = new SignUpInfo(                           // <<<---
       this.form.username,                                       // <<<---
       this.form.email,                                          // <<<---
-      this.form.password);                                      // <<<---
+      this.form.password,
+      this.role);
+      
+    console.log(this.signupInfo);
 
     this.authService.signUp(this.signupInfo).subscribe(         // <<<---
       data => {                                                 // <<<---

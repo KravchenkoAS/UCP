@@ -1,0 +1,41 @@
+<div class="container">
+  <head>Фильтр</head>
+  <div class="wrapper">
+    <form [formGroup]="formFilter" class="form" (submit)="onSubmit()">
+
+          <div class="form-group">
+            <label for="startPoint" class="form-label">Точка отправления</label>
+            <select id="startPoint" class="form-input" formControlName="startPoint">
+              <option disabled>Выберите точку отправления</option>
+              <option *ngFor="let point of points" value={{point.id_point}}>{{point.country}}/{{point.city}}</option> 
+              <option value="null"></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="endPoint" class="form-label">Точка прибытия</label>
+            <select id="endPoint" class="form-input" formControlName="endPoint">
+              <option disabled>Выберите точку прибытия</option>
+              <option *ngFor="let point of points" value={{point.id_point}}>{{point.country}}/{{point.city}}</option>
+              <option value="null"></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="status" class="form-label">Статус заявки</label>
+            <select id="status" class="form-input" formControlName="status">
+              <option disabled>Выберите статус заявки</option>
+              <option value="Договор">Договор</option>
+              <option value="Выполнен">Выполнен</option>
+              <option value="Отменен">Отменен</option>
+              <option value="Обрабатывается">Обрабатывается</option>
+              <option value="Выполняется">Выполняется</option>
+              <option value="null"></option>
+            </select>
+          </div>
+          
+        <div class="btn">
+          <button type="submit" >Найти</button>
+        </div>
+        
+      </form>
+  </div>
+</div>

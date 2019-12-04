@@ -1,0 +1,125 @@
+.container {
+    background: rgba(212, 205, 205, 0.699);
+    min-height: 92vh;
+}
+
+h2 {
+    text-align: center;
+    font-size: 33.5px; 
+    padding-top: .5em;
+    padding-bottom: .22em;
+}
+
+.head {
+    margin: auto;
+    color: #7D6342;
+}
+
+.info {
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 1em;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content;
+    grid-template-areas: 
+    "userForm"
+    "passForm";
+}
+
+.userForm {
+    grid-area: userForm;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 2em;
+    grid-template-rows: 1fr min-content min-content;
+    grid-template-areas: 
+    "loginData persData"
+    "sub-div sub-div"
+    "btn-ctr btn-ctr";
+}
+
+.loginData {
+    grid-area: loginData;
+}
+
+.persData {
+    grid-area: persData;
+}
+
+.submitted-div {
+    grid-area: sub-div; 
+}
+
+.sub {
+    padding: .5em;
+    text-align: center;
+    color: green;
+}
+
+.btn-container {
+    grid-area: btn-ctr;
+    margin: 0 auto;   
+    padding: 1em; 
+}
+
+.passForm {
+    grid-area: passForm;
+    padding-top: 1.5em;
+    width: 60%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr min-content min-content;
+    grid-template-areas: 
+    "passInput"
+    "sub-pass"
+    "btn-pass";
+}
+
+.passInput {
+    grid-area: passInput;
+}
+
+.sub-pass {
+    grid-area: sub-pass;  
+}
+
+.btn-pass {
+    grid-area: btn-pass;
+    margin: 0 auto;   
+    padding: 1em;
+}
+
+.form-group {
+    padding: 0.5em 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: min-content min-content;
+    grid-template-areas: 
+    "form-label form-input"
+    "form-error form-error";
+}
+
+.form-input {
+    grid-area: form-input;
+}
+
+.input-pass-size {
+    width: 70%;
+}
+
+.form-label{
+    /* color: #7D6342; */
+    grid-area: form-label;
+}
+
+.form-input, .form-label {
+    padding: .5em;
+}
+
+.form-error {
+    grid-area: form-error;
+    font-size: 80%;
+    padding-top: 0.25em;
+}

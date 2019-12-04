@@ -8,6 +8,14 @@
           <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
             <header>Регистрация</header>
             <div class="form-group">
+              <label for="role" class="form-label">Тип пользователя</label>
+              <select id="role" class="form-input" name="role" [(ngModel)]="form.role" #role="ngModel">
+                <option disabled>Выберите тип пользователя</option>
+                <option value="client">Заказчик</option>
+                <option value="transporter">Перевозчик</option>
+              </select>
+            </div>
+            <div class="form-group">
               <label for="username" class="form-label">Логин</label>
               <input type="text" class="form-input" name="username" [(ngModel)]="form.username" #username="ngModel"
                 required />
