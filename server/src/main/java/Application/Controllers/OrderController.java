@@ -113,7 +113,7 @@ public class OrderController {
         return getAllOrdersUserDTOList;
     }
 
-    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN') or hasRole('ROLE_TRANSPORTER')")
     @GetMapping(value = "/api/test/client/delivery/delivery-details/{id_order}")
     public Order_Cargo_RouteDTO getOrder(@PathVariable("id_order") Long id_order) {
 
@@ -127,7 +127,23 @@ public class OrderController {
         }
     }
 
-    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN') or hasRole('ROLE_TRANSPORTER')")
+    @GetMapping(value = "/api/test/delivery/getAllOrCaRoDTO")
+    public List<Order_Cargo_RouteDTO> getAllOrCaRoDTO() {
+
+        System.out.printf("getAllOrCaRoDTO");
+
+        Iterable<Order> orders = orderRepository.findAll();
+        List<Order_Cargo_RouteDTO> orderDTOList = new ArrayList<>();
+        for (Order order: orders) {
+            orderDTOList.add(Order_Cargo_RouteDTO.fromModel(order));
+        }
+
+        System.out.println("...");
+        return orderDTOList;
+    }
+
+    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN') or hasRole('ROLE_TRANSPORTER')")
     @GetMapping(value = "/api/test/getAloneOrder/{id_order}")
     public OrderDTO getAloneOrder(@PathVariable("id_order") Long id_order) {
 
@@ -172,7 +188,7 @@ public class OrderController {
         }
     }
 
-    @PreAuthorize("hasRole('ANALYST') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ANALYST') or hasRole('ADMIN') or hasRole('ROLE_TRANSPORTER')")
     @PutMapping("/api/test/order/updateOrderStatus/{id_order}")
     public ResponseEntity<OrderDTO> updateOrderStatus(@PathVariable("id_order") Long id_order,
                                                             @RequestBody OrderDTO order) {
@@ -207,7 +223,7 @@ public class OrderController {
         }
     }
 
-    @PreAuthorize("hasRole('ANALYST') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ANALYST') or hasRole('ADMIN') or hasRole('ROLE_TRANSPORTER')")
     @GetMapping(value = "/api/test/analyst/getAllOrders")
     public List<OrderDTO> getAllOrders() {
 
@@ -223,7 +239,7 @@ public class OrderController {
         return orderDTOList;
     }
 
-    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN') or hasRole('ROLE_TRANSPORTER')")
     @GetMapping("/api/test/order/getStatus/{id_order}")
     public ResponseEntity<String> getStatus(@PathVariable("id_order") Long id_order) {
         System.out.printf("getStatus Order with ID = " + id_order);

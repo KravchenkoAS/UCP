@@ -28,7 +28,7 @@ public class TransportController {
     @Autowired
     private Type_deliveryRepository typeDeliveryRepository;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('ROLE_TRANSPORTER')")
     @PostMapping("api/test/transport/updateTransport")
     public ResponseEntity<TransportDTO> updateTransport(@RequestBody TransportDTO transportDTO) {
         System.out.println("updateTransport");
@@ -56,7 +56,7 @@ public class TransportController {
 
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('ROLE_TRANSPORTER')")
     @DeleteMapping("/api/test/transport/deleteTransport/{id_transport}")
     public ResponseEntity<String> deleteTransport(@PathVariable("id_transport") Long id_transport) {
         System.out.println("Delete Transport with ID = " + id_transport + "...");
@@ -69,7 +69,7 @@ public class TransportController {
         }
     }
 
-    @PreAuthorize("hasRole('ANALYST') or hasRole('ADMIN') or hasRole('CLIENT')")
+    @PreAuthorize("hasRole('ANALYST') or hasRole('ADMIN') or hasRole('CLIENT') or hasRole('ROLE_TRANSPORTER')")
     @GetMapping(value = "/api/test/transport/getAllTransports")
     public List<TransportDTO> getAllTransports() {
 

@@ -20,7 +20,7 @@ public class TypeDeliveryController {
     @Autowired
     private Type_deliveryRepository typeDeliveryRepository;
 
-    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN') or hasRole('ROLE_TRANSPORTER')")
     @GetMapping(value = "/api/test/type_delivery/getAllTypeDeliveries")
     public List<TypeDeliveryDTO> getAllTypeDeliveries() {
 

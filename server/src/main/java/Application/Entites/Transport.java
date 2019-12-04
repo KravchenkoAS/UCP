@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -58,6 +59,9 @@ public class Transport implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_fuel", foreignKey = @ForeignKey(name = "fk_transport_id_fuel"))
     private Fuel fuel;
+
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "transport")
+//    private Set<Transporter> transporters = new HashSet<>();
 
     public Transport() {
     }
@@ -149,4 +153,12 @@ public class Transport implements Serializable {
     public void setFuel(Fuel fuel) {
         this.fuel = fuel;
     }
+
+//    public Set<Transporter> getTransporters() {
+//        return transporters;
+//    }
+//
+//    public void setTransporters(Set<Transporter> transporters) {
+//        this.transporters = transporters;
+//    }
 }

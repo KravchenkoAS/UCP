@@ -41,7 +41,7 @@ public class RouteController {
     @Autowired
     private OrderRepository orderRepository;
 
-    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN') or hasRole('ROLE_TRANSPORTER')")
     @GetMapping(value = "/api/test/route/getRoute/{id_order}")
     public RouteDTO getRoute(@PathVariable("id_order") Long id_order) {
         System.out.printf("getRoute - Order : " + id_order);
@@ -54,7 +54,7 @@ public class RouteController {
         );
     }
 
-    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN') or hasRole('ROLE_TRANSPORTER')")
     @GetMapping(value = "/api/test/route/getDictionaryList/{id_route}")
     public List<WayDTO> getDictionaryList(@PathVariable("id_route") Long id_route) {
         System.out.printf("getDictionaryList - id_route: " + id_route);

@@ -163,7 +163,7 @@ public class SegmentController {
         return true;
     }
 
-    @PreAuthorize("hasRole('ANALYST') or hasRole('ADMIN') or hasRole('CLIENT')")
+    @PreAuthorize("hasRole('ANALYST') or hasRole('ADMIN') or hasRole('CLIENT') or hasRole('ROLE_TRANSPORTER')")
     @PostMapping(value = "/api/test/segment/getSegments")
     public List<SegmentDetailsDTO> getSegments(@RequestBody List<Long> list) {
         System.out.printf("getSegments");

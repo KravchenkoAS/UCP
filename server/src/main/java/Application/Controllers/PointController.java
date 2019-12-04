@@ -17,7 +17,7 @@ public class PointController {
     @Autowired
     PointRepository pointRepository;
 
-    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN') or hasRole('ROLE_TRANSPORTER')")
     @GetMapping(value = "/api/test/client/delivery/getAllPoints")
     public Iterable<Point> getAllPoints() {
 
@@ -34,7 +34,7 @@ public class PointController {
         return pointRepository.findAll();
     }
 
-    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ADMIN') or hasRole('ROLE_TRANSPORTER')")
     @GetMapping(value = "/api/test/getPoint/{id_point}")
     public Optional<Point> getPoint(@PathVariable("id_point") String id_point) {
         System.out.printf("getPoint: " + id_point);
@@ -42,7 +42,7 @@ public class PointController {
         return pointRepository.findById(Long.valueOf(id_point));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('ROLE_TRANSPORTER')")
     @PostMapping("api/test/point/createPoint")
     public ResponseEntity<Point> createPoint(@RequestBody Point point) {
         System.out.println("createPoint...");

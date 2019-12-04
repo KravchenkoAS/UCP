@@ -1,12 +1,9 @@
 package Application.Repositories;
 
-import Application.Entites.Dictionary;
+import Application.Entites.Transporter;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DictionaryRepository extends CrudRepository<Dictionary, Long> {
-
-
-
+public interface TransporterRepository extends CrudRepository<Transporter, Long> {
 }

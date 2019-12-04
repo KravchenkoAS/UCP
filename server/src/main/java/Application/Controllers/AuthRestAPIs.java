@@ -2,12 +2,14 @@ package Application.Controllers;
 
 import Application.Entites.Role;
 import Application.Entites.RoleName;
+import Application.Entites.Transporter;
 import Application.Entites.User;
 import Application.Messages.Request.LoginForm;
 import Application.Messages.Request.SignUpForm;
 import Application.Messages.Response.JwtResponse;
 import Application.Messages.Response.ResponseMessage;
 import Application.Repositories.RoleRepository;
+import Application.Repositories.TransporterRepository;
 import Application.Repositories.UserRepository;
 import Application.Security.JWT.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +47,9 @@ public class AuthRestAPIs {
     @Autowired
     JwtProvider jwtProvider;
 
+    @Autowired
+    TransporterRepository transporterRepository;
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
@@ -79,10 +84,7 @@ public class AuthRestAPIs {
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
 
-        System.out.println(strRoles);
-
         strRoles.forEach(role -> {
-            System.out.println(role);
             switch (role) {
                 case "admin":
                     Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
@@ -97,6 +99,13 @@ public class AuthRestAPIs {
                     roles.add(analystRole);
 
                     break;
+                case "transporter":
+                    System.out.println("transporter");
+                    Role transporterRole = roleRepository.findByName(RoleName.ROLE_TRANSPORTER)
+                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+                    roles.add(transporterRole);
+
+                    break;
                 default:
                     Role clientRole = roleRepository.findByName(RoleName.ROLE_CLIENT)
                             .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
@@ -107,6 +116,14 @@ public class AuthRestAPIs {
         user.setRoles(roles);
         user.setActive(true);
         userRepository.save(user);
+
+        for (Role role : user.getRoles()) {
+            if (role.getName() == RoleName.ROLE_TRANSPORTER) {
+                Transporter transporter = new Transporter();
+                transporter.setId_user(userRepository.findByUsername(user.getUsername()).get().getId_user());
+                transporterRepository.save(transporter);
+            }
+        }
 
         return new ResponseEntity<>(new ResponseMessage("Регистрация прошла успешно!"), HttpStatus.OK);
     }

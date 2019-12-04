@@ -22,7 +22,7 @@ public class FuelController {
     @Autowired
     private FuelRepository fuelRepository;
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT') or hasRole('ANALYST') ")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT') or hasRole('ANALYST') or hasRole('ROLE_TRANSPORTER')")
     @GetMapping(value = "/api/test/fuel/getAllFuels")
     public List<FuelDTO> getAllFuels() {
 
@@ -55,7 +55,7 @@ public class FuelController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('ROLE_TRANSPORTER')")
     @PostMapping("api/test/fuel/createFuel")
     public ResponseEntity<FuelDTO> createFuel(@RequestBody FuelDTO fuelDTO) {
         System.out.println("createFuel");
