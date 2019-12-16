@@ -9,22 +9,30 @@
             <div class="btn">
               <button (click)="cancel()">Отмена</button>
             </div>
+            <div *ngIf="info.authorities[0] === 'ROLE_TRANSPORTER'">
+              <a [routerLink]="['./backpack', info.username]" class="btn" 
+                (click)="IsBackpack()" routerLinkActive="active">Собрать рюкзак</a>
+            </div>
           </div>
           <div class="content">
-            <section id="projects">
-            
-              <h2>Список заявок</h2>
-              <div *ngIf="orders; else Empty" class="projects-table">
-                <div *ngFor="let order of orders">
-                  <app-bid-client-list [order]='order'></app-bid-client-list>
+            <div *ngIf="backpack; else NoBackpack">
+              <app-backpack [orders]='orders'></app-backpack>
+            </div>
+            <ng-template #NoBackpack>
+              <section id="projects">
+              
+                <h2>Список заявок</h2>
+                <div *ngIf="orders; else Empty" class="projects-table">
+                  <div *ngFor="let order of orders">
+                    <app-bid-client-list [order]='order'></app-bid-client-list>
+                  </div>
                 </div>
-              </div>
-      
-              <ng-template #Empty>
-                <h2>Список пуст.</h2>
-              </ng-template>
-            </section>
-    
+        
+                <ng-template #Empty>
+                  <h2>Список пуст.</h2>
+                </ng-template>
+              </section>
+            </ng-template>
           </div>
         </div>   
       </div>

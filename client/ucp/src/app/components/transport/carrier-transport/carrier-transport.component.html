@@ -1,0 +1,33 @@
+<div class="container">
+
+    <header>
+      <div class="head">
+        <h2>Транспорт перевозчика</h2>
+      </div>
+    </header>
+
+    <div class="menu-trp">
+      <div class="list-trp">
+        <a [routerLink]="['./list']" (click)="IsList()">Транспорт</a>
+      </div>
+      <div class="add-trp">
+        <a [routerLink]="['./add', info.username]" (click)="IsAdd()">Добавить транспорт</a>
+      </div>
+      <div class="my-trp">
+        <a [routerLink]="['./my-transport', info.username]" (click)="IsMy()">Мой транспорт</a>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div *ngIf="isList">
+        <app-transport [authority]="info.authorities"></app-transport>
+      </div>
+      <div *ngIf="isAdd">
+        <app-add-trp  [info]="info"></app-add-trp>
+      </div>
+      <div *ngIf="isMy">
+        <app-my-trp [info]="info"></app-my-trp>
+      </div>
+    </div>
+    
+</div>

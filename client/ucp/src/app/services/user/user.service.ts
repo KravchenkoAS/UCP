@@ -27,10 +27,6 @@ export class UserService {
     return this.http.get(`${this.baseUrl}/getUser/${userName}`);
   }
 
-  // updateLoginData(id_user: number, user: User): Observable<any> {          // <<<---
-  //   return this.http.put(`${this.baseUrl}/updateLoginData/${id_user}`, user);               // <<<---
-  // }  
-
   updatePassword(id_user: number, changePassword: ChangePassword): Observable<any> {          // <<<---
     return this.http.put(`${this.baseUrl}/updatePassword/${id_user}`, changePassword);               // <<<---
   }
@@ -46,5 +42,9 @@ export class UserService {
   getAllUser(): Observable<any> {
     return this.http.get(`${this.baseUrl}/getAllUser/`);
   }  
+
+  changeRole(id_user: number, role: string) : Observable<any> {
+    return this.http.put(`${this.baseUrl}/changeRole/${id_user}`, role);               // <<<---
+  }
 
 }

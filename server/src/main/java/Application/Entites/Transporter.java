@@ -47,4 +47,5 @@ public class Transporter implements Serializable {
     public void setTransports(Set<Transport> transports) {
         this.transports = transports;
     }
+
 }

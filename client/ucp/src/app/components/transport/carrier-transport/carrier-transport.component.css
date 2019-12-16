@@ -1,0 +1,67 @@
+.container {
+    background: rgba(212, 205, 205, 0.699);
+    min-height: 92vh;
+}
+
+h2 {
+    text-align: center;
+    font-size: 33.5px; 
+    padding-top: .5em;
+    padding-bottom: .22em;
+}
+
+.head {
+    margin: auto;
+    color: #7D6342;
+}
+
+.menu-trp {
+    padding: 1em;
+    margin: left;
+    display: grid;
+    grid-template-rows: repeat(3, min-content);
+    grid-row-gap: .5em;
+    grid-template-areas: 
+    "list-trp"
+    "add-trp"
+    "my-trp";
+}
+
+.list-trp {
+    grid-area: list-trp;
+}
+
+.add-trp {
+    grid-area: add-trp;
+}
+
+.my-trp {
+    grid-area: my-trp;
+}
+
+a {
+    color: #7D521D;
+    padding: 0px .25em;    
+    display: inline-block;
+
+    line-height: 1.5;
+    text-decoration:none;
+    cursor: pointer;
+}
+
+a:after {
+    background-color: #7D521D;
+    display: block;
+    content: "";
+    height: 5px;
+    width: 0%;
+    transition: width .3s ease-in-out;
+}
+a:hover:after,
+a:focus:after {
+    width: 100%;
+}
+
+.wrapper {
+    padding: 1em;
+}

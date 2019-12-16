@@ -12,10 +12,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class SettingComponent implements OnInit {
 
   roles: string[] = []; 
-  user: User;
+  user = new User();
   changePassword: ChangePassword;
   submitted = false;
   submittedPass = false;
+  errorUser = false;
+  errorMessageUser: string;
 
   userForm: FormGroup;
   passForm: FormGroup;
@@ -28,32 +30,38 @@ export class SettingComponent implements OnInit {
   ngOnInit() {
     if (this.tokenStorage.getToken()) {                                   // <<<---
       this.roles = this.tokenStorage.getAuthorities();                    // <<<---
-    }      
+    }   
+    this.initForm(this.user);
     this.userServise.getUser(this.tokenStorage.getUsername())
     .subscribe(
       data => {
         this.user = data;
+        this.initForm(data);
       }, error => {
         console.log(error);
         alert(error.error.message);
       }
     )  
-    this.initForm();
   }
 
   Save(){
+    // this.user.username = this.userForm.value.username;
+    // this.user.email = this.userForm.value.email;
+    this.user.name = this.userForm.value.name;
+    this.user.surname = this.userForm.value.surname;
     console.log(this.user);
     this.userServise.updateUser(this.user)
       .subscribe(
         data => {
           console.log(data);
           this.submitted = true;
-          this.user = data as User;
-        },
-        error => {
-          this.submitted = false;
+          this.errorUser = false;
+          // this.user = data as User;
+        }, error => {
+          this.submitted = true;
+          this.errorUser = true;
           console.log(error);
-          alert(error.error.message);
+          this.errorMessageUser = error.error.message;
         })
 
         setTimeout(() => {
@@ -89,7 +97,7 @@ export class SettingComponent implements OnInit {
 
   /** Инициализация формы*/
 
-  initForm() {
+  initForm(user: User) {
     this.userForm = this.fb.group({
       username: [null],
       email:  [null],
@@ -103,19 +111,19 @@ export class SettingComponent implements OnInit {
     });
 
     this.userForm = this.fb.group({
-      username: ['', [
+      username: [user.username, [
         Validators.required,
         Validators.pattern(/^[\w_-\s]+$/ )
       ]],
-      name: ['', [
+      name: [user.name, [
         Validators.required,
         Validators.pattern(/^[A-zА-я-\s]+$/ )
       ]],
-      surname: ['', [
+      surname: [user.surname, [
         Validators.required,
         Validators.pattern(/^[A-zА-я-\s]+$/ )
       ]],
-      email: ['', [
+      email: [user.email, [
         Validators.required,
         Validators.pattern(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i)
       ]]

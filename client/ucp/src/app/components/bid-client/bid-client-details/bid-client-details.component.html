@@ -1,25 +1,26 @@
 <div>
-  <div *ngIf="info.authorities === 'ROLE_TRANSPORTER'" class="select-status">
+  <div *ngIf="info.authorities !== 'ROLE_TRANSPORTER'" class="select-status">
     <div *ngIf="order.status === 'Обрабатывается'; else OtherStatus">
-    <select id="order.status" class="form-input" name="order.status">
-      <option disabled>Выберите статус заказа</option>
-      <option value="Обрабатывается">Обрабатывается</option>
-      <option value="Отменен">Отменен</option>
-    </select>
-  </div>
-  <ng-template #OtherStatus>
-    <select id="order.status" class="form-input" name="order.status" [(ngModel)]="order.status">
-      <option disabled>Выберите статус заказа</option>
-      <option value="Обрабатывается">Обрабатывается</option>
-      <option value="Договор">Договор</option>
-      <option value="Отменен">Отменен</option>
-      <option value="Выполняется">Выполняется</option>
-      <option value="Выполнен">Выполнен</option>
-    </select>
-  </ng-template>
-  </div>
-  <div class="btn">
-    <button (click)="SubmitStatus()">Подтвердить</button>
+      <select id="order.status" class="form-input" name="order.status">
+        <option disabled>Выберите статус заказа</option>
+        <option value="Обрабатывается">Обрабатывается</option>
+        <option value="Отменен">Отменен</option>
+      </select>
+    </div>
+    <ng-template #OtherStatus>
+      <select id="order.status" class="form-input" name="order.status" [(ngModel)]="order.status">
+        <option disabled>Выберите статус заказа</option>
+        <option value="Обрабатывается">Обрабатывается</option>
+        <option value="Договор">Договор</option>
+        <option value="Отменен">Отменен</option>
+        <option value="Выполняется">Выполняется</option>
+        <option value="Выполнен">Выполнен</option>
+      </select>
+    </ng-template>
+  
+    <div class="btn">
+      <button (click)="SubmitStatus()">Подтвердить</button>
+    </div>
   </div>
 
   <section>

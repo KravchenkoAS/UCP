@@ -1,0 +1,63 @@
+<div class="table-div">
+    <table>
+        <thead>
+          <tr>
+            <th class="first">№</th>
+            <th>Логин</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Роль</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngIf="users; else NoUsers">
+          <tr *ngFor="let user of users; let i = index">
+            <td class="first number">{{i + 1}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.surname}}</td>
+            <td>
+              <div *ngIf="user.role == 'ROLE_TRANSPORTER'; else NoTransporter">
+                Перевозчик
+              </div>
+              <ng-template #NoTransporter>
+                  <div class="custom-radio">
+                      <input id="{{user.username}}" type="radio" class="radiobtn" value="ROLE_ADMIN" name="{{user.username}}" ngModel
+                        (click)="CheckedRole('ROLE_ADMIN', user.id_user)" >
+                      <label for="{{user.username}}">Администратор</label>
+                   </div>
+                   <div class="custom-radio">
+                      <input id="{{user.username}}" type="radio" class="radiobtn" value="ROLE_ANALYST" name="{{user.username}}" ngModel
+                        (click)="CheckedRole('ROLE_ANALYST', user.id_user)">
+                      <label for="{{user.username}}">Аналитик</label>
+                   </div>
+                   <div class="custom-radio">
+                      <input id="{{user.username}}" type="radio" class="radiobtn" value="ROLE_CLIENT" name="{{user.username}}" ngModel
+                        (click)="CheckedRole('ROLE_CLIENT', user.id_user)">
+                      <label for="{{user.username}}">Заказчик</label>
+                   </div>
+              </ng-template>
+            </td>
+            <td>
+              <div *ngIf="user.isActive; else unset">
+                <a class="buttonBlock"  (click)="isCheckedBlock(user.is_user)">
+                  Блокировать
+                </a>
+              </div>
+              <ng-template #unset>
+                <a class="buttonBlock" (click)="isCheckedBlock(user.id_user)" #unset>
+                  Разблокировать
+                </a>
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+        <ng-template #NoUsers>
+          <tr>
+            <td colspan="5">
+              Список пользователей пуст
+            </td>
+          </tr>
+        </ng-template>
+    </table>    
+</div>

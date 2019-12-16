@@ -81,6 +81,24 @@ tbody tr:hover {
     padding: 0 0 1em 0;
 }
 
+.switch{
+    width: 15%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-areas: 
+    "lbl btn";
+}
+
+.lbl{
+    margin: auto 0;
+    grid-area: lbl;
+}
+
+.btn {
+    grid-area: btn;
+}
+
 button {
     background:rgb(238, 238, 238);
     color:#C9842E;

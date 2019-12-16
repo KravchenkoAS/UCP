@@ -68,4 +68,27 @@
     margin: 0 0 0 auto;
   }
 
+a {
+    color: #7D521D;
+    padding: .25em; 
+    
+    display: inline-block;
+    text-decoration:none;
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+a:after {
+    background-color: #7D521D;
+    display: block;
+    content: "";
+    height: 5px;
+    width: 0%;
+    transition: width .3s ease-in-out;
+}
+a:hover:after,
+a:focus:after {
+    width: 100%;
+}
+
   

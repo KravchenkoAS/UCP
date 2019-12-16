@@ -72,15 +72,15 @@
 
   <div class="footer">
     <div *ngIf="route.time == 0 && route.distance == null; else RouteOK">
-      <div *ngIf="numberWayDTO != 0" [ngSwitch]="authority">
-        <label>Путь №<span>{{numberWayDTO}} </span></label> 
-        <ng-template ngSwitchCase="admin">
+      <div *ngIf="numberWayDTO != 0" [ngSwitch]="authority" class="switch">
+        <label class="lbl">Путь №<span>{{numberWayDTO}} </span></label> 
+        <ng-template ngSwitchCase="admin" class="btn">
             <button>Admin</button>
         </ng-template>
-        <ng-template ngSwitchCase="analyst">
+        <ng-template ngSwitchCase="analyst" class="btn">
             <button (click)=deleteWay(numberWayDTO)>Удалить</button>
         </ng-template>
-        <ng-template ngSwitchCase="client">
+        <ng-template ngSwitchCase="client" class="btn">
             <button (click)=submitOn(numberWayDTO)>Выбрать</button>
         </ng-template>
         <ng-template ngSwitchDefault>

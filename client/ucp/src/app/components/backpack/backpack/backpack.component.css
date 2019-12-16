@@ -1,0 +1,77 @@
+.content {
+    grid-area: main;
+}
+
+#projects {
+    padding: 30px 1em;
+    display: grid;
+    max-width: 1280px;
+    margin: 0 auto;
+    grid-template-rows: repeat(7, min-content);
+    grid-gap: 1vw;
+    grid-template-areas: 
+    "head"
+    "table-input"
+    "table-trp"
+    "btn-culc"
+    "sub-div"
+    "table-output"
+    "btn-sub";
+    
+}
+
+#projects > h2 {
+    grid-area: head;
+    text-align: center;
+    font-size: 33.5px; 
+    padding: .5em 0 1em 0;
+}
+
+.table-input {
+    grid-area: table-input;
+    text-align: center;
+}
+
+table {
+    border-top: solid 3px black;
+    font-size: 80%;
+    color: black;
+}
+
+caption {
+    font-size: 120%;
+    font-weight: 600;
+    padding: .5em;
+}
+
+.table-trp{
+    grid-area: table-trp;
+}
+
+.sub-div {
+    grid-area: sub-div;
+}
+
+.btn-culc {
+    grid-area: btn-culc;
+}
+
+.table-output {
+    grid-area: table-output;
+}
+
+.btn-sub {
+    grid-area: btn-sub;
+}
+
+.sub {
+    padding: .5em;
+    text-align: center;
+    color: green;
+}
+
+.alert {
+    padding: .5em;
+    text-align: center;
+    color: red;
+}

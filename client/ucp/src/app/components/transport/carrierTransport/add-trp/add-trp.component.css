@@ -1,0 +1,16 @@
+table {
+    border-top: solid 3px black;
+    font-size: 80%;
+}
+
+.sub {
+    padding: .5em;
+    text-align: center;
+    color: green;
+}
+
+.alert {
+    padding: .5em;
+    text-align: center;
+    color: red;
+}

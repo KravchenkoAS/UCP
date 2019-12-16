@@ -1,0 +1,31 @@
+<table>
+    <tr>
+      <td>№</td>
+      <td>Тип транспорта</td>
+      <td>Тип топлива</td>
+      <td>Расход</td>
+      <td>Название</td>
+      <td>Cкорость, км/ч</td>
+      <td>Макс. объем перевозки, куб. м</td>
+      <td>Грузоподъемность</td>
+      <td>Стоимость, $</td>
+      <td>Коэфф. использования</td>
+      <td></td>
+    </tr>
+    <tr *ngFor="let transport of transportsTransporter; let i = index">
+      <td>{{i + 1}}</td>
+      <td>{{transport.type_delivery}}</td>
+      <td>{{transport.fuel}}</td>
+      <td>{{transport.fuel_consumption}}</td>
+      <td>{{transport.name}}</td>
+      <td>{{transport.speed}}</td>
+      <td>{{transport.max_volume}}</td>
+      <td>{{transport.max_weight}}</td>
+      <td>{{transport.price}}</td>
+      <td>{{transport.coefficient}}</td>
+      <td><button (click)="Delete(transport.id_transport, i)">Удалить</button></td>
+    </tr>
+</table>
+<div *ngIf="isDelete" class="submitted-div">
+  <div class="sub">Транспорт удален</div>
+</div>

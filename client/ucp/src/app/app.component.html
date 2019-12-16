@@ -7,6 +7,9 @@
       <il *ngIf="authority === 'client'" class="nav-item">
         <a class="nav-link" routerLink="delivery">Доставка груза</a>
       </il>
+      <il *ngIf="authority === 'transporter'" class="nav-item">
+        <a class="nav-link" routerLink="carrierTransport">Ваш транспорт</a>
+        </il>
       <il *ngIf="authority === 'admin' || authority === 'analyst' || authority === 'transporter'" class="nav-item">
         <a class="nav-link" routerLink="bidClient">Заявки</a>
       </il>

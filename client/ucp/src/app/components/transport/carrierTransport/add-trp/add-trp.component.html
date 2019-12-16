@@ -1,0 +1,44 @@
+<table>
+    <tr>
+      <td>№</td>
+      <td>Тип транспорта</td>
+      <td>Тип топлива</td>
+      <td>Расход</td>
+      <td>Название</td>
+      <td>Cкорость, км/ч</td>
+      <td>Макс. объем перевозки, куб. м</td>
+      <td>Грузоподъемность</td>
+      <td>Стоимость, $</td>
+      <td>Коэфф. использования</td>
+      <td></td>
+    </tr>
+    <tr *ngFor="let transport of transports; let i = index">
+      <td>{{i + 1}}</td>
+      <td>{{transport.type_delivery}}</td>
+      <td>{{transport.fuel}}</td>
+      <td>{{transport.fuel_consumption}}</td>
+      <td>{{transport.name}}</td>
+      <td>{{transport.speed}}</td>
+      <td>{{transport.max_volume}}</td>
+      <td>{{transport.max_weight}}</td>
+      <td>{{transport.price}}</td>
+      <td>{{transport.coefficient}}</td>
+      <td><button (click)="Add(transport, i)">Добавить</button></td>
+    </tr>
+</table>
+  <div>
+    <button (click)="AddNew(transport)">Добавить</button>
+  </div>
+    
+  <div *ngIf="isAdd">
+    <app-create-transport (transportUpdate)="transportUpdate($event)"></app-create-transport>
+  </div>
+  
+<div *ngIf="submitted" class="submitted-div">
+      <div *ngIf="errorUser; else NoError" class="alert">
+        Ошибка!<br/>{{errorMessageUser}}
+      </div>
+      <ng-template #NoError>
+          <div class="sub">Транспорт добавлен</div>
+      </ng-template>
+</div>

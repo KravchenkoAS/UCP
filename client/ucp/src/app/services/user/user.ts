@@ -7,6 +7,17 @@ export class User {
     isActive: boolean;
     role: string;
     countOrders: number;
+
+    init(user: User) {
+            this.id_user = user.id_user;
+            this.username = user.username;
+            this.email = user.email;
+            this.name = user.name;
+            this.surname = user.surname;
+            this.isActive = user.isActive;
+            this.role = user.role;
+            this.countOrders = user.countOrders;
+    }
 };
 
 export class ChangePassword {

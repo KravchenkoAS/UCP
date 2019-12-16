@@ -1,0 +1,103 @@
+<div class="content">
+  <section id="projects">
+    <h2 class="head">Рюкзак</h2>
+    <div *ngIf="itemsInput.length != 0; else Empty" class="table-input">
+          <table>
+            <caption>Входной список заявок</caption>
+              <thead>
+                <tr>
+                  <th>№</th>
+                  <th>Название</th>
+                  <th>Вес, кг</th>
+                  <th>Стоимость, $</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let item of itemsInput; let i = index">
+                <tr>
+                  <td>{{i + 1}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.weight}}</td>
+                  <td>{{item.price}}</td>
+                </tr>
+              </tbody>
+            </table>
+    </div>
+    <ng-template #Empty class="table-input">
+      <strong>Список пуст.</strong>
+    </ng-template>
+    <div class="table-trp">
+        <table>
+            <tr>
+              <td>№</td>
+              <td>Тип транспорта</td>
+              <td>Тип топлива</td>
+              <td>Расход</td>
+              <td>Название</td>
+              <td>Cкорость, км/ч</td>
+              <td>Макс. объем перевозки, куб. м</td>
+              <td>Грузоподъемность, кг</td>
+              <td>Стоимость, $</td>
+              <td>Коэфф. использования</td>
+              <td></td>
+            </tr>
+            <tr *ngFor="let transport of transports; let i = index">
+              <td>{{i + 1}}</td>
+              <td>{{transport.type_delivery}}</td>
+              <td>{{transport.fuel}}</td>
+              <td>{{transport.fuel_consumption}}</td>
+              <td>{{transport.name}}</td>
+              <td>{{transport.speed}}</td>
+              <td>{{transport.max_volume}}</td>
+              <td>{{transport.max_weight}}</td>
+              <td>{{transport.price}}</td>
+              <td>{{transport.coefficient}}</td>
+              <td><button (click)="SubmitTrp(transport)">Выбрать</button></td>
+            </tr>
+        </table>
+    </div>
+    <div class="btn-culc">
+      <button (click)="CalculateBackpack()">Расcчитать</button>
+    </div>
+    <div class="sub-div" *ngIf="submitted">
+        <div *ngIf="isError; else NoError" class="alert">
+          <strong>Ошибка! </strong>{{message}}
+        </div>
+        <ng-template #NoError>
+          <div class="sub">{{message}}</div>
+        </ng-template>
+    </div>
+    <div *ngIf="backpack;" class="table-output">
+            <table>
+              <caption>Выходной список заявок</caption>
+                <thead>
+                  <tr>
+                    <th>№</th>
+                    <th>Название</th>
+                    <th>Вес, кг</th>
+                    <th>Стоимость, $</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let item of backpack.bestItems; let i = index">
+                  <tr>
+                    <td>{{i + 1}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.weight}}</td>
+                    <td>{{item.price}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td>Общий вес</td>
+                    <td>{{backpack.maxW}} кг</td>
+                    <td>Общая стоимость</td>
+                    <td>$ {{backpack.bestPrice}}</td>
+                  </tr>
+                </tfoot>
+              </table>
+    </div>
+    <div class="btn-sub">
+        <button (click)="Submit()">Подтвердить</button>
+    </div>
+      
+  </section>
+</div>

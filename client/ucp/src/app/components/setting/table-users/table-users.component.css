@@ -1,0 +1,115 @@
+table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse; 
+    background: #FDC786;
+    font-size: 85%;
+    table-layout: fixed;
+}
+
+td {
+    padding: .5em;
+}
+
+.number {
+    text-align: center;
+}
+
+.first {
+    width: 1vw;
+}
+
+th {
+    padding: 1em 1em;
+    background-color: #FDA43A;
+}
+
+tbody tr:hover {
+    background: #C9842E; 
+}
+
+.table-div {
+    width: 70%;
+    margin: 0 auto;
+    padding: 1em 0;
+}
+
+
+
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    font-size: 125%;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  a:hover {
+    color: #FDC786;
+    text-decoration: underline;
+    background: none;
+  
+  }
+  
+  a:active {
+    color: #FDC786;
+    background: none;
+    text-decoration: underline;
+    transform: translateY(2px);
+  }
+
+  /* radiobtn */
+
+  .custom-radio {
+      padding: .25em;
+  }
+
+.radiobtn {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    margin: 10px 0 0 7px;
+  }
+  .radiobtn + label {
+    position: relative;
+    padding-left: 20px;
+    padding-top: 2px;
+    cursor: pointer;
+  }
+  .radiobtn + label:before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border: 1px solid black;
+    border-radius: 50%;
+    background: none;
+  }
+  .radiobtn + label:after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: black;
+    border: none;
+    opacity: 0;
+    transition: .5s;
+  }
+  .radiobtn:checked + label:after {
+    opacity: 1;
+  }
+  
+  .radiobtn:checked + label::before {
+    border: 1px solid black; 
+    opacity: 1;
+  }
+
+

@@ -33,6 +33,11 @@ import { CreateTransportComponent } from './components/transport/create-transpor
 import { TypeDeliveryComponent } from './components/delivery/type-delivery/type-delivery.component';
 import { PointComponent } from './components/point/point/point.component';
 import { FilterComponent } from './components/filter/filter/filter.component';
+import { TableUsersComponent } from './components/setting/table-users/table-users.component';
+import { CarrierTransportComponent } from './components/transport/carrier-transport/carrier-transport.component';
+import { AddTrpComponent } from './components/transport/carrierTransport/add-trp/add-trp.component';
+import { MyTrpComponent } from './components/transport/carrierTransport/my-trp/my-trp.component';
+import { BackpackComponent } from './components/backpack/backpack/backpack.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,8 +64,13 @@ import { FilterComponent } from './components/filter/filter/filter.component';
     CreateTransportComponent,
     TypeDeliveryComponent,
     PointComponent,
-    FilterComponent
-    ],
+    FilterComponent,
+    TableUsersComponent,
+    CarrierTransportComponent,
+    AddTrpComponent,
+    MyTrpComponent,
+    BackpackComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

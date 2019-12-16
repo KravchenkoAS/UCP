@@ -19,8 +19,9 @@
       <div class="loginData">
         <div class="form-group">
           <label class="form-label" for="username">Логин:</label>
-          <input type="text" class="form-input" id="username" value="{{username}}" formControlName="username" />
-          <div class="form-error"  *ngIf="isControlInvalidUserForm('username')">
+          <span class="form-input">{{user.username}}</span>
+          <!-- <input type="text" class="form-input" id="username" value="{{username}}" formControlName="username" />-->
+          <div class="form-error"  *ngIf="isControlInvalidUserForm('username')">  
             <ngb-alert>
               <strong>Ошибка!</strong> Проверьте корректность ввода. (A-z, 0-9)
             </ngb-alert>
@@ -28,12 +29,13 @@
         </div>
         <div class="form-group">
           <label class="form-label" for="email">E-mail:</label>
-          <input type="text" class="form-input" id="email" value="{{email}}" formControlName="email"/>
+          <span class="form-input">{{user.email}}</span>
+          <!-- <input type="text" class="form-input" id="email" value="{{email}}" formControlName="email"/>-->
           <div class="form-error" *ngIf="isControlInvalidUserForm('email')">
               <ngb-alert>
                 <strong>Ошибка!</strong> Проверьте корректность ввода Email.
               </ngb-alert>
-            </div>
+            </div> 
         </div>
       </div>
       <div class="persData">
@@ -56,8 +58,13 @@
             </div>
         </div>
       </div>
-      <div *ngIf="submitted" class="submitted-div sub">
-        Данные сохранены успешно
+      <div *ngIf="submitted" class="submitted-div">
+        <div *ngIf="errorUser; else NoError" class="alert">
+          Ошибка!<br/>{{errorMessageUser}}
+        </div>
+        <ng-template #NoError>
+            <div class="sub">Данные сохранены успешно</div>
+        </ng-template>
       </div>
       <div class="btn-container">
           <button type="submit">Сохранить</button>
@@ -99,6 +106,10 @@
 
   </div>
  
+  <app-table-users *ngIf="roles[0] === 'ROLE_ADMIN'">
+    
+  </app-table-users>
+
 </div>
 
 

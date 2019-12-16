@@ -16,6 +16,10 @@ import { SegmentComponent } from './components/create-route/segment/segment.comp
 import { RouteListComponent } from './components/create-route/route-list/route-list.component';
 import { RouteDitailsComponent } from './components/create-route/route-list/route-ditails/route-ditails.component';
 import { ClientRouteListComponent } from './components/client-route-list/client-route-list.component';
+import { CarrierTransportComponent } from './components/transport/carrier-transport/carrier-transport.component';
+import { AddTrpComponent } from './components/transport/carrierTransport/add-trp/add-trp.component';
+import { MyTrpComponent } from './components/transport/carrierTransport/my-trp/my-trp.component';
+import { BackpackComponent } from './components/backpack/backpack/backpack.component';
 
 const routes: Routes = [
   {                                                                   // <<<--
@@ -54,10 +58,12 @@ const routes: Routes = [
 {                                                                     // <<<--
     path: 'bidClient',                                                   // <<<--
     component: BidClientComponent,
-    children: 
-    [{
+    children: [{
         path: 'details/:id',
         component: BidClientDetailsComponent
+    },{
+        path: 'backpack/:username',
+        component: BackpackComponent
     }]                                        // <<<--
 },  
 {                                                                     // <<<--
@@ -79,6 +85,13 @@ const routes: Routes = [
     //     component: RouteDitailsComponent
     // }]
 },
+{
+    path: 'carrierTransport', component: CarrierTransportComponent,
+    children: [
+        { path: 'add/:id', component: AddTrpComponent, },
+        { path: 'my-transport/:id', component: MyTrpComponent, }
+    ]
+}
 
 ];
 

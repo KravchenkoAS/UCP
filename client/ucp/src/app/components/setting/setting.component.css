@@ -57,6 +57,12 @@ h2 {
     color: green;
 }
 
+.alert {
+    padding: .5em;
+    text-align: center;
+    color: red;
+}
+
 .btn-container {
     grid-area: btn-ctr;
     margin: 0 auto;   
@@ -122,4 +128,8 @@ h2 {
     grid-area: form-error;
     font-size: 80%;
     padding-top: 0.25em;
+}
+
+span {
+    color: #C9842E;
 }

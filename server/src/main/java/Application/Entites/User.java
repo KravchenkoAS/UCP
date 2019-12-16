@@ -187,7 +187,7 @@ public class User implements Serializable {
     @Size(min=3, max = 50)
     private String username;
 
-    @NaturalId
+//    @NaturalId
     @NotBlank(message = "E-mail не может быть пустым")
     @Size(max = 50)
     @Email

@@ -18,10 +18,11 @@ export class BidClientComponent implements OnInit {
   ordersList = new Array<Order>();
   id_order: number;
 
+  backpack: boolean = false;
+
   ordersFilter = new Array<OrderCreate>();
 
-  constructor(private token: TokenStorageService, private orderService: OrderService) { 
-    }
+  constructor(private token: TokenStorageService, private orderService: OrderService) { }
 
     ngOnInit() {                                                        // <<<---
       this.info = {                                                     // <<<---
@@ -89,5 +90,17 @@ export class BidClientComponent implements OnInit {
     reloadAllOrders(){
       this.orderService.getAllOrders()
       .subscribe(orders => this.orders = orders);
+    }
+
+    IsBackpack() {
+      if (this.ordersFilter.length === this.orders.length) {
+        // this.backpack = false;
+        alert("Выберети точки отправления и прибытия");
+      } else if (this.orders.length === 0) {
+        alert("По этому маршруту нет заявок");
+      }  else {
+        this.backpack = !this.backpack;
+      }
+  
     }
 }
