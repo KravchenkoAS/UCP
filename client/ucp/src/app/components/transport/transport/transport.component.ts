@@ -62,9 +62,11 @@ export class TransportComponent implements OnInit {
           transport.speed = transportUpdate.speed;
           transport.max_volume = transportUpdate.max_volume;
           transport.max_weight = transportUpdate.max_weight;
+          transport.max_width = transportUpdate.max_width;
           transport.price = transportUpdate.price;
           transport.coefficient = transportUpdate.coefficient;
           transport.fuel_consumption = transportUpdate.fuel_consumption;
+          transport.crewCost = transportUpdate.crewCost;
         }
       })
       console.log(this.transports);

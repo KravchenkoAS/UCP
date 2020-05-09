@@ -1,15 +1,15 @@
 package Application.Security.Service;
 
-import Application.Entites.User;
+import Application.Entites.Users.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class UserPrinciple implements UserDetails {
 
@@ -30,13 +30,13 @@ public class UserPrinciple implements UserDetails {
 
     private String surname;
 
-    private Boolean active;
+    private Boolean locked;
 
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserPrinciple(Long id_user, String login,
                          String username, String email, String password,
-                         Collection<? extends GrantedAuthority> authorities) {
+                         Collection<? extends GrantedAuthority> authorities, Boolean locked) {
         this.id_user = id_user;
         this.login = login;
         this.username = username;
@@ -46,14 +46,16 @@ public class UserPrinciple implements UserDetails {
         //
         this.name = null;
         this.surname = null;
-        this.active = true;
+        this.locked = locked;
     }
 
     public static UserPrinciple build(User user) {
-        List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
-                new SimpleGrantedAuthority(role.getName().name())
-        ).collect(Collectors.toList());
+//        List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
+//                new SimpleGrantedAuthority(role.getName().name())
+//        ).collect(Collectors.toList());
 
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(user.getRole().getName().toString()));
         return new UserPrinciple(
 //                user.getId_user(),ucp
 //                user.getLogin(),
@@ -67,7 +69,8 @@ public class UserPrinciple implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities
+                authorities,
+                user.getIsLock()
         );
     }
 
@@ -95,8 +98,8 @@ public class UserPrinciple implements UserDetails {
         return surname;
     }
 
-    public Boolean getActive() {
-        return active;
+    public Boolean getAccountNonLocked() {
+        return locked;
     }
 
     @Override
@@ -116,17 +119,17 @@ public class UserPrinciple implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return locked;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return locked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return locked;
     }
 
     @Override

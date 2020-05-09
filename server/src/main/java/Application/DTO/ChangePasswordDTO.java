@@ -10,6 +10,9 @@ public class ChangePasswordDTO {
     @JsonProperty("newPassword")
     private String newPassword;
 
+    @JsonProperty("roleUser")
+    private String roleUser;
+
     public ChangePasswordDTO() {
     }
 
@@ -29,14 +32,23 @@ public class ChangePasswordDTO {
         this.newPassword = newPassword;
     }
 
-    public void init(String oldPassword, String newPassword) {
-        this.setNewPassword(newPassword);
-        this.setOldPassword(oldPassword);
+    public String getRole() {
+        return roleUser;
     }
 
-    public static ChangePasswordDTO fromModel(String oldPassword, String newPassword) {
+    public void setRole(String role) {
+        this.roleUser = roleUser;
+    }
+
+    public void init(String oldPassword, String newPassword, String roleUser) {
+        this.setNewPassword(newPassword);
+        this.setOldPassword(oldPassword);
+        this.setRole(roleUser);
+    }
+
+    public static ChangePasswordDTO fromModel(String oldPassword, String newPassword, String roleUser) {
         ChangePasswordDTO dto = new ChangePasswordDTO();
-        dto.init(oldPassword, newPassword);
+        dto.init(oldPassword, newPassword, roleUser);
         return dto;
     }
 }

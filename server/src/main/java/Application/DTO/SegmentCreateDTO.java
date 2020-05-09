@@ -12,6 +12,9 @@ public class SegmentCreateDTO implements Serializable {
     @JsonProperty("id_segment")
     private Long id_segment;
 
+    @JsonProperty("id_order")
+    private Long id_order;
+
     @JsonProperty("type_delivery")
     private String type_delivery;
 
@@ -111,6 +114,14 @@ public class SegmentCreateDTO implements Serializable {
         this.amount_transport = amount_transport;
     }
 
+    public Long getId_order() {
+        return id_order;
+    }
+
+    public void setId_order(Long id_order) {
+        this.id_order = id_order;
+    }
+
     public void init(Segment segment){
         this.setId_segment(segment.getId_segment());
         this.setType_delivery(segment.getTransport().getType_delivery().getName());
@@ -121,6 +132,7 @@ public class SegmentCreateDTO implements Serializable {
         this.setStartPoint(segment.getStart_point().getId_point().toString());
         this.setEndPoint(segment.getEnd_point().getId_point().toString());
         this.setAmount_transport(segment.getAmount_transport());
+        this.setId_order(segment.getId_order());
     }
 
     public static SegmentCreateDTO fromModel(Segment segment) {

@@ -29,13 +29,10 @@ tbody tr:hover {
 }
 
 .table-div {
-    width: 70%;
+    width: 90%;
     margin: 0 auto;
     padding: 1em 0;
 }
-
-
-
 
 a {
     display: inline-block;
@@ -112,4 +109,17 @@ a {
     opacity: 1;
   }
 
+  .btn-save {
+    margin: auto;
+    width: 200px;
+    margin-bottom: 2em;
+  }
+
+  .green {
+    color: green;
+  }
+
+  .red {
+    color: red;
+  }
 

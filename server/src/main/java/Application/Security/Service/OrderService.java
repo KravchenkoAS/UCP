@@ -1,9 +1,6 @@
 package Application.Security.Service;
 
 //import Application.Entites.Order;
-import Application.Entites.User;
-
-import java.util.Optional;
 
 public interface OrderService {
 //

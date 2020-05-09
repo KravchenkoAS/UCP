@@ -6,20 +6,24 @@ export class Transport {
     speed: number;
     max_volume: number;
     max_weight: number;
+    max_width: number
     price: number;
     coefficient: number;
     fuel_consumption: number;
+    crewCost: number;
 
-    init(trnsport: any){
-        this.fuel = trnsport.fuel;
-        this.name = trnsport.name;
-        this.type_delivery = trnsport.type_delivery;
-        this.speed = trnsport.speed;
-        this.max_volume = trnsport.max_volume;
-        this.max_weight = trnsport.max_weight;
-        this.price = trnsport.price;
-        this.coefficient = trnsport.coefficient;
-        this.fuel_consumption = trnsport.fuel_consumption;
+    init(transport: any){
+        this.fuel = transport.fuel;
+        this.name = transport.name;
+        this.type_delivery = transport.type_delivery;
+        this.speed = transport.speed;
+        this.max_volume = transport.max_volume;
+        this.max_weight = transport.max_weight;
+        this.price = transport.price;
+        this.coefficient = transport.coefficient;
+        this.fuel_consumption = transport.fuel_consumption;
+        this.max_width = transport.max_width;
+        this.crewCost = transport.crewCost;
       }
 
 }

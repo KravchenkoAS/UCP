@@ -1,5 +1,7 @@
 package Application.Entites;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -32,6 +34,8 @@ public class Cargo implements Serializable {
     @NotNull(message = "Количество груза не может быть пустым")
     private Float number;
 
+    private Boolean stack; //штабилировать
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_order", referencedColumnName = "id_order")
     private Order order;
@@ -41,14 +45,14 @@ public class Cargo implements Serializable {
 
     public Cargo(Float weight, Float length,
                  Float height, Float width, Float number,
-                 @NotBlank String type) {
+                 @NotBlank String type, Boolean stack, Boolean express) {
         this.weight = weight;
         this.length = length;
         this.height = height;
         this.width = width;
         this.number = number;
         this.type = type;
-
+        this.stack = stack;
         this.volume = Float.valueOf(0);
     }
 
@@ -123,5 +127,14 @@ public class Cargo implements Serializable {
     public void setOrder(Order order) {
         this.order = order;
     }
+
+    public Boolean getStack() {
+        return stack;
+    }
+
+    public void setStack(Boolean stack) {
+        this.stack = stack;
+    }
+
 }
 

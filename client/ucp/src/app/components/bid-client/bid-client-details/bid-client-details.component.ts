@@ -23,7 +23,6 @@ export class BidClientDetailsComponent implements OnInit {
 
   constructor(private orderService: OrderService, 
     private pointService: PointService,
-    private router: Router,
     private token: TokenStorageService) { }
 
   ngOnInit() {
@@ -33,17 +32,15 @@ export class BidClientDetailsComponent implements OnInit {
       authorities: this.token.getAuthorities()                        // <<<---
     };   
 
-    console.log(this.order);
+    console.log(this.info.authorities);
     this.orderService.getOrder(this.order.id_order)
       .subscribe(
         data => {
-          console.log(data),
-            this.orderDetails = data;
+          this.orderDetails = data;
           this.getPoint(this.orderDetails.startPoint, this.startPoint);
           this.getPoint(this.orderDetails.endPoint, this.endPoint);
         },
         error => {
-          console.log(error);
           alert(error.error.message);
         })
   }
@@ -52,13 +49,11 @@ export class BidClientDetailsComponent implements OnInit {
     this.pointService.getPoint(id_point)
       .subscribe(
         data => {
-          console.log(data),
           point.id_point = data.id_point;
           point.city = data.city;
           point.country = data.country;
         },
         error => {
-          console.log(error);
           alert(error.error.message);
         })
   }
@@ -67,10 +62,8 @@ export class BidClientDetailsComponent implements OnInit {
     this.orderService.updateOrderStatus(this.order)
     .subscribe(
       data => {
-        console.log(data);
         this.status.emit(this.order.status);
       }, error => {
-        console.log(error);
         alert(error.error.message);
       }
     )

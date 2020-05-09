@@ -18,11 +18,13 @@ export class DeliveryDetailsComponent implements OnInit {
   order = new OrderCreate();
   startPoint = new Point();
   endPoint = new Point();
-  submitted = false;
   status: string;
 
-  constructor(private _router: Router, private orderService: OrderService, private pointService: PointService,
-    deliveryComponent: DeliveryComponent) { }
+  submitted = false;
+  error = false;
+  errorMessage: string;
+
+  constructor(private _router: Router, private orderService: OrderService, private pointService: PointService) { }
 
   ngOnInit() {
     this.navigateToFoo();
@@ -40,10 +42,6 @@ export class DeliveryDetailsComponent implements OnInit {
           alert(error.error.message);
         })
   }
-
-  // clickBack(){
-  //   this.openDetails.emit(false);
-  // }
 
   navigateToFoo() {
     this._router.navigate([], { queryParams: { order: this.id_order } });
@@ -79,13 +77,15 @@ export class DeliveryDetailsComponent implements OnInit {
           this.order = data as OrderCreate;
         },
         error => {
-          this.submitted = false;
+          this.submitted = true;
+          this.error = true;
           console.log(error);
-          alert(error.error.message);
+          this.errorMessage = error.error.message;
         })
 
         setTimeout(() => {
           this.submitted = false;
+          this.error = false;
         }, 10000);
   }
 

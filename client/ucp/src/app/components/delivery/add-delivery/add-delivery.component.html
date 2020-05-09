@@ -4,19 +4,19 @@
 
           <section class="data">
             <h2>Данные о грузе</h2>
-            <div class="form-group">
+            <div class="form-group-data">
               <label for="type" class="form-label">Тип груза</label>
-              <select id="type" class="form-input" formControlName="type">
+              <select id="type" class="form-input" style="width: 52%;" formControlName="type">
                 <option disabled>Выберите тип груза</option>
                 <option value="Штучный">Штучный</option>
                 <option value="Навалочный">Навалочный</option>
                 <option value="Наливной">Наливной</option>
               </select>
             </div>
-            <div class="form-group-error">
+            <div class="form-group-data-error">
               <label for="name" class="form-label">Название груза</label>
-              <input type="text" id="name" class="form-input" formControlName="name" maxlength="25" />
-              <div class="form-error">
+              <input type="text" id="name" class="form-input width-70" style="width: 50%;" formControlName="name" maxlength="25" />
+              <div class="form-error width-70">
                 <ngb-alert *ngIf="isControlInvalid('name')">
                   <strong>Ошибка!</strong> Проверьте корректность ввода. (A-z, А-я, 0-9, -)
                 </ngb-alert>
@@ -85,11 +85,19 @@
             <h2>Дополнительные услуги</h2>
             <div class="form-group-add">
               <input type="checkbox" id="isContainer" class="form-input-add" formControlName="isContainer" />
-              <label for="isContainer" class="form-label">Защитная транспортировочная упаковка</label>
+              <label for="isContainer" class="form-label">Защитная транспортировочная упаковка (5$ шт.)</label>
             </div>
             <div class="form-group-add">
               <input type="checkbox" id="isDocuments" class="form-input-add" formControlName="isDocuments" />
-              <label for="isDocuments" class="form-label">Перевозка сопроводительных документов</label>
+              <label for="isDocuments" class="form-label">Перевозка сопроводительных документов (3$)</label>
+            </div>
+            <div class="form-group-add">
+              <input type="checkbox" id="stack" class="form-input-add" formControlName="stack" />
+              <label for="stack" class="form-label">Можно штабилировать</label>
+            </div>
+            <div class="form-group-add">
+              <input type="checkbox" id="express" class="form-input-add" formControlName="express" />
+              <label for="express" class="form-label">Экспресс доставка</label>
             </div>
           </section>
       

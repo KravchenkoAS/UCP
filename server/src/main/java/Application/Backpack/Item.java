@@ -6,17 +6,14 @@ public class Item {
 
     private String name;
 
-    private Double weight;
+    private Double volume;
 
     private Double price;
 
-    public Item() {
-    }
-
-    public Item(Long id_order, String name, Double weight, Double price) {
+    public Item(Long id_order, String name, Double volume, Double price) {
         this.id_order = id_order;
         this.name = name;
-        this.weight = weight;
+        this.volume = volume;
         this.price = price;
     }
 
@@ -36,12 +33,12 @@ public class Item {
         this.name = name;
     }
 
-    public Double getWeight() {
-        return weight;
+    public Double getVolume() {
+        return volume;
     }
 
-    public void setWeight(Double weight) {
-        this.weight = weight;
+    public void setVolume(Double volume) {
+        this.volume = volume;
     }
 
     public Double getPrice() {

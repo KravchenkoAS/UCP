@@ -8,6 +8,8 @@ import { TypeDeliveryService } from 'src/app/services/typeDelivery/type-delivery
 import { Transport } from 'src/app/services/transport/transport';
 import { TransportService } from 'src/app/services/transport/transport.service';
 import { SegmentCreate } from 'src/app/services/segment/segment';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 export interface myinterface {
   removeSegment(index: number);
@@ -38,7 +40,8 @@ export class SegmentComponent implements OnInit {
               private pointService: PointService,
               private segmentService: SegmentService,
               private typeDeliveryService: TypeDeliveryService,
-              private transportService: TransportService) {
+              private transportService: TransportService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(){
@@ -59,7 +62,8 @@ export class SegmentComponent implements OnInit {
                                 Validators.pattern(/^[\d]+$/ )  ]],
       startPoint: ['', [Validators.required ]],
       endPoint: ['', [Validators.required ]],
-      id_transport: ['', [Validators.required ]]
+      id_transport: ['', [Validators.required ]],
+      id_order: [ this.route.snapshot.paramMap.get('id') ]
     });
 
   }
@@ -94,6 +98,8 @@ export class SegmentComponent implements OnInit {
 
         return;
     }
+
+    console.log(this.segmentForm.value);
 
     this.segmentService.calculate(this.segmentForm.value)
       .subscribe(
@@ -162,7 +168,8 @@ export class SegmentComponent implements OnInit {
       id_transport: [null],
       amount_transport: [null],
       distance: [null],
-      price: [null]
+      price: [null],
+      id_order: [null]
     });
   }
 

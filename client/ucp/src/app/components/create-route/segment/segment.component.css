@@ -17,28 +17,12 @@ h2 {
     color: green;
 }
 
-button {
-    background:rgb(238, 238, 238);
-    color:#C9842E;
-    text-decoration:none;
-    display:block;
-    text-align:center;
-    padding: .5em;
-    transition:all 0.3s;
-    border:rgb(238, 238, 238);
-    cursor: pointer;
-}
-
-button:hover {
-    box-shadow:0px -5px 0 #C9842E inset;
-}
-
 .segment-container-all {
     padding: 1em 0;
     display: grid;
-    grid-template-columns: 100px 100px;
+    grid-template-columns: 100px 100px 150px;
     grid-template-areas: 
-    "btn-calculate btn-save";
+    "btn-calculate btn-save btn-remove";
 }
 
 .form-group {
@@ -69,4 +53,8 @@ button:hover {
 
 .btn-remove {
     padding-bottom: 1.5em;
+}
+
+.btn-remove > button {
+    width: 100%;
 }

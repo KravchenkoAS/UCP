@@ -1,11 +1,11 @@
 <div class="container">
 
   <header>
-    <div class="a">
-      <a href="/delivery" class="back">
+    <!-- <div class="a">
+      <a href="/delivery" class="back"></a>
         <img src="../../../../assets/icons/left-arrow.png" />
       </a>
-    </div>
+    </div> -->
     <div class="head">
       <h2>Информация о заявке {{order.name}}</h2>
     </div>
@@ -18,9 +18,9 @@
           <label>Тип груза: </label>
           <span>{{order.type}}</span>
       </div>
-      <div>
-          <label for="order.name">Название груза: </label>
-          <input type="text" id="order.name" value="{{order.name}}" [(ngModel)]="order.name"/>
+      <div class="label-div">
+        <label for="order.name">Название груза: </label>
+        <input type="text" id="order.name" value="{{order.name}}" [(ngModel)]="order.name"/>
       </div>
       <div>
         <ngb-alert *ngIf="isControlInvalid('order.name')">
@@ -75,24 +75,43 @@
                 <input type="checkbox" id="order.isDocuments" class="form-input-add" [checked]="order.isDocuments" [(ngModel)]="order.isDocuments"/>
                 <label for="order.isDocuments" class="form-label">Перевозка сопроводительных документов</label>
               </div>
+              <div class="form-group-add">
+                <input type="checkbox" id="order.stack" class="form-input-add" [checked]="order.stack" [(ngModel)]="order.stack"/>
+                <label for="order.stack" class="form-label">Можно штабилировать</label>
+              </div>
+              <div class="form-group-add">
+                <input type="checkbox" id="order.express" class="form-input-add" [checked]="order.express" [(ngModel)]="order.express"/>
+                <label for="order.express" class="form-label">Ексресс доставка</label>
+              </div>
             </div>
             <ng-template #OtherStatus>
               <div class="form-group-add">
                 <input type="checkbox" id="order.isContainer" class="form-input-add" [checked]="order.isContainer" [(ngModel)]="order.isContainer" disabled/>
-                <label for="order.isContainer" class="form-label"> Защитная транспортировочная упаковка</label>
+                <label for="order.isContainer" class="form-label">Защитная транспортировочная упаковка</label>
               </div>
               <div class="form-group-add">
                 <input type="checkbox" id="order.isDocuments" class="form-input-add" [checked]="order.isDocuments" [(ngModel)]="order.isDocuments" disabled/>
-                <label for="order.isDocuments" class="form-label"> Перевозка сопроводительных документов</label>
+                <label for="order.isDocuments" class="form-label">Перевозка сопроводительных документов</label>
+              </div>
+              <div class="form-group-add">
+                <input type="checkbox" id="order.stack" class="form-input-add" [checked]="order.stack" [(ngModel)]="order.stack" disabled/>
+                <label for="order.stack" class="form-label">Можно штабилировать</label>
+              </div>
+              <div class="form-group-add">
+                <input type="checkbox" id="order.express" class="form-input-add" [checked]="order.express" [(ngModel)]="order.express" disabled/>
+                <label for="order.express" class="form-label">Ексресс доставка</label>
               </div>
             </ng-template>
             
           </section>
 
           <div *ngIf="submitted" class="submitted-div">
-              <div>
-                Изменения внесены в заявку!
-              </div>
+            <div *ngIf="errorUser; else NoError" class="alert">
+              Ошибка!<br />{{errorMessage}}
+            </div>
+            <ng-template #NoError>
+              <div class="sub">Изменения внесены в заявку!</div>
+            </ng-template>
           </div>
         
           <div class="btn-container">
@@ -104,6 +123,9 @@
             </div>
             <div class="a-routs">
               <a [routerLink]="['./routes', order.id_order]"  routerLinkActive="active">Список маршрутов</a>
+            </div>
+            <div class="back">
+              <a href="/delivery">Назад</a>
             </div>
           </div>
   </div>

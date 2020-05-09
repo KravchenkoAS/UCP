@@ -1,63 +1,95 @@
 <div class="table-div">
-    <table>
-        <thead>
-          <tr>
-            <th class="first">№</th>
-            <th>Логин</th>
-            <th>Имя</th>
-            <th>Фамилия</th>
-            <th>Роль</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody *ngIf="users; else NoUsers">
-          <tr *ngFor="let user of users; let i = index">
-            <td class="first number">{{i + 1}}</td>
-            <td>{{user.username}}</td>
-            <td>{{user.name}}</td>
-            <td>{{user.surname}}</td>
-            <td>
-              <div *ngIf="user.role == 'ROLE_TRANSPORTER'; else NoTransporter">
-                Перевозчик
+  <table>
+    <thead>
+      <tr>
+        <th class="first">№</th>
+        <th>Логин</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Роль</th>
+        <th>Статус</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="users; else NoUsers">
+      <tr *ngFor="let user of users; let i = index">
+        <td class="first number">{{i + 1}}</td>
+        <td>{{user.username}}</td>
+        <td>
+          <div *ngIf="user.name != null && user.surname != ''; else NoName">
+            {{user.name}}
+          </div>
+          <ng-template #NoName>-</ng-template>
+        </td>
+        <td>
+          <div *ngIf="user.surname != null && user.surname != ''; else NoSurname">
+            {{user.surname}}
+          </div>
+          <ng-template #NoSurname>-</ng-template>
+        </td>
+        <td>
+          <div *ngIf="user.role == 'ROLE_TRANSPORTER'">
+            Перевозчик
+          </div>
+          <div *ngIf="user.role == 'ROLE_CLIENT'">
+            Заказчик
+          </div>
+          <div *ngIf="user.role == 'ROLE_ADMIN' || user.role == 'ROLE_ANALYST'">
+            <div id="{{i}}">
+              <div class="custom-radio">
+
+                <input type="radio" id="admin_{{i}}" name="{{i}}" value="ROLE_ADMIN"
+                  [(ngModel)]="user.role" (ngChange)="user.role" class="radiobtn">
+                <label for="admin_{{i}}">Администратор</label>
               </div>
-              <ng-template #NoTransporter>
-                  <div class="custom-radio">
-                      <input id="{{user.username}}" type="radio" class="radiobtn" value="ROLE_ADMIN" name="{{user.username}}" ngModel
-                        (click)="CheckedRole('ROLE_ADMIN', user.id_user)" >
-                      <label for="{{user.username}}">Администратор</label>
-                   </div>
-                   <div class="custom-radio">
-                      <input id="{{user.username}}" type="radio" class="radiobtn" value="ROLE_ANALYST" name="{{user.username}}" ngModel
-                        (click)="CheckedRole('ROLE_ANALYST', user.id_user)">
-                      <label for="{{user.username}}">Аналитик</label>
-                   </div>
-                   <div class="custom-radio">
-                      <input id="{{user.username}}" type="radio" class="radiobtn" value="ROLE_CLIENT" name="{{user.username}}" ngModel
-                        (click)="CheckedRole('ROLE_CLIENT', user.id_user)">
-                      <label for="{{user.username}}">Заказчик</label>
-                   </div>
-              </ng-template>
-            </td>
-            <td>
-              <div *ngIf="user.isActive; else unset">
-                <a class="buttonBlock"  (click)="isCheckedBlock(user.is_user)">
-                  Блокировать
-                </a>
+              <div class="custom-radio">
+                <input type="radio" id="analyst_{{i}}" name="{{i}}" value="ROLE_ANALYST"
+                  [(ngModel)]="user.role" (ngChange)="user.role" class="radiobtn">
+                <label for="analyst_{{i}}">Аналитик</label>
               </div>
-              <ng-template #unset>
-                <a class="buttonBlock" (click)="isCheckedBlock(user.id_user)" #unset>
-                  Разблокировать
-                </a>
-              </ng-template>
-            </td>
-          </tr>
-        </tbody>
-        <ng-template #NoUsers>
-          <tr>
-            <td colspan="5">
-              Список пользователей пуст
-            </td>
-          </tr>
-        </ng-template>
-    </table>    
+              <!-- <div class="custom-radio">
+
+                <input type="radio" id="client_{{i}}" name="{{i}}" value="ROLE_CLIENT"
+                  [(ngModel)]="user.role" (ngChange)="user.role" class="radiobtn">
+                <label for="client_{{i}}">Заказчик</label>
+              </div> -->
+
+            </div>
+          </div>
+        </td>
+        <td>
+          <div *ngIf="user.isActive; else unset">
+            <a class="buttonBlock green" (click)="isCheckedBlock(i)">
+              Блокировать
+            </a>
+          </div>
+          <ng-template #unset>
+            <a class="buttonBlock red" (click)="isCheckedBlock(i)" #unset>
+              Разблокировать
+            </a>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+    <ng-template #NoUsers>
+      <tr>
+        <td colspan="5">
+          Список пользователей пуст
+        </td>
+      </tr>
+    </ng-template>
+  </table>
+  <br />
+
+  <div *ngIf="submitted" class="submitted-div">
+    <div *ngIf="error; else NoError" class="alert">
+      Ошибка!<br />{{errorMessage}}
+    </div>
+    <ng-template #NoError>
+      <div class="sub">Данные сохранены успешно</div>
+    </ng-template>
+  </div>
+
+  <div>
+    <button class="btn-save" (click)="saveUsers()">Сохранить изменения</button>
+  </div>
 </div>

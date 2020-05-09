@@ -1,0 +1,122 @@
+.info {
+    background-color: #FDC786;
+    border-radius: 10px;
+    width: 85%;
+    margin: 0 auto;
+    padding: 1em 2em 1em 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content;
+    grid-template-areas: 
+    "userForm"
+    "passForm";
+}
+
+.userForm {
+    grid-area: userForm;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 2em;
+    grid-template-rows: 1fr min-content min-content;
+    grid-template-areas: 
+    "loginData persData"
+    "sub-div sub-div"
+    "btn-ctr btn-ctr";
+}
+
+.loginData {
+    grid-area: loginData;   
+}
+
+.persData {
+    grid-area: persData;
+}
+
+.submitted-div {
+    grid-area: sub-div; 
+}
+
+.sub {
+    padding: .5em;
+    text-align: center;
+    color: green;
+}
+
+.alert {
+    padding: .5em;
+    text-align: center;
+    color: red;
+}
+
+.btn-container {
+    grid-area: btn-ctr;
+    margin: 0 auto;   
+    padding: 1em; 
+}
+
+.passForm {
+    grid-area: passForm;
+    padding-top: 1.5em;
+    width: 80%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr min-content min-content;
+    grid-template-areas: 
+    "passInput"
+    "sub-pass"
+    "btn-pass";
+}
+
+.passInput {
+    grid-area: passInput;
+}
+
+.sub-pass {
+    grid-area: sub-pass;  
+}
+
+.btn-pass {
+    grid-area: btn-pass;
+    margin: 0 auto;   
+    padding: 1em;
+}
+
+.form-group {
+    padding: 0.5em 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content min-content;
+    grid-template-areas: 
+    "form-label form-input"
+    "form-error form-error";
+}
+
+.form-input {
+    grid-area: form-input;
+}
+
+.input-pass-size {
+    width: 70%;
+}
+
+.form-label{
+    /* color: #7D6342; */
+    grid-area: form-label;
+    text-align: right;
+    margin-right: .5em;
+}
+
+.form-input, .form-label {
+    padding: .5em;
+}
+
+.form-error {
+    grid-area: form-error;
+    font-size: 80%;
+    padding-top: 0.25em;
+}
+
+span {
+    color: #C9842E;
+}

@@ -31,6 +31,8 @@ export class OrderService {
     orderCreate.date = formCreateOrder.date;
     orderCreate.isContainer = formCreateOrder.isContainer;
     orderCreate.isDocuments = formCreateOrder.isDocuments;
+    orderCreate.stack = formCreateOrder.stack;
+    orderCreate.express = formCreateOrder.express;
     console.log(this.tokenStorage.getUsername());
     return this.http.post(`${this.baseUrl}` + `/` + this.tokenStorage.getUsername() + `/createOrder`, orderCreate);     // <<<---
   }      

@@ -15,7 +15,7 @@ export class SignupComponent implements OnInit {
   isSignedUp = false;                                           // <<<---
   isSignUpFailed = false;                                       // <<<---
   errorMessage = '';   
-  role = new Array<string>();                                         // <<<---
+  roles : string[];                                         // <<<---
  
   constructor(private authService: AuthService) { }             // <<<---
  
@@ -23,14 +23,13 @@ export class SignupComponent implements OnInit {
  
   onSubmit() {                                                  // <<<---
     console.log(this.form.role);  
-    this.role.length = 0;                                   // <<<---
-    this.role.push(this.form.role)
-    console.log(this.role);
+    this.roles =(this.form.role)
+    console.log(this.roles);
     this.signupInfo = new SignUpInfo(                           // <<<---
       this.form.username,                                       // <<<---
       this.form.email,                                          // <<<---
       this.form.password,
-      this.role);
+      this.roles);
       
     console.log(this.signupInfo);
 

@@ -2,15 +2,15 @@ package Application.Controllers;
 
 import Application.Entites.Role;
 import Application.Entites.RoleName;
-import Application.Entites.Transporter;
-import Application.Entites.User;
+import Application.Entites.Users.Customer;
+import Application.Entites.Users.Transporter;
 import Application.Messages.Request.LoginForm;
 import Application.Messages.Request.SignUpForm;
 import Application.Messages.Response.JwtResponse;
 import Application.Messages.Response.ResponseMessage;
 import Application.Repositories.RoleRepository;
-import Application.Repositories.TransporterRepository;
-import Application.Repositories.UserRepository;
+import Application.Repositories.UserRepositories.CustomerRepository;
+import Application.Repositories.UserRepositories.TransporterRepository;
 import Application.Security.JWT.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,8 +24,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -34,9 +32,6 @@ public class AuthRestAPIs {
 
     @Autowired
     AuthenticationManager authenticationManager;
-
-    @Autowired
-    UserRepository userRepository;
 
     @Autowired
     RoleRepository roleRepository;
@@ -50,6 +45,9 @@ public class AuthRestAPIs {
     @Autowired
     TransporterRepository transporterRepository;
 
+    @Autowired
+    CustomerRepository customerRepository;
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
@@ -61,68 +59,82 @@ public class AuthRestAPIs {
         String jwt = jwtProvider.generateJwtToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
+        System.out.println(userDetails.isAccountNonLocked());
+
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
     }
 
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (customerRepository.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity<>(new ResponseMessage("Fail -> Такой логин уже существует!"),
                     HttpStatus.BAD_REQUEST);
         }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if (transporterRepository.existsByUsername(signUpRequest.getUsername())) {
+            return new ResponseEntity<>(new ResponseMessage("Fail -> Такой логин уже существует!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        if (customerRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity<>(new ResponseMessage("Fail -> Такой email уже существует!"),
                     HttpStatus.BAD_REQUEST);
         }
 
-        // Creating user's account
-        User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+        if (transporterRepository.existsByEmail(signUpRequest.getEmail())) {
+            return new ResponseEntity<>(new ResponseMessage("Fail -> Такой email уже существует!"),
+                    HttpStatus.BAD_REQUEST);
+        }
 
-        Set<String> strRoles = signUpRequest.getRole();
-        Set<Role> roles = new HashSet<>();
+        String strRole = signUpRequest.getRole();
+        Role role = null;
 
-        strRoles.forEach(role -> {
-            switch (role) {
-                case "admin":
-                    Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    roles.add(adminRole);
 
-                    break;
-                case "analyst":
-                    System.out.println("analyst");
-                    Role analystRole = roleRepository.findByName(RoleName.ROLE_ANALYST)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    roles.add(analystRole);
-
-                    break;
+//        strRoles.forEach(role -> {
+            switch (strRole) {
+//                case "admin":
+//                    Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
+//                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+//                    role = adminRole;
+//
+//                    break;
+//                case "analyst":
+//                    System.out.println("analyst");
+//                    Role analystRole = roleRepository.findByName(RoleName.ROLE_ANALYST)
+//                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+//                    role = analystRole;
+//
+//                    break;
                 case "transporter":
                     System.out.println("transporter");
                     Role transporterRole = roleRepository.findByName(RoleName.ROLE_TRANSPORTER)
                             .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    roles.add(transporterRole);
+                    role = transporterRole;
 
                     break;
                 default:
                     Role clientRole = roleRepository.findByName(RoleName.ROLE_CLIENT)
                             .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    roles.add(clientRole);
+                    role = clientRole;
             }
-        });
+//        });
 
-        user.setRoles(roles);
-        user.setActive(true);
-        userRepository.save(user);
+        // Creating user's account
+        if (role.getName().equals(RoleName.ROLE_TRANSPORTER)) {
+            Transporter transporter = new Transporter(signUpRequest.getUsername(), signUpRequest.getEmail(),
+                    encoder.encode(signUpRequest.getPassword()));
+            transporter.setRole(role);
+            transporter.setIsLock(true);
+            transporterRepository.save(transporter);
 
-        for (Role role : user.getRoles()) {
-            if (role.getName() == RoleName.ROLE_TRANSPORTER) {
-                Transporter transporter = new Transporter();
-                transporter.setId_user(userRepository.findByUsername(user.getUsername()).get().getId_user());
-                transporterRepository.save(transporter);
-            }
+        } else {
+            Customer customer = new Customer(signUpRequest.getUsername(), signUpRequest.getEmail(),
+                    encoder.encode(signUpRequest.getPassword()));
+            customer.setRole(role);
+            customer.setIsLock(true);
+            customerRepository.save(customer);
+
         }
 
         return new ResponseEntity<>(new ResponseMessage("Регистрация прошла успешно!"), HttpStatus.OK);

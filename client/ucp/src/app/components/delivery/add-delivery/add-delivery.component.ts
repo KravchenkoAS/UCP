@@ -34,19 +34,19 @@ export class AddDeliveryComponent implements OnInit {
       ]],
       length: [0, [
         Validators.required,
-        Validators.pattern(/^[\d]+$/ )
+        Validators.pattern(/^[\d.]+$/ )
       ]],
       width: [0, [
         Validators.required,
-        Validators.pattern(/^[\d]+$/ )
+        Validators.pattern(/^[\d.]+$/ )
       ]],
       height: [0, [
         Validators.required,
-        Validators.pattern(/^[\d]+$/ )
+        Validators.pattern(/^[\d.]+$/ )
       ]],
       weight: ['', [
         Validators.required,
-        Validators.pattern(/^[\d]+$/ )
+        Validators.pattern(/^[\d.]+$/ )
       ]],
       amount: ['', [
         Validators.required,
@@ -60,7 +60,9 @@ export class AddDeliveryComponent implements OnInit {
       ]],
       date: [null],
       isContainer: [false],
-      isDocuments: [false]
+      isDocuments: [false],
+      stack: [false],
+      express: [false]
     });
 
   }
@@ -85,21 +87,19 @@ export class AddDeliveryComponent implements OnInit {
     }
 
     /** TODO: Обработка данных формы */
-    console.log(this.myFirstReactiveForm.value);
     this.save();
 
   }
 
   save(){
-    console.log("save");
 
     if(this.myFirstReactiveForm.value.type === 'Наливной'){
       this.myFirstReactiveForm.value.length = null;
       this.myFirstReactiveForm.value.width = null;
       this.myFirstReactiveForm.value.height = null;
-    } else if (this.myFirstReactiveForm.value.length < 1 ||
-                this.myFirstReactiveForm.value.width < 1 ||
-                this.myFirstReactiveForm.value.height < 1){
+    } else if (this.myFirstReactiveForm.value.length <= 0 ||
+                this.myFirstReactiveForm.value.width <= 0 ||
+                this.myFirstReactiveForm.value.height <= 0){
       alert("Ошибка! Данные о габаритах груза некорректны.");
       return false;
     } 
@@ -107,12 +107,10 @@ export class AddDeliveryComponent implements OnInit {
     this.orderService.createOrder(this.myFirstReactiveForm.value)
       .subscribe(
         data => {
-          console.log(data), 
           this.submitted = true;
         },
         error => {
           this.submitted = false;
-          console.log(error);
           alert(error.error.message);
         })
   }
@@ -132,15 +130,15 @@ export class AddDeliveryComponent implements OnInit {
       endPoint: [null],
       date: [null],
       isContainer: [null],
-      isDocuments: [null]
+      isDocuments: [null],
+      stack: [null],
+      express: [null]
     });
   }
 
   reloadPoint() {
     this.pointService.getPointList()
     .subscribe(points => this.points = points);
-    console.log("getPointList: " + this.points);
-
   }
 
 }

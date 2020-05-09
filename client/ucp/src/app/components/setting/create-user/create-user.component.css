@@ -1,0 +1,65 @@
+.content {
+    background-color: #FDC786;
+    border-radius: 10px;
+    width: 85%;
+    margin: auto;
+    padding: 1em;
+}
+
+header {
+    text-align: center;
+    color: #7D6342; 
+    font-size: 150%;
+}
+
+form{
+    padding: 2rem 0;
+}
+
+.form-group {
+    padding: 0.5em 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: min-content min-content;
+    grid-template-areas: 
+    "form-label form-input"
+    "form-error form-error";
+}
+
+.form-input {
+    grid-area: form-input;
+    width: 15rem;
+}
+
+.form-label{
+    grid-area: form-label;
+    text-align: right;
+    margin-right: .5em;
+}
+
+.form-input, .form-label {
+    padding: .5em;
+}
+
+.form-error {
+    text-align: center;
+    grid-area: form-error;
+    font-size: 80%;
+    padding-top: 0.25em;
+}
+
+button {
+    margin: auto;
+}
+
+.sub {
+    padding: .5em;
+    text-align: center;
+    color: green;
+}
+
+.alert {
+    padding: .5em;
+    text-align: center;
+    color: red;
+}

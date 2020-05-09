@@ -22,7 +22,15 @@ public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
                          AuthenticationException e)
             throws IOException, ServletException {
 
+        String message;
+        if (e.getMessage().equals("Bad credentials")) {
+            message = "Неверный ввод логина или пароля";
+        } else if (e.getMessage().equals("User account is locked")) {
+            message = "Аккаунт заблокирован";
+        } else {
+            message = "Ошибка сервера. Попробуйте повторить вход позже";
+        }
         logger.error("Unauthorized error. Message - {}", e.getMessage());
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error -> Неверный ввод логина или пароля");
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, message);
     }
 }

@@ -28,7 +28,6 @@ export class CreateRouteComponent implements OnInit {
   distance: number = 0;
   isSaveAll: boolean = false;
 
-
   @ViewChild('viewContainerRef', { read: ViewContainerRef }) VCR: ViewContainerRef;
 
   index: number = 0;
@@ -52,10 +51,8 @@ export class CreateRouteComponent implements OnInit {
       data => {
         this.order = data;
         this.getOrderDetails(this.order.id_order, this.orderDetails);
-        console.log(this.order);
       },
       error => {
-        console.log(error);
         alert(error.error.message);
       })
     }
@@ -83,7 +80,7 @@ export class CreateRouteComponent implements OnInit {
         data => {
           orderDetails.init(data);
           this.getPoint(this.orderDetails.startPoint, this.startPoint);
-        this.getPoint(this.orderDetails.endPoint, this.endPoint);
+          this.getPoint(this.orderDetails.endPoint, this.endPoint);
         },
         error => {
           alert(error.error.message);
@@ -151,18 +148,11 @@ export class CreateRouteComponent implements OnInit {
     if (!isPointEnd || !isPointStart) {
       alert("Маршрут не построен!!!");
     } else {
-      console.log("OK");
       price = this.segmentService.calculateAllPrice(this.segments);
       time = this.segmentService.calculateAllTime(this.segments);
       distance = this.segmentService.calculateAllDistance(this.segments);
     }
     this.order.price = 0;
-    if (this.order.isContainer) {
-      price += 5;
-    }
-    if (this.order.isDocuments) {
-      price += 3; 
-    }
     this.order.price += price;
     this.time = time;
     this.distance = distance;
@@ -178,11 +168,9 @@ export class CreateRouteComponent implements OnInit {
   this.segmentService.saveAllSegments(this.order.id_order, this.segments)
   .subscribe(
     data => {
-      console.log(data);
       this.isSaveAll = true;
     },
     error => {
-      console.log(error);
       alert(error.error);
     })
     

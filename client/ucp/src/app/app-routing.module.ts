@@ -20,6 +20,9 @@ import { CarrierTransportComponent } from './components/transport/carrier-transp
 import { AddTrpComponent } from './components/transport/carrierTransport/add-trp/add-trp.component';
 import { MyTrpComponent } from './components/transport/carrierTransport/my-trp/my-trp.component';
 import { BackpackComponent } from './components/backpack/backpack/backpack.component';
+import { TableUsersComponent } from './components/setting/table-users/table-users.component';
+import { ProfileComponent } from './components/setting/profile/profile.component';
+import { CreateUserComponent } from './components/setting/create-user/create-user.component';
 
 const routes: Routes = [
   {                                                                   // <<<--
@@ -68,7 +71,12 @@ const routes: Routes = [
 },  
 {                                                                     // <<<--
     path: 'settings',                                                   // <<<--
-    component: SettingComponent                                        // <<<--
+    component: SettingComponent,                                        // <<<--
+    children: [
+        { path: 'users-list', component: TableUsersComponent },
+        { path: 'profile', component: ProfileComponent },
+        { path: 'create-user', component: CreateUserComponent}
+    ]
 },
 {
     path: 'delivery/addDelivery',

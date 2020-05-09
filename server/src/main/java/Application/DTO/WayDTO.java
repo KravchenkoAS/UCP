@@ -91,6 +91,7 @@ public class WayDTO implements Serializable {
              distance += dictionary.getSegment().getDistance();
              price += dictionary.getSegment().getPrice();
          }
+         price = (float) Math.ceil(Double.valueOf(price) * 100) / 100;
          this.setId_segment(list);
          this.setTime(time);
          this.setDistance(distance);

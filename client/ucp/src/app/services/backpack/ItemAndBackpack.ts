@@ -1,12 +1,12 @@
 export class Item {
     id_order: number;
     name: string;
-    weight: number;
+    volume: number;
     price: number;
 }
 
 export class Backpack {
     bestItems: Array<Item>;
-    maxW: number;
+    maxV: number;
     bestPrice: number;
 }

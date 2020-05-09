@@ -1,0 +1,105 @@
+<div class="info">
+
+  <form [formGroup]="userForm" class="userForm" (submit)="Save()">
+    <div class="loginData">
+      <div class="form-group">
+        <label class="form-label" for="username">Логин:</label>
+        <span class="form-input">{{user.username}}</span>
+        <div class="form-error" *ngIf="isControlInvalidUserForm('username')">
+          <ngb-alert>
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (A-z, 0-9)
+          </ngb-alert>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="email">E-mail:</label>
+        <input type="text" class="form-input" id="email" value="{{email}}" formControlName="email" />
+        <div class="form-error" *ngIf="isControlInvalidUserForm('email')">
+          <ngb-alert>
+            <strong>Ошибка!</strong> Проверьте корректность ввода Email.
+          </ngb-alert>
+        </div>
+      </div>
+    </div>
+    <div class="persData">
+      <div class="form-group">
+        <label class="form-label" for="surname">Фамилия:</label>
+        <input type="text" class="form-input" id="surname" value="{{surname}}" formControlName="surname" />
+        <div class="form-error" *ngIf="isControlInvalidUserForm('surname')">
+          <ngb-alert>
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (A-z, А-я)
+          </ngb-alert>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="name">Имя:</label>
+        <input type="text" class="form-input" id="name" value="{{name}}" formControlName="name" />
+        <div class="form-error" *ngIf="isControlInvalidUserForm('name')">
+          <ngb-alert>
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (A-z, А-я)
+          </ngb-alert>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="submitted" class="submitted-div">
+      <div *ngIf="errorUser; else NoError" class="alert">
+        Ошибка!<br />{{errorMessageUser}}
+      </div>
+      <ng-template #NoError>
+        <div class="sub">Данные сохранены успешно</div>
+      </ng-template>
+    </div>
+    <div class="btn-container">
+      <button type="submit">Сохранить</button>
+    </div>
+
+  </form>
+
+  <form [formGroup]="passForm" class="passForm" (submit)="SavePass()">
+    <div class="passInput">
+      <div class="form-group">
+        <label class="form-label" for="oldPassword">Пароль:</label>
+        <input type="password" id="oldPassword" class="form-input input-pass-size" formControlName="oldPassword" />
+        <div class="form-error" *ngIf="isControlInvalidPassForm('oldPassword')">
+          <ngb-alert>
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (A-z, 0-9)
+          </ngb-alert>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="newPassword">Новый пароль:</label>
+        <input type="password" id="newPassword" class="form-input input-pass-size" formControlName="newPassword" />
+        <div class="form-error" *ngIf="isControlInvalidPassForm('newPassword')">
+          <ngb-alert>
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (A-z, 0-9)
+          </ngb-alert>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="confirmNewPassword">Подтвердите новый пароль:</label>
+        <input type="password" id="confirmNewPassword" class="form-input input-pass-size"
+          formControlName="confirmNewPassword" />
+        <div class="form-error" *ngIf="isControlInvalidPassForm('confirmNewPassword')">
+          <ngb-alert>
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (A-z, 0-9)
+          </ngb-alert>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="submittedPass" class="sub-pass sub">
+      <div *ngIf="!errorPass; else ErrorPass" class="sub">
+        {{messagePass}}
+      </div>
+      <ng-template #ErrorPass>
+        <div class="alert">
+          {{messagePass}}
+        </div>
+      </ng-template>
+    </div>
+    <div class="btn-pass">
+      <button type="submit">Сохранить</button>
+    </div>
+
+  </form>
+
+</div>

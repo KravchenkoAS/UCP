@@ -52,7 +52,7 @@ button:hover {
 
 .data {
     grid-area: data;
-    width: 35%;
+    width: 100%;
 }
 
 .dimensions {
@@ -66,10 +66,19 @@ button:hover {
 
 .add {
     grid-area: add;
+    padding-top: 1rem;
 }
 
 .btn {
     padding: 1em;
+}
+
+.form-group-data {
+    padding: 0.25em;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: 
+    "form-label form-input";
 }
 
 .form-group {
@@ -78,6 +87,16 @@ button:hover {
     grid-template-columns: 1fr 1fr;
     grid-template-areas: 
     "form-label form-input";
+}
+
+.form-group-data-error {
+    padding: 0.25em;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+    "form-label form-input"
+    "form-error form-error";
 }
 
 .form-group-error {
@@ -91,7 +110,7 @@ button:hover {
 }
 
 .form-group-add {
-    padding: 0.25em;
+    padding: .25em 0 .25em 1em;
 }
 
 .form-input-add {

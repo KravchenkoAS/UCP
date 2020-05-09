@@ -2,7 +2,6 @@ package Application.Security.Service;
 
 import Application.Entites.Cargo;
 import Application.Entites.Order;
-import Application.Entites.User;
 
 import java.util.Optional;
 

@@ -34,6 +34,9 @@ public class OrderDTO {
     @JsonProperty("isContainer")
     private Boolean isContainer;
 
+    @JsonProperty("express")
+    private Boolean express;
+
     public OrderDTO() {
     }
 
@@ -101,6 +104,14 @@ public class OrderDTO {
         isContainer = container;
     }
 
+    public Boolean getExpress() {
+        return express;
+    }
+
+    public void setExpress(Boolean express) {
+        this.express = express;
+    }
+
     public void init(Order order) {
         this.setId_order(order.getId_order());
         this.setName(order.getName());
@@ -110,6 +121,7 @@ public class OrderDTO {
         this.setDate_of_dispatch(order.getDate_of_dispatch());
         this.setContainer(order.getContainer());
         this.setDocuments(order.getDocuments());
+        this.setExpress(order.getExpress());
     }
 
     public static OrderDTO fromModel(Order order) {

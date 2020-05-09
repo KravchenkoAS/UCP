@@ -2,10 +2,8 @@ package Application.Controllers;
 
 import Application.DTO.SegmentCreateDTO;
 import Application.DTO.SegmentDetailsDTO;
+import Application.Entites.*;
 import Application.Entites.Dictionary;
-import Application.Entites.Order;
-import Application.Entites.Segment;
-import Application.Entites.Transport;
 import Application.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,20 +41,62 @@ public class SegmentController {
         Optional<Transport> transport = transportRepository.findById(segmentCreateDTO.getId_transport());
 
         if (transport.isPresent()){
-            Float time = segmentCreateDTO.getDistance() / transport.get().getSpeed() / 12;
-            segmentCreateDTO.setTime((int)Math.ceil(time));
+            Float day = segmentCreateDTO.getDistance() / transport.get().getSpeed() / 12;
+            segmentCreateDTO.setTime((int)Math.ceil(day));
 
-            Float consumption = transport.get().getFuel_consumption() * segmentCreateDTO.getDistance() / 100;
+            Float consumption = segmentCreateDTO.getDistance() * transport.get().getFuel_consumption() / 100;
             Float priceFuelForOneTransport = consumption * transport.get().getFuel().getPrice();
-            double AllPriceSegment = (priceFuelForOneTransport
-                    + transport.get().getPrice() * transport.get().getCoefficient()
-                    ) * segmentCreateDTO.getAmount_transport();
-            AllPriceSegment = Math.round(AllPriceSegment * 100.0) / 100.0;
-            segmentCreateDTO.setPrice(Float.valueOf(String.valueOf(AllPriceSegment)));
+            Float costOfOneTransport = priceFuelForOneTransport
+                    + transport.get().getPrice()
+                    + transport.get().getCrewCost() * segmentCreateDTO.getTime();
 
-            System.out.println("...");
+            Optional<Order> order = orderRepository.findById(segmentCreateDTO.getId_order());
 
-            return new ResponseEntity<>(segmentCreateDTO, HttpStatus.OK);
+            if (order.isPresent()) {
+                Cargo cargo = order.get().getCargo();
+
+                if (cargo != null) {
+                    Float calculatedWeight;
+                    if (cargo.getStack()) {
+                        Float density = cargo.getWeight()/cargo.getVolume();
+                        if (density < 250) {
+                            calculatedWeight = cargo.getVolume() * 250;
+                        } else {
+                            calculatedWeight = cargo.getWeight();
+                        }
+                    } else {
+                        Float loadingMeter = (float) (Math.ceil(cargo.getWidth() * cargo.getLength() / 2.4));
+
+                        Float weightPerMeter = transport.get().getMax_weight() / transport.get().getMax_width();
+                        calculatedWeight = loadingMeter * weightPerMeter;
+                    }
+
+                    Float shareOfCargo = (calculatedWeight * cargo.getNumber()) / transport.get().getMax_weight();
+
+                    segmentCreateDTO.setAmount_transport((int) Math.ceil(shareOfCargo));
+
+                    shareOfCargo = (calculatedWeight * cargo.getNumber())
+                        / transport.get().getMax_weight() * segmentCreateDTO.getAmount_transport();
+
+                    Float price = costOfOneTransport *  segmentCreateDTO.getAmount_transport() * shareOfCargo;
+
+                    if (order.get().getExpress()) {
+                        price = (float) (price * 1.5);
+                    }
+
+                    price = price * 100;
+                    int result = Math.round(price);
+                    price = (float) result / 100;
+
+                    segmentCreateDTO.setPrice(Float.valueOf(String.valueOf(price)));
+                    System.out.println("...");
+                    return new ResponseEntity<>(segmentCreateDTO, HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -75,8 +115,8 @@ public class SegmentController {
         List<Segment> segmentList = new ArrayList<>();
         if(order.isPresent()) {
             for (SegmentCreateDTO segment: segments) {
-                if(Long.valueOf(segment.getStartPoint()) ==
-                        order.get().getRoute().getStart_point().getId_point()) {
+                if(Long.valueOf(segment.getStartPoint())
+                        .equals(order.get().getRoute().getStart_point().getId_point())) {
                     Segment firstSegment = new Segment();
                     firstSegment.convertFromSegmentCreateDTO(segment);
 
@@ -92,8 +132,7 @@ public class SegmentController {
                     break;
                 }
             }
-
-            for (int i = 0; i < segments.size(); i++) {
+            
                 for (SegmentCreateDTO segment: segments) {
                     if (Long.valueOf(segment.getStartPoint()) ==
                             segmentList.get(segmentList.size()-1).getEnd_point().getId_point()) {
@@ -111,7 +150,8 @@ public class SegmentController {
                         segmentList.add(nextSegment);
                     }
                 }
-            }
+
+            orderRepository.save(order.get());
 
             if (segmentList.size() == segments.size()) {
                 for (Segment segment: segmentList) {
@@ -158,8 +198,12 @@ public class SegmentController {
             dictionaries.add(dictionary);
             dictionary.setSegment(segmentList.get(i));
 //            segmentRepository.save(segmentList.get(i));
+            if (dictionary.getSegment().getId_order() == null) {
+                dictionary.getSegment().setId_order(id_order);
+            }
             dictionaryRepository.save(dictionary);
         }
+
         return true;
     }
 

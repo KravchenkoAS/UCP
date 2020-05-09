@@ -1,8 +1,6 @@
 package Application.DTO;
 
-import Application.Entites.Cargo;
 import Application.Entites.Order;
-import Application.Entites.Route;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDate;
@@ -30,6 +28,9 @@ public class Order_Cargo_RouteDTO {
     @JsonProperty("weight")
     private Float weight;
 
+    @JsonProperty("volume")
+    private Float volume;
+
     @JsonProperty("amount")
     private Float amount;
 
@@ -47,6 +48,12 @@ public class Order_Cargo_RouteDTO {
 
     @JsonProperty("isDocuments")
     private Boolean isDocuments;
+
+    @JsonProperty("stack")
+    private Boolean stack;
+
+    @JsonProperty("express")
+    private Boolean express;
 
     public Order_Cargo_RouteDTO() {
     }
@@ -155,6 +162,30 @@ public class Order_Cargo_RouteDTO {
         isDocuments = documents;
     }
 
+    public Boolean getStack() {
+        return stack;
+    }
+
+    public void setStack(Boolean stack) {
+        this.stack = stack;
+    }
+
+    public Float getVolume() {
+        return volume;
+    }
+
+    public void setVolume(Float volume) {
+        this.volume = volume;
+    }
+
+    public Boolean getExpress() {
+        return express;
+    }
+
+    public void setExpress(Boolean express) {
+        this.express = express;
+    }
+
     public void init(Order order) {
         this.setId_order(order.getId_order());
         this.setType(order.getCargo().getType());
@@ -163,12 +194,15 @@ public class Order_Cargo_RouteDTO {
         this.setWidth(order.getCargo().getWidth());
         this.setHeight(order.getCargo().getHeight());
         this.setWeight(order.getCargo().getWeight());
-        this.setAmount(order.getCargo().getVolume());
+        this.setVolume(order.getCargo().getVolume());
+        this.setAmount(order.getCargo().getNumber());
         this.setStartPoint(order.getRoute().getStart_point().getId_point());
         this.setEndPoint(order.getRoute().getEnd_point().getId_point());
         this.setDate(order.getDate_of_dispatch());
         this.setContainer(order.getContainer());
         this.setDocuments(order.getDocuments());
+        this.setStack(order.getCargo().getStack());
+        this.setExpress(order.getExpress());
     }
 
     public static Order_Cargo_RouteDTO fromModel(Order order) {

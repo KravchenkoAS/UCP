@@ -1,6 +1,6 @@
 <div class="content">
   <section id="projects">
-    <h2 class="head">Рюкзак</h2>
+    <h2 class="head">Загрузка ТС</h2>
     <div *ngIf="itemsInput.length != 0; else Empty" class="table-input">
           <table>
             <caption>Входной список заявок</caption>
@@ -8,7 +8,7 @@
                 <tr>
                   <th>№</th>
                   <th>Название</th>
-                  <th>Вес, кг</th>
+                  <th>Объем, куб. м.</th>
                   <th>Стоимость, $</th>
                 </tr>
               </thead>
@@ -16,7 +16,7 @@
                 <tr>
                   <td>{{i + 1}}</td>
                   <td>{{item.name}}</td>
-                  <td>{{item.weight}}</td>
+                  <td>{{item.volume}}</td>
                   <td>{{item.price}}</td>
                 </tr>
               </tbody>
@@ -73,7 +73,7 @@
                   <tr>
                     <th>№</th>
                     <th>Название</th>
-                    <th>Вес, кг</th>
+                    <th>Объем, куб. м.</th>
                     <th>Стоимость, $</th>
                   </tr>
                 </thead>
@@ -81,14 +81,14 @@
                   <tr>
                     <td>{{i + 1}}</td>
                     <td>{{item.name}}</td>
-                    <td>{{item.weight}}</td>
+                    <td>{{item.volume}}</td>
                     <td>{{item.price}}</td>
                   </tr>
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td>Общий вес</td>
-                    <td>{{backpack.maxW}} кг</td>
+                    <td>Общий oбъем</td>
+                    <td>{{backpack.maxV}} куб. м.</td>
                     <td>Общая стоимость</td>
                     <td>$ {{backpack.bestPrice}}</td>
                   </tr>

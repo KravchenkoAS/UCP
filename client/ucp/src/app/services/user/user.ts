@@ -23,4 +23,5 @@ export class User {
 export class ChangePassword {
     oldPassword: string;
     newPassword: string;
+    roleUser: string;
 }

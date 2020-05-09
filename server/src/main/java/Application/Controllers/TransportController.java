@@ -42,14 +42,7 @@ public class TransportController {
             transport = transportOptional.get();
         }
 
-        transport.setCoefficient(transportDTO.getCoefficient());
-        transport.setFuel_consumption(transportDTO.getFuel_consumption());
-        transport.setMax_volume(transportDTO.getMax_volume());
-        transport.setMax_weight(transportDTO.getMax_weight());
-        transport.setSpeed(transportDTO.getSpeed());
-        transport.setPrice(transportDTO.getPrice());
-        transport.setFuel(fuelRepository.findByName(transportDTO.getFuel()));
-        transport.setType_delivery(typeDeliveryRepository.findByName(transportDTO.getType_delivery()));
+        transport = TransportDTO.parse(transport, transportDTO, fuelRepository, typeDeliveryRepository);
 
         System.out.println("...");
         return new ResponseEntity<>(TransportDTO.fromModel(transportRepository.save(transport)), HttpStatus.OK);

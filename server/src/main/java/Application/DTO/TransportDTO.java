@@ -1,7 +1,10 @@
 package Application.DTO;
 
 import Application.Entites.Transport;
+import Application.Repositories.FuelRepository;
+import Application.Repositories.Type_deliveryRepository;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class TransportDTO {
 
@@ -23,6 +26,9 @@ public class TransportDTO {
     @JsonProperty("max_weight")
     private Float max_weight;
 
+    @JsonProperty("max_width")
+    private Float max_width;
+
     @JsonProperty("price")
     private Float price;
 
@@ -34,6 +40,9 @@ public class TransportDTO {
 
     @JsonProperty("fuel")
     private String fuel;
+
+    @JsonProperty("crewCost")
+    private Float crewCost;
 
     public TransportDTO() {
     }
@@ -118,6 +127,22 @@ public class TransportDTO {
         this.fuel = fuel;
     }
 
+    public Float getMax_width() {
+        return max_width;
+    }
+
+    public void setMax_width(Float max_width) {
+        this.max_width = max_width;
+    }
+
+    public Float getCrewCost() {
+        return crewCost;
+    }
+
+    public void setCrewCost(Float crewCost) {
+        this.crewCost = crewCost;
+    }
+
     public void init(Transport transport) {
         this.setId_transport(transport.getId_transport());
         this.setName(transport.getName());
@@ -129,11 +154,30 @@ public class TransportDTO {
         this.setMax_weight(transport.getMax_weight());
         this.setSpeed(transport.getSpeed());
         this.setFuel(transport.getFuel().getName());
+        this.setMax_width(transport.getMax_width());
+        this.setCrewCost(transport.getCrewCost());
     }
 
     public static TransportDTO fromModel(Transport transport) {
         TransportDTO dto = new TransportDTO();
         dto.init(transport);
         return dto;
+    }
+
+    public static Transport parse(Transport transport, TransportDTO transportDTO, FuelRepository fuelRepository,
+                                  Type_deliveryRepository typeDeliveryRepository) {
+
+        transport.setCoefficient(transportDTO.getCoefficient());
+        transport.setFuel_consumption(transportDTO.getFuel_consumption());
+        transport.setMax_volume(transportDTO.getMax_volume());
+        transport.setMax_weight(transportDTO.getMax_weight());
+        transport.setSpeed(transportDTO.getSpeed());
+        transport.setPrice(transportDTO.getPrice());
+        transport.setFuel(fuelRepository.findByName(transportDTO.getFuel()));
+        transport.setType_delivery(typeDeliveryRepository.findByName(transportDTO.getType_delivery()));
+        transport.setMax_width(transportDTO.getMax_width());
+        transport.setCrewCost(transportDTO.getCrewCost());
+
+        return transport;
     }
 }

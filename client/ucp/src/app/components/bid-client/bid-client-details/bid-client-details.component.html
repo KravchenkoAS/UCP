@@ -1,5 +1,5 @@
 <div>
-  <div *ngIf="info.authorities !== 'ROLE_TRANSPORTER'" class="select-status">
+  <div *ngIf="info.authorities[0] !== 'ROLE_TRANSPORTER'" class="select-status">
     <div *ngIf="order.status === 'Обрабатывается'; else OtherStatus">
       <select id="order.status" class="form-input" name="order.status">
         <option disabled>Выберите статус заказа</option>
@@ -63,13 +63,20 @@
       </div>
     </section>
       
-    <section *ngIf="orderDetails.isContainer || orderDetails.isDocuments; else noDopUslug">
+    <section *ngIf="orderDetails.isContainer || orderDetails.isDocuments
+      || orderDetails.expeess || orderDetails.stack; else noDopUslug">
       <h2>Дополнительные услуги</h2>
       <div *ngIf="orderDetails.isContainer">
         Требуется защитная транспортировочная упаковка
       </div>
       <div *ngIf="orderDetails.isDocuments">
         Требуется перевозка сопроводительных документов
+      </div>
+      <div *ngIf="orderDetails.stack">
+        Можно штабилировать
+      </div>
+      <div *ngIf="orderDetails.expeess">
+        <strong>Экспресс</strong>
       </div>
     </section>
     <ng-template #noDopUslug>
@@ -78,7 +85,7 @@
       </section>
     </ng-template>
       
-    <div *ngIf="order.status == 'Обрабатывается'; else anotherStatus">
+    <div *ngIf="order.status == 'Обрабатывается' && info.authorities[0] !== 'ROLE_TRANSPORTER'; else anotherStatus">
       <div>
         <a routerLink="/route/{{orderDetails.id_order}}">Проложить маршрут</a>
       </div>
@@ -88,7 +95,7 @@
     </div>
 
     <ng-template #anotherStatus>
-      <div>
+      <div *ngIf="order.status == 'Договор'">
         <a [routerLink]="['/bidClient/routeList', orderDetails.id_order]"  routerLinkActive="active">Информация о маршруте</a>
       </div>
     </ng-template>

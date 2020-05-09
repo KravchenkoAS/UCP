@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/services/user/user';
 import { UserService } from 'src/app/services/user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table-users',
@@ -10,69 +11,53 @@ import { UserService } from 'src/app/services/user/user.service';
 export class TableUsersComponent implements OnInit {
 
   users = new Array<User>();
+  submitted = false;
+  error = false;
+  errorMessage: string;
 
-  constructor(private userServise: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    this.userServise.getAllUser()
-    .subscribe( data => {
-      this.users = data;
-      console.log(this.users);
-    }, error => {
-      console.log(error);
-      alert(error.error.message);
+
+    this.userService.getAllUser()
+      .subscribe( data => {
+        this.users = data;
+        console.log(this.users);
+      }, error => {
+        this.submitted = this.error = true;
+        this.errorMessage = error.error.message;
+        console.log(error);
     })
+
+    if (this.submitted) {
+      setTimeout(() => {
+        this.submitted = this.error = false;
+      }, 10000);
+    }
+
   }
 
+  saveUsers() {
+    console.log(this.users);
+    this.userService.saveUsers(this.users)
+      .subscribe(data => {
+        this.submitted = true;
+      }, error => {
+        this.submitted = this.error = true;
+        this.errorMessage = error.error.message;   
+    })
 
-  isChecked(role: string, user: User) {
-    if (user.role == role){
-      return true;
-    } else return false
+    if (this.submitted) {
+      setTimeout(() => {
+        this.submitted = this.error = false;
+      }, 10000);
+    }
+
   }
 
-  CheckedRole(role: string, id_user: number) {
-    console.log(id_user + " " + role);
-    // this.userCount = 0;
-
-    // this.users.forEach(user => {
-    //   if (user.user) {
-    //     this.userCount++;
-    //   }
-    // });
-
-    // return false;
-  }
-
-  isCheckedBlock(id_user: number) {
-    console.log(id_user);
-    // if (isBlock == "unblock") {
-    //   this.users[index].active = true;
-    //   this.blockCount--;
-    //   this.userCount++;
-
-    //   this.userService.editUser(this.users[index])
-    //   .subscribe((response) => {
-    //      console.log(response);
-    //   }, (error) => {
-    //     console.log(error);
-    //   });
-
-    // } else if (isBlock == "block") {
-    //   this.users[index].active = false;
-    //   this.blockCount++;
-    //   this.userCount--;
-
-    //   this.userService.editUser(this.users[index])
-    //   .subscribe((response) => {
-    //      console.log(response);
-    //   }, (error) => {
-    //     console.log(error);
-    //   });
-    // }
-    // console.log(this.users[index].admin);
-
-    // return false;
+  isCheckedBlock(index: number) {
+    console.log(index);
+    this.users[index].isActive = !this.users[index].isActive;
   }
 
 }

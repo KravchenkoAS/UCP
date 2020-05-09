@@ -2,6 +2,9 @@
 
   <div *ngIf="info.token; else loggedOut">
     <div class="wrapper">
+      <header>
+        <h2>Список заказов</h2>
+      </header>
       <div class="sidebar">
         <div>
           <a routerLink="addDelivery" class="btn btn-primary active" role="button" routerLinkActive="active">Заказать
@@ -11,8 +14,7 @@
       <div class="content">
         <section *ngIf="!openDetails; else OpenDetails" id="projects">
         
-          <h2>Список выших заказов</h2>
-          <div *ngIf="orders; else Empty" class="projects-table">
+          <div *ngIf="orders.length > 0; else Empty" class="projects-table">
             <div *ngFor="let order of orders">
               <app-delivery-list [order]='order' (id_order)="onId_order($event)"></app-delivery-list>
             </div>

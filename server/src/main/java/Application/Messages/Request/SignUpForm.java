@@ -1,5 +1,7 @@
 package Application.Messages.Request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -16,7 +18,8 @@ public class SignUpForm {
     @Email
     private String email;
 
-    private Set<String> role;
+    @JsonProperty("role")
+    private String role;
 
     @NotBlank
     @Size(min = 4, max = 40)
@@ -46,11 +49,11 @@ public class SignUpForm {
         this.password = password;
     }
 
-    public Set<String> getRole() {
+    public String getRole() {
         return this.role;
     }
 
-    public void setRole(Set<String> role) {
+    public void setRole(String role) {
         this.role = role;
     }
 

@@ -105,7 +105,7 @@ export class CreateTransportComponent implements OnInit {
       ]],
       name: [transportChange.name, [
         Validators.required,
-        Validators.pattern(/^[\wА-я-\s]+$/ )
+        Validators.pattern(/^[\wА-я-\s.]+$/ )
       ]],
       speed: [transportChange.speed, [
         Validators.required,
@@ -130,7 +130,15 @@ export class CreateTransportComponent implements OnInit {
       fuel_consumption: [transportChange.fuel_consumption, [
         Validators.required,
         Validators.pattern(/^[\d.]+$/ )
-      ]]
+      ]],
+      max_width: [transportChange.max_width, [
+        Validators.required,
+        Validators.pattern(/^[\d.]+$/ )
+      ]],
+      crewCost: [transportChange.crewCost, [
+        Validators.required,
+        Validators.pattern(/^[\d.]+$/ )
+      ]],
     });
   }
 
@@ -144,7 +152,7 @@ export class CreateTransportComponent implements OnInit {
       ]],
       name: ['', [
         Validators.required,
-        Validators.pattern(/^[\wА-я-\s]+$/ )
+        Validators.pattern(/^[\wА-я-\s.]+$/ )
       ]],
       speed: [0, [
         Validators.required,
@@ -169,6 +177,14 @@ export class CreateTransportComponent implements OnInit {
       fuel_consumption: [0, [
         Validators.required,
         Validators.pattern(/^[\d.]+$/ )
+      ]],
+      max_width: [0,  [
+        Validators.required,
+        Validators.pattern(/^[\d.]+$/ )
+      ]],
+      crewCost: [0,  [
+        Validators.required,
+        Validators.pattern(/^[\d.]+$/ )
       ]]
     });
   }
@@ -187,6 +203,8 @@ export class CreateTransportComponent implements OnInit {
       price: [null],
       coefficient: [null],
       fuel_consumption: [null],
+      max_width: [null],
+      crewCost: [null]
     });
   }
 

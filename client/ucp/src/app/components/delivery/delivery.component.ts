@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class DeliveryComponent implements OnInit {
 
   info: any;    
-  orders: Order[];
+  orders:  Array<Order> = [];
   openDetails: boolean;
   id_order: number;
 
@@ -27,13 +27,12 @@ export class DeliveryComponent implements OnInit {
       authorities: this.token.getAuthorities()                        // <<<---
     };   
     this.orderService.getAllOrdersUser()
-    .subscribe(orders => this.orders = orders); 
+      .subscribe(orders => this.orders = orders); 
     this._router.navigate([]);
     this.openDetails = false;                                                            // <<<---
   }                                                                   // <<<---
  
   logout() {  
-    console.log("/delivery");                                                          // <<<---
     this.token.signOut();                                             // <<<---
     window.location.reload();                                         // <<<---
   }     

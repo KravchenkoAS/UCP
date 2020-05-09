@@ -38,6 +38,8 @@ import { CarrierTransportComponent } from './components/transport/carrier-transp
 import { AddTrpComponent } from './components/transport/carrierTransport/add-trp/add-trp.component';
 import { MyTrpComponent } from './components/transport/carrierTransport/my-trp/my-trp.component';
 import { BackpackComponent } from './components/backpack/backpack/backpack.component';
+import { ProfileComponent } from './components/setting/profile/profile.component';
+import { CreateUserComponent } from './components/setting/create-user/create-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +71,9 @@ import { BackpackComponent } from './components/backpack/backpack/backpack.compo
     CarrierTransportComponent,
     AddTrpComponent,
     MyTrpComponent,
-    BackpackComponent
+    BackpackComponent,
+    ProfileComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule,

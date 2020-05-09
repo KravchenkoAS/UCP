@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Order, OrderCreate } from 'src/app/services/order/order';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { OrderService } from 'src/app/services/order/order.service';
-import { Router } from '@angular/router';
-import { Point } from 'src/app/services/point/point';
 import { Filter } from 'src/app/services/filter/filter';
 
 @Component({
@@ -33,11 +31,9 @@ export class BidClientComponent implements OnInit {
       this.reloadAllOrders();
       this.orderService.getAllOrCaRoDTO()
       .subscribe(data => this.ordersFilter = data);
-      console.log(this.info);
     }                                                                   // <<<---
    
     logout() {  
-      console.log("/bid-client");                                                          // <<<---
       this.token.signOut();                                             // <<<---
       window.location.reload();                                         // <<<---
     }       
@@ -93,10 +89,7 @@ export class BidClientComponent implements OnInit {
     }
 
     IsBackpack() {
-      if (this.ordersFilter.length === this.orders.length) {
-        // this.backpack = false;
-        alert("Выберети точки отправления и прибытия");
-      } else if (this.orders.length === 0) {
+       if (this.orders.length === 0) {
         alert("По этому маршруту нет заявок");
       }  else {
         this.backpack = !this.backpack;

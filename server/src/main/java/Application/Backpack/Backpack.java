@@ -7,15 +7,14 @@ public class Backpack {
 
     private List<Item> bestItems;
 
-    private Double maxW;
+    private Double maxV;
 
     private Double bestPrice;
 
-    public Backpack() {
-    }
+    private Double bestVolume;
 
-    public Backpack(Double maxW) {
-        this.maxW = maxW;
+    public Backpack(Double maxV) {
+        this.maxV = maxV;
     }
 
     public List<Item> getBestItems() {
@@ -26,12 +25,12 @@ public class Backpack {
         this.bestItems = bestItems;
     }
 
-    public Double getMaxW() {
-        return maxW;
+    public Double getMaxV() {
+        return maxV;
     }
 
-    public void setMaxW(Double maxW) {
-        this.maxW = maxW;
+    public void setMaxV(Double maxV) {
+        this.maxV = maxV;
     }
 
     public Double getBestPrice() {
@@ -42,13 +41,21 @@ public class Backpack {
         this.bestPrice = bestPrice;
     }
 
+    public Double getBestVolume() {
+        return bestVolume;
+    }
+
+    public void setBestVolume(Double bestVolume) {
+        this.bestVolume = bestVolume;
+    }
+
     private double calcWeight(List<Item> items) {
-        double sumW = 0;
+        double sumV = 0;
         for (Item item : items) {
-            sumW += item.getWeight();
+            sumV += item.getVolume();
         }
 
-        return sumW;
+        return sumV;
     }
 
     private double calcPrice(List<Item> items) {
@@ -62,17 +69,18 @@ public class Backpack {
 
     private void checkSet(List<Item> items) {
         if (this.bestItems == null) {
-            if (calcWeight(items) <= this.maxW) {
+            if (calcWeight(items) <= this.maxV) {
                 this.bestItems = items;
                 this.bestPrice = calcPrice(items);
             }
         } else {
             if (calcWeight(items) <=
-                    this.maxW &&
+                    this.maxV &&
                     calcPrice(items) >
                             this.bestPrice) {
                 this.bestItems = items;
                 this.bestPrice = calcPrice(items);
+                this.bestVolume = calcWeight(items);
             }
         }
     }

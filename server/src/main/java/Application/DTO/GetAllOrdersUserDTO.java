@@ -15,9 +15,6 @@ public class GetAllOrdersUserDTO {
     @JsonProperty("status")
     private String status;
 
-    public GetAllOrdersUserDTO() {
-    }
-
     public GetAllOrdersUserDTO(Long id_order, String type, String name, String status) {
         this.id_order = id_order;
         this.type = type;

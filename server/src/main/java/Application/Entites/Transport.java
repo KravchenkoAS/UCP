@@ -36,6 +36,8 @@ public class Transport implements Serializable {
     @NotNull(message = "Максимальный вес не может быть пустым")
     private Float max_weight;
 
+    private Float max_width;
+
     @NotNull(message = "Цена не может быть пустым")
     private Float price;
 
@@ -47,6 +49,9 @@ public class Transport implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="transport", fetch = FetchType.LAZY)
     private Set<Segment> segments;
+
+    @NotNull
+    private Float crewCost;
 
     @JsonManagedReference
     @JsonIgnore
@@ -154,7 +159,23 @@ public class Transport implements Serializable {
         this.fuel = fuel;
     }
 
-//    public Set<Transporter> getTransporters() {
+    public Float getMax_width() {
+        return max_width;
+    }
+
+    public void setMax_width(Float max_width) {
+        this.max_width = max_width;
+    }
+
+    public Float getCrewCost() {
+        return crewCost;
+    }
+
+    public void setCrewCost(Float crewCost) {
+        this.crewCost = crewCost;
+    }
+
+    //    public Set<Transporter> getTransporters() {
 //        return transporters;
 //    }
 //

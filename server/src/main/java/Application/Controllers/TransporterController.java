@@ -8,12 +8,12 @@ import Application.DTO.OrderDTO;
 import Application.DTO.TransportDTO;
 import Application.Entites.Order;
 import Application.Entites.Transport;
-import Application.Entites.Transporter;
-import Application.Entites.User;
+import Application.Entites.Users.Transporter;
+import Application.Entites.Users.User;
 import Application.Repositories.OrderRepository;
 import Application.Repositories.TransportRepository;
-import Application.Repositories.TransporterRepository;
-import Application.Repositories.UserRepository;
+import Application.Repositories.UserRepositories.TransporterRepository;
+//import Application.Repositories.UserRepositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +33,6 @@ public class TransporterController {
     private TransportRepository transportRepository;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private OrderRepository orderRepository;
 
     @PreAuthorize("hasRole('ROLE_TRANSPORTER')")
@@ -44,12 +41,12 @@ public class TransporterController {
 
         System.out.printf("getTransportsTransporter");
 
-        Optional<User> user = userRepository.findByUsername(username);
+        Optional<Transporter> transporterOptional = transporterRepository.findByUsername(username);
         Iterable<Transporter> transporters = transporterRepository.findAll();
         Transporter transporterGet = new Transporter();
 
         for (Transporter transporter : transporters) {
-            if (transporter.getId_user() == user.get().getId_user()) {
+            if (transporter.getId_user() == transporterOptional.get().getId_user()) {
                 transporterGet = transporter;
             }
         }
@@ -72,12 +69,12 @@ public class TransporterController {
 
         System.out.printf("deleteTransportTransporter");
 
-        Optional<User> user = userRepository.findByUsername(username);
+        Optional<Transporter> transporterOptional = transporterRepository.findByUsername(username);
         Iterable<Transporter> transporters = transporterRepository.findAll();
         Transporter transporterDel = new Transporter();
 
         for (Transporter transporter : transporters) {
-            if (transporter.getId_user() == user.get().getId_user()) {
+            if (transporter.getId_user() == transporterOptional.get().getId_user()) {
                 transporterDel = transporter;
             }
         }
@@ -100,12 +97,12 @@ public class TransporterController {
 
         System.out.printf("addTransportTransporter");
 
-        Optional<User> user = userRepository.findByUsername(username);
+        Optional<Transporter> transporterOptional = transporterRepository.findByUsername(username);
         Iterable<Transporter> transporters = transporterRepository.findAll();
         Transporter transporterAdd = new Transporter();
 
         for (Transporter transporter : transporters) {
-            if (transporter.getId_user() == user.get().getId_user()) {
+            if (transporter.getId_user() == transporterOptional.get().getId_user()) {
                 transporterAdd = transporter;
             }
         }
@@ -131,7 +128,7 @@ public class TransporterController {
         System.out.printf("calculateBackpack");
 
         Optional<Transport> transportOptional = transportRepository.findById(id_transport);
-        Backpack backpack = new Backpack(Double.valueOf(transportOptional.get().getMax_weight()));
+        Backpack backpack = new Backpack(Double.valueOf(transportOptional.get().getMax_volume()));
         backpack.makeAllSets(items);
 
         if (backpack.getBestItems() != null && backpack.getBestItems().size() > 0) {

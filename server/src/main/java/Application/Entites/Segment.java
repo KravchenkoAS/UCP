@@ -31,6 +31,9 @@ public class Segment implements Serializable {
     @NotNull(message = "Количество транспорта не может быть пустым")
     private Integer amount_transport;
 
+    @NotNull
+    private Long id_order;
+
     @JsonManagedReference
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -144,10 +147,19 @@ public class Segment implements Serializable {
         this.dictionaries = dictionaries;
     }
 
+    public Long getId_order() {
+        return id_order;
+    }
+
+    public void setId_order(Long id_order) {
+        this.id_order = id_order;
+    }
+
     public void convertFromSegmentCreateDTO(SegmentCreateDTO segmentCreateDTO) {
         this.setDistance(segmentCreateDTO.getDistance());
         this.setPrice(segmentCreateDTO.getPrice());
         this.setTime(segmentCreateDTO.getTime());
         this.setAmount_transport(segmentCreateDTO.getAmount_transport());
+        this.setId_order(segmentCreateDTO.getId_order());
     }
 }

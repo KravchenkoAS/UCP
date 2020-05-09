@@ -13,11 +13,11 @@ public class ItemDTO implements Serializable {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("weight")
-    private Double weight;
+    @JsonProperty("volume")
+    private Float volume;
 
     @JsonProperty("price")
-    private Double price;
+    private Float price;
 
     public ItemDTO() {
     }
@@ -30,19 +30,19 @@ public class ItemDTO implements Serializable {
         this.name = name;
     }
 
-    public Double getWeight() {
-        return weight;
+    public Float getVolume() {
+        return volume;
     }
 
-    public void setWeight(Double weight) {
-        this.weight = weight;
+    public void setVolume(Float volume) {
+        this.volume = volume;
     }
 
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -57,14 +57,16 @@ public class ItemDTO implements Serializable {
     public void init(Order order) {
         this.setId_order(order.getId_order());
         this.setName(order.getName());
-        Double weight = Double.valueOf(order.getCargo().getWeight() * order.getCargo().getNumber());
-        this.setWeight(weight);
-        this.setPrice(Double.valueOf(order.getPrice()));
+        Float volume = order.getCargo().getVolume() * order.getCargo().getNumber();
+        volume = (float) (Math.ceil(Double.valueOf(volume * 100)) / 100);
+        this.setVolume(volume);
+        this.setPrice(order.getPrice());
     }
 
     public static ItemDTO fromModel(Order order) {
         ItemDTO dto = new ItemDTO();
         dto.init(order);
+        System.out.println(dto.getPrice());
         return dto;
     }
 }

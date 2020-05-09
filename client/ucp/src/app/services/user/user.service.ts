@@ -23,8 +23,8 @@ export class UserService {
     return this.http.get(this.adminUrl, { responseType: 'text' });
   }
 
-  getUser(userName: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/getUser/${userName}`);
+  getUser(userName: string, role: string): Observable<any> {
+    return this.http.put(`${this.baseUrl}/getUser/${userName}`, role);
   }
 
   updatePassword(id_user: number, changePassword: ChangePassword): Observable<any> {          // <<<---
@@ -40,11 +40,15 @@ export class UserService {
   } 
 
   getAllUser(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/getAllUser/`);
+    return this.http.get(`${this.adminUrl}/getAllUsers`);
   }  
 
   changeRole(id_user: number, role: string) : Observable<any> {
     return this.http.put(`${this.baseUrl}/changeRole/${id_user}`, role);               // <<<---
+  }
+
+  saveUsers(users: any): Observable<any> {
+    return this.http.put(`${this.adminUrl}/saveUsers`, users);
   }
 
 }

@@ -55,10 +55,18 @@
               <div *ngIf="orderDetails.isContainer">
                   <span>Требуется защитная транспортировочная упаковка</span>
                 </div>
-                <div *ngIf="order.isDocuments">
+                <div *ngIf="orderDetails.isDocuments">
                   <span>Требуется перевозка сопроводительных документов</span>
                 </div>
-                <div *ngIf="!orderDetails.isContainer && !order.isDocuments">
+                <div *ngIf="orderDetails.stack">
+                  <span>Можно штабилировать</span>
+                </div>
+                <div *ngIf="orderDetails.express">
+                  <span>Требуется експресс доставка</span>
+                </div>
+                <div *ngIf="!orderDetails.isContainer 
+                  && !orderDetails.isDocuments  
+                  && !orderDetails.stack && !orderDetails.express">
                     <span>Не указаны</span>
                 </div>
           </section>
@@ -92,7 +100,7 @@
             <div>
               <ng-template #viewContainerRef></ng-template>
             </div>
-            <button type="button" (click)="addSegment()">
+            <button type="button" class="btn-add-segment" (click)="addSegment()">
                 + Добавить сегмент
             </button>
           </div>

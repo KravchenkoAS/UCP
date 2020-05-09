@@ -1,5 +1,7 @@
 package Application.Entites;
 
+import Application.Entites.Users.Customer;
+import Application.Entites.Users.User;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -43,10 +45,12 @@ public class Order implements Serializable {
 
     private Boolean isContainer;
 
+    private Boolean express;
+
     @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "fk_orders_id_user"))
-    private User user;
+    private Customer customer;
 
     @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -60,11 +64,12 @@ public class Order implements Serializable {
     }
 
     public Order(@NotBlank(message = "Название не может быть пустым") @Size(min = 2, max = 25) String name,
-                 LocalDate date_of_dispatch, Boolean isDocuments, Boolean isContainer) {
+                 LocalDate date_of_dispatch, Boolean isDocuments, Boolean isContainer, Boolean express) {
         this.name = name;
         this.date_of_dispatch = date_of_dispatch;
         this.isDocuments = isDocuments;
         this.isContainer = isContainer;
+        this.express = express;
 
         this.price = Float.valueOf(0);
         this.date = LocalDate.now();
@@ -119,12 +124,12 @@ public class Order implements Serializable {
         this.price = price;
     }
 
-    public User getUser() {
-        return user;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Cargo getCargo() {
@@ -159,5 +164,11 @@ public class Order implements Serializable {
         this.route = route;
     }
 
+    public Boolean getExpress() {
+        return express;
+    }
 
+    public void setExpress(Boolean express) {
+        this.express = express;
+    }
 }

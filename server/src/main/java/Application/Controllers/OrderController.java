@@ -4,7 +4,10 @@ import Application.DTO.GetAllOrdersUserDTO;
 import Application.DTO.OrderDTO;
 import Application.DTO.Order_Cargo_RouteDTO;
 import Application.Entites.*;
+import Application.Entites.Users.Customer;
 import Application.Repositories.*;
+//import Application.Repositories.UserRepositories.UserRepository;
+import Application.Repositories.UserRepositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,11 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.ObjDoubleConsumer;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -28,8 +29,11 @@ public class OrderController {
     @Autowired
     CargoRepository cargoRepository;
 
+//    @Autowired
+//    UserRepository userRepository;
+
     @Autowired
-    UserRepository userRepository;
+    CustomerRepository customerRepository;
 
     @Autowired
     PointRepository pointRepository;
@@ -47,15 +51,16 @@ public class OrderController {
 
         System.out.printf("createOrder");
 
-        if (orderRepository.findByNameAndUser(orderCargoRouteDTO.getName(),
-                userRepository.findByUsername(username).get()) != null) {
-            return new ResponseEntity<>(HttpStatus.valueOf("Такой груз уже существует"));
+        if (orderRepository.findByNameAndCustomer(orderCargoRouteDTO.getName(),
+                customerRepository.findByUsername(username).get()) != null) {
+            return new ResponseEntity<>(HttpStatus.valueOf("Груз с таким газванием уже существует. Придумайте другое название."));
         }
         Order newOrder = new Order(orderCargoRouteDTO.getName(), orderCargoRouteDTO.getDate(), orderCargoRouteDTO.getDocuments(),
-                orderCargoRouteDTO.getContainer());
+                orderCargoRouteDTO.getContainer(), orderCargoRouteDTO.getExpress());
         Cargo newCargo = new Cargo(orderCargoRouteDTO.getWeight(),
                 orderCargoRouteDTO.getLength(), orderCargoRouteDTO.getHeight(), orderCargoRouteDTO.getWidth(),
-                orderCargoRouteDTO.getAmount(), orderCargoRouteDTO.getType());
+                orderCargoRouteDTO.getAmount(), orderCargoRouteDTO.getType(),
+                orderCargoRouteDTO.getStack(), orderCargoRouteDTO.getExpress());
         Route newRoute = new Route(pointRepository.findById(orderCargoRouteDTO.getStartPoint()),
                 pointRepository.findById(orderCargoRouteDTO.getEndPoint()));
 
@@ -69,10 +74,9 @@ public class OrderController {
 
         newOrder.setCargo(newCargo);
         newOrder.setRoute(newRoute);
-        //newRoute.setOrders(newOrder);
         newCargo.setOrder(newOrder);
 
-        newOrder.setUser(userRepository.findUserByUsername(username));
+        newOrder.setCustomer(customerRepository.findUserByUsername(username));
 
         try {
             if (newOrder.getContainer()) {
@@ -82,6 +86,7 @@ public class OrderController {
                 newOrder.setPrice(newOrder.getPrice() + 3);
             }
             newRoute.setPrice(newOrder.getPrice());
+            newOrder.getCustomer().setCountOrders(newOrder.getCustomer().getCountOrders() + 1);
             cargoRepository.save(newCargo);
             routeRepository.save(newRoute);
             orderRepository.save(newOrder);
@@ -102,7 +107,7 @@ public class OrderController {
         System.out.printf("getAllOrdersUser");
 
         List<GetAllOrdersUserDTO> getAllOrdersUserDTOList = new ArrayList<>();
-        List<Order> orderList = orderRepository.findAllByUser(userRepository.findUserByUsername(username));
+        List<Order> orderList = orderRepository.findAllByCustomer(customerRepository.findUserByUsername(username));
 
         for (Order order : orderList) {
             getAllOrdersUserDTOList.add(new GetAllOrdersUserDTO(order.getId_order(), null, order.getName(),
@@ -167,6 +172,8 @@ public class OrderController {
         Optional<Order> optionalOrder = orderRepository.findById(id_order);
 
         if (optionalOrder.isPresent()) {
+
+            // Update container info
             optionalOrder.get().setName(order.getName());
             if (order.getContainer() && !optionalOrder.get().getContainer()) {
                 optionalOrder.get().setPrice(optionalOrder.get().getPrice() + 5);
@@ -174,12 +181,28 @@ public class OrderController {
                 optionalOrder.get().setPrice(optionalOrder.get().getPrice() - 5);
             }
             optionalOrder.get().setContainer(order.getContainer());
+
+            // Update docs info
             if (order.getDocuments() && !optionalOrder.get().getDocuments()) {
                 optionalOrder.get().setPrice(optionalOrder.get().getPrice() + 3);
             } else if(optionalOrder.get().getPrice() >= 3 && optionalOrder.get().getDocuments() && !order.getDocuments()) {
                 optionalOrder.get().setPrice(optionalOrder.get().getPrice() - 3);
             }
             optionalOrder.get().setDocuments(order.getDocuments());
+
+            // Update stack info
+            if (optionalOrder.get().getCargo().getStack() != order.getStack()) {
+                optionalOrder.get().getCargo().setStack(order.getStack());
+            }
+
+            // Update express info
+            if (order.getExpress() && !optionalOrder.get().getExpress()) {
+                optionalOrder.get().setPrice((float) (optionalOrder.get().getPrice() * 1.5));
+            } else if(optionalOrder.get().getPrice() >= 3 && optionalOrder.get().getExpress() && !order.getExpress()) {
+                optionalOrder.get().setPrice((float) (optionalOrder.get().getPrice() / 1.5));
+            }
+            optionalOrder.get().setExpress(order.getExpress());
+
             optionalOrder.get().getRoute().setPrice(optionalOrder.get().getPrice());
             return new ResponseEntity<>(Order_Cargo_RouteDTO.fromModel(orderRepository.save(optionalOrder.get())),
                     HttpStatus.OK);

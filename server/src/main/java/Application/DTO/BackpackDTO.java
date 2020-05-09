@@ -13,8 +13,8 @@ public class BackpackDTO implements Serializable {
     @JsonProperty("bestItems")
     private List<Item> bestItems;
 
-    @JsonProperty("maxW")
-    private Double maxW;
+    @JsonProperty("maxV")
+    private Double maxV;
 
     @JsonProperty("bestPrice")
     private Double bestPrice;
@@ -30,12 +30,12 @@ public class BackpackDTO implements Serializable {
         this.bestItems = bestItems;
     }
 
-    public Double getMaxW() {
-        return maxW;
+    public Double getMaxV() {
+        return maxV;
     }
 
-    public void setMaxW(Double maxW) {
-        this.maxW = maxW;
+    public void setMaxV(Double maxV) {
+        this.maxV = maxV;
     }
 
     public Double getBestPrice() {
@@ -48,7 +48,7 @@ public class BackpackDTO implements Serializable {
 
     public void init(Backpack backpack) {
         this.setBestItems(backpack.getBestItems());
-        this.setMaxW(backpack.getMaxW());
+        this.setMaxV((Math.ceil(backpack.getBestVolume() * 100) / 100));
         this.setBestPrice(backpack.getBestPrice());
     }
 

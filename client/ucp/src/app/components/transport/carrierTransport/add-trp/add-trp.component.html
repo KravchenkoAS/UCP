@@ -8,9 +8,10 @@
       <td>Cкорость, км/ч</td>
       <td>Макс. объем перевозки, куб. м</td>
       <td>Грузоподъемность</td>
+      <td>Длина, м</td>
       <td>Стоимость, $</td>
       <td>Коэфф. использования</td>
-      <td></td>
+      <td>Стоимость экипажа за сут., $</td>
     </tr>
     <tr *ngFor="let transport of transports; let i = index">
       <td>{{i + 1}}</td>
@@ -21,8 +22,10 @@
       <td>{{transport.speed}}</td>
       <td>{{transport.max_volume}}</td>
       <td>{{transport.max_weight}}</td>
+      <td>{{transport.max_width}}</td>
       <td>{{transport.price}}</td>
       <td>{{transport.coefficient}}</td>
+      <td>{{transport.crewCost}}</td>
       <td><button (click)="Add(transport, i)">Добавить</button></td>
     </tr>
 </table>

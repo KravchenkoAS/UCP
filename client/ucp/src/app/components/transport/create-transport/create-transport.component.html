@@ -71,6 +71,16 @@
       </div>
 
       <div class="form-group-error">
+        <label for="max_width" class="form-label">Максимальная длина, м: </label>
+        <input type="text" id="max_width" class="form-input size" formControlName="max_width" maxlength="20" />
+        <div class="form-error">
+          <ngb-alert *ngIf="isControlInvalid('max_width')">
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (0-9)
+          </ngb-alert>
+        </div>
+      </div>
+
+      <div class="form-group-error">
         <label for="price" class="form-label">Стоимость, $: </label>
         <input type="text" id="price" class="form-input size" formControlName="price" maxlength="10" />
         <div class="form-error">
@@ -89,6 +99,17 @@
           </ngb-alert>
         </div>
       </div>
+
+      <div class="form-group-error">
+        <label for="crewCost" class="form-label">Суточноая зп экипажа, $: </label>
+        <input type="text" id="crewCost" class="form-input size" formControlName="crewCost" maxlength="5" />
+        <div class="form-error">
+          <ngb-alert *ngIf="isControlInvalid('price')">
+            <strong>Ошибка!</strong> Проверьте корректность ввода. (0-9)
+          </ngb-alert>
+        </div>
+      </div>
+
     </section>
     <div class="btn">
       <button type="submit">Сохранить</button>
