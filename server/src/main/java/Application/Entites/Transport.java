@@ -65,9 +65,6 @@ public class Transport implements Serializable {
     @JoinColumn(name = "id_fuel", foreignKey = @ForeignKey(name = "fk_transport_id_fuel"))
     private Fuel fuel;
 
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "transport")
-//    private Set<Transporter> transporters = new HashSet<>();
-
     public Transport() {
     }
 
@@ -175,11 +172,4 @@ public class Transport implements Serializable {
         this.crewCost = crewCost;
     }
 
-    //    public Set<Transporter> getTransporters() {
-//        return transporters;
-//    }
-//
-//    public void setTransporters(Set<Transporter> transporters) {
-//        this.transporters = transporters;
-//    }
 }

@@ -4,7 +4,7 @@ import { RouteService } from 'src/app/services/route/route.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Point } from 'src/app/services/point/point';
 import { PointService } from 'src/app/services/point/point.service';
-import { Dictionary, WayDTO } from 'src/app/services/route/Dictionary';
+import { WayDTO } from 'src/app/services/route/Dictionary';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
@@ -35,10 +35,10 @@ export class RouteListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.info = {                                                     // <<<---
-      token: this.token.getToken(),                                   // <<<---
-      username: this.token.getUsername(),                             // <<<---
-      authorities: this.token.getAuthorities()                        // <<<---
+    this.info = {                                                     
+      token: this.token.getToken(),                                   
+      username: this.token.getUsername(),                             
+      authorities: this.token.getAuthorities()                        
     };
     
     this.controlAuthority();
@@ -103,9 +103,9 @@ export class RouteListComponent implements OnInit {
   
 
   controlAuthority() {
-    this.info.authorities.every(role => {                                        // <<<---
-      if (role === 'ROLE_ADMIN') {                                    // <<<---
-        this.authority = 'admin';                                                 // <<<---
+    this.info.authorities.every(role => {                                        
+      if (role === 'ROLE_ADMIN') {                                    
+        this.authority = 'admin';                                                 
       } else if (role === 'ROLE_ANALYST') {
         this.authority = 'analyst';
       } else if (role === 'ROLE_CLIENT') {
@@ -114,8 +114,8 @@ export class RouteListComponent implements OnInit {
         alert('Ошибка авторизации');
         console.log('Ошибка авторизации' + role);
         this.authority = 'client'
-      }                                            // <<<---
-    });                                                               // <<<---
+      }                                            
+    });                                                               
   }
 
   deleteWay(numberWayDTO: number){
@@ -160,9 +160,5 @@ export class RouteListComponent implements OnInit {
     this.route.distance = this.wayDTO[0].distance;
     this.route.time = this.wayDTO[0].time;
     this.route.price = this.wayDTO[0].price;
-
-
   }
-
-
 }

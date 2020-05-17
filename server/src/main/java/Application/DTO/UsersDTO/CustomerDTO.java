@@ -122,31 +122,6 @@ public class CustomerDTO implements UserDTO {
 
     }
 
-//    public void init(Customer user) {
-//
-//        System.out.println("CustomerDTO - Customer - init");
-//
-//        this.setId_user(user.getId_user());
-//        this.setName(user.getName());
-//        this.setUsername(user.getUsername());
-//        this.setSurname(user.getSurname());
-//        this.setActive(user.getIsLock());
-//        this.setEmail(user.getEmail());
-//        this.setRole(user.getRole().getName().toString());
-//        this.setCountOrders(user.getCountOrders());
-//
-//    }
-
-//    @Override
-//    public CustomerDTO fromModel(User user) {
-//
-//        System.out.println("CustomerDTO - User - fromModel");
-//
-//        CustomerDTO dto = new CustomerDTO();
-//        dto.init(user);
-//        return dto;
-//    }
-
     public CustomerDTO fromModel(Customer customer) {
 
         System.out.println("CustomerDTO - Customer - fromModel");

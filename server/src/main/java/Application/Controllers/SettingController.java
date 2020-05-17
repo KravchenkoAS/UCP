@@ -29,9 +29,6 @@ import java.util.*;
 @RestController
 public class SettingController {
 
-//    @Autowired
-//    private UserRepository userRepository;
-
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
@@ -95,31 +92,6 @@ public class SettingController {
                         }
                     }
                 }
-
-//            if (staff.isPresent()) {
-//
-//                System.out.println(staff.get().getRole().getName().toString().equals(staffDTO.getRole()));
-//
-//                if (!staff.get().getRole().getName().toString().equals(staffDTO.getRole())) {
-//                    if (staffDTO.getRole().equals(RoleName.ROLE_ADMIN.toString())) {
-//                        staff.get().setRole(roleRepository.findByName(RoleName.ROLE_ADMIN).get());
-//                    } else if (staffDTO.getRole().equals(RoleName.ROLE_ANALYST.toString())) {
-//                        staff.get().setRole(roleRepository.findByName(RoleName.ROLE_ANALYST).get());
-//                    }
-//
-//                    else if (staff.get().getRole().equals(RoleName.ROLE_TRANSPORTER.toString())) {
-//                        staff.get().setRole(roleRepository.findByName(RoleName.ROLE_TRANSPORTER).get());
-//                    } else {
-//                        staff.get().setRole(roleRepository.findByName(RoleName.ROLE_CLIENT).get());
-//                    }
-//                }
-//                if (staff.get().getIsLock() != staffDTO.getActive()) {
-//                    staff.get().setIsLock(staffDTO.getActive());
-//                }
-//                staffs.add(user.get());
-//            } else if (customerRepository.existsById(staffDTO.getId_user())){
-//
-//            }
             }
 
             staffRepository.saveAll(staffs);
@@ -157,7 +129,6 @@ public class SettingController {
             user.setPassword(encoder.encode(changePasswordDTO.getNewPassword()));
 
             if (user.getRole().getName().equals(RoleName.ROLE_CLIENT)) {
-//                Customer customer = (Customer) user;
                 customerRepository.save((Customer) user);
             } else if (user.getRole().getName().equals(RoleName.ROLE_TRANSPORTER)) {
                 transporterRepository.save((Transporter) user);

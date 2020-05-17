@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from 'src/app/auth/auth.service';
-import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Observable } from 'rxjs';
 import { SegmentCreate } from './segment';
 
@@ -13,39 +11,23 @@ export class SegmentService {
   private baseUrl = 'http://localhost:8080/api/test/analyst';
   private baseUrl_2 = 'http://localhost:8080/api/test';
 
-  constructor(private http: HttpClient,private authService: AuthService,                           // <<<---
-        private tokenStorage: TokenStorageService) { }
+  constructor(private http: HttpClient) { }
 
-  createSegment(segmentForm: any): Observable<any> {                // <<<---
+  createSegment(segmentForm: any): Observable<any> {                
     let segmentCreate: SegmentCreate = new SegmentCreate();
     segmentCreate.init(segmentForm);
-    // segmentCreate.type_delivery = segmentForm.type_delivery;
-    // segmentCreate.id_transport = segmentForm.id_transport;
-    // segmentCreate.time = segmentForm.time;
-    // segmentCreate.price = segmentForm.price;
-    // segmentCreate.distance = segmentForm.distance;
-    // segmentCreate.startPoint = segmentForm.startPoint;
-    // segmentCreate.endPoint = segmentForm.endPoint;
-    return this.http.post(`${this.baseUrl}/createSegment`, segmentCreate);     // <<<---
+        return this.http.post(`${this.baseUrl}/createSegment`, segmentCreate);     
   }  
   
-  removeSegment(id_segment: number): Observable<any> {                         // <<<---
-    return this.http.delete(`${this.baseUrl}/removeSegment/${id_segment}`,                    // <<<--- 
-                            { responseType: 'text' });                  // <<<---
+  removeSegment(id_segment: number): Observable<any> {                         
+    return this.http.delete(`${this.baseUrl}/removeSegment/${id_segment}`,                     
+                            { responseType: 'text' });                  
   }  
 
   calculate(segmentForm: any): Observable<any> { 
     let segmentCreate: SegmentCreate = new SegmentCreate();
     segmentCreate.init(segmentForm);
-    // segmentCreate.type_delivery = segmentForm.type_delivery;
-    // segmentCreate.id_transport = segmentForm.id_transport;
-    // segmentCreate.time = segmentForm.time;
-    // segmentCreate.price = segmentForm.price;
-    // segmentCreate.distance = segmentForm.distance;
-    // segmentCreate.startPoint = segmentForm.startPoint;
-    // segmentCreate.endPoint = segmentForm.endPoint;
-    // segmentCreate.amount_transport = segmentForm.amount_transport;
-    return this.http.post(`${this.baseUrl}/calculate`, segmentCreate);     // <<<---
+        return this.http.post(`${this.baseUrl}/calculate`, segmentCreate);     
   } 
 
   saveAllSegments(id_order: number, segments: Map<number, SegmentCreate>){

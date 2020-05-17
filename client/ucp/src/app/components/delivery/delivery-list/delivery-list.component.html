@@ -1,26 +1,10 @@
-<!-- <section id="projects">
-
-    <h2>Список выших заказов</h2>
-
-    <div *ngIf="orders; else Empty" class="projects-table">
-        <div *ngFor="let order of orders" class="project-tile"> -->
-        <div class="project-tile">
-            <a (click)="onClick(order.id_order)" id="project-a">
-                <img src="../../../../assets/icons/{{image}}.png" />
-                <p>
-                    <span class="code">&lt;</span>
-                    {{order.name}}
-                    <span class="code">&gt;</span>
-                </p>
-            </a>
-        </div>
-<!-- 
-    </div>
-
-    <ng-template #Empty>
-        <h2>
-                Список пуст.
-        </h2>
-    </ng-template>
-
-</section> -->
+<div class="project-tile">
+    <a (click)="onClick(order.id_order)" id="project-a">
+        <img src="../../../../assets/icons/{{image}}.png" />
+        <p>
+            <span class="code">&lt;</span>
+            {{order.name}}
+            <span class="code">&gt;</span>
+        </p>
+    </a>
+</div>

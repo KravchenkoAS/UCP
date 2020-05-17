@@ -12,11 +12,11 @@ export class FuelService {
   private baseUrl = 'http://localhost:8080/api/test/fuel';
 ;
 
-  constructor(private http: HttpClient,private authService: AuthService,                           // <<<---
+  constructor(private http: HttpClient,private authService: AuthService,                           
         private tokenStorage: TokenStorageService) { }
 
-  createFuel(fuel: Fuel): Observable<any> {                // <<<--
-    return this.http.post(`${this.baseUrl}/createFuel`, fuel);     // <<<---
+  createFuel(fuel: Fuel): Observable<any> {                
+    return this.http.post(`${this.baseUrl}/createFuel`, fuel);     
   }      
   
   getAllFuels(): Observable<any> {
@@ -31,12 +31,12 @@ export class FuelService {
     return this.http.get(`${this.baseUrl}/getFuelName/${name}`);
    }
 
-  updateFuel(id_fuel: number, fuel: Fuel): Observable<any> {          // <<<---
-    return this.http.put(`${this.baseUrl}/updateFuel/${id_fuel}`, fuel);               // <<<---
-  }                                                                     // <<<---
+  updateFuel(id_fuel: number, fuel: Fuel): Observable<any> {          
+    return this.http.put(`${this.baseUrl}/updateFuel/${id_fuel}`, fuel);               
+  }                                                                     
  
-  deleteFuel(id_fuel: number): Observable<any> {                         // <<<---
-    return this.http.delete(`${this.baseUrl}/deleteFuel/${id_fuel}`,                    // <<<--- 
-                            { responseType: 'text' });                  // <<<---
+  deleteFuel(id_fuel: number): Observable<any> {                         
+    return this.http.delete(`${this.baseUrl}/deleteFuel/${id_fuel}`,                     
+                            { responseType: 'text' });                  
   }  
 }

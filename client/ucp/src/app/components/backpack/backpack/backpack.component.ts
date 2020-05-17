@@ -114,7 +114,5 @@ export class BackpackComponent implements OnInit {
         this.submitted = false;
       }, 20000);
     }
-
-    
   }
 }

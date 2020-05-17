@@ -15,9 +15,8 @@ export class DeliveryListComponent implements OnInit {
   @Output() id_order = new EventEmitter<number>();
   image: string;
  
-  constructor(private orderService: OrderService, private deliveryComponent: DeliveryComponent) { }
+  constructor() { }
  
-
   ngOnInit() {
     if (this.order.name.length > 15) {
       this.order.name = this.order.name.substr(0, 15);

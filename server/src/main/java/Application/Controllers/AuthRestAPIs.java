@@ -91,34 +91,21 @@ public class AuthRestAPIs {
         Role role = null;
 
 
-//        strRoles.forEach(role -> {
-            switch (strRole) {
-//                case "admin":
-//                    Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
-//                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-//                    role = adminRole;
-//
-//                    break;
-//                case "analyst":
-//                    System.out.println("analyst");
-//                    Role analystRole = roleRepository.findByName(RoleName.ROLE_ANALYST)
-//                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-//                    role = analystRole;
-//
-//                    break;
-                case "transporter":
-                    System.out.println("transporter");
-                    Role transporterRole = roleRepository.findByName(RoleName.ROLE_TRANSPORTER)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    role = transporterRole;
+        switch (strRole) {
 
-                    break;
-                default:
-                    Role clientRole = roleRepository.findByName(RoleName.ROLE_CLIENT)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    role = clientRole;
-            }
-//        });
+            case "transporter":
+                System.out.println("transporter");
+                Role transporterRole = roleRepository.findByName(RoleName.ROLE_TRANSPORTER)
+                        .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+                role = transporterRole;
+
+                break;
+            default:
+                Role clientRole = roleRepository.findByName(RoleName.ROLE_CLIENT)
+                        .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+                role = clientRole;
+        }
+
 
         // Creating user's account
         if (role.getName().equals(RoleName.ROLE_TRANSPORTER)) {

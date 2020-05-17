@@ -18,23 +18,23 @@ export class DeliveryComponent implements OnInit {
 
   constructor(private token: TokenStorageService, private orderService: OrderService,
     private _router: Router) { 
-    }                 // <<<---
+    }                
 
-  ngOnInit() {                                                        // <<<---
-    this.info = {                                                     // <<<---
-      token: this.token.getToken(),                                   // <<<---
-      username: this.token.getUsername(),                             // <<<---
-      authorities: this.token.getAuthorities()                        // <<<---
+  ngOnInit() {                                                        
+    this.info = {                                                     
+      token: this.token.getToken(),                                   
+      username: this.token.getUsername(),                             
+      authorities: this.token.getAuthorities()                        
     };   
     this.orderService.getAllOrdersUser()
       .subscribe(orders => this.orders = orders); 
     this._router.navigate([]);
-    this.openDetails = false;                                                            // <<<---
-  }                                                                   // <<<---
+    this.openDetails = false;                                                            
+  }                                                                   
  
   logout() {  
-    this.token.signOut();                                             // <<<---
-    window.location.reload();                                         // <<<---
+    this.token.signOut();                                             
+    window.location.reload();                                         
   }     
   
   onId_order(id_order: number) {
@@ -43,9 +43,4 @@ export class DeliveryComponent implements OnInit {
       this.id_order = id_order;
     }
   } 
-
-  // onOpenDetails(openDetails: boolean) {
-  //     this.openDetails = openDetails;
-  //     this._router.navigate([]);
-  // }
 }

@@ -7,8 +7,6 @@ import java.io.Serializable;
 
 public class SegmentCreateDTO implements Serializable {
 
-//    private static final long serialVersionUID = -8809089768201955649L;
-
     @JsonProperty("id_segment")
     private Long id_segment;
 

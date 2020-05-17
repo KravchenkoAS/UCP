@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';                    // <<<---
+import { HttpClient } from '@angular/common/http';                    
 import { Observable } from 'rxjs';     
 import { Point } from './point';
 
@@ -9,7 +9,7 @@ import { Point } from './point';
 })
 export class PointService {
 
-  private baseUrl = 'http://localhost:8080/api/test/';   // <<<---
+  private baseUrl = 'http://localhost:8080/api/test/';   
 
   constructor(private http: HttpClient) { }   
   
@@ -22,12 +22,12 @@ export class PointService {
     return this.http.get(`${this.baseUrl}getPoint/${id_point}`);
   }
 
-  createPoint(point: Point): Observable<any> {                // <<<---
-    return this.http.post(`${this.baseUrl}point/createPoint`, point);     // <<<---
+  createPoint(point: Point): Observable<any> {                
+    return this.http.post(`${this.baseUrl}point/createPoint`, point);     
   }      
 
-  deletePoint(point: Point): Observable<any> {                         // <<<---
-    return this.http.delete(`${this.baseUrl}point/deletePoint/${point.id_point}`, { responseType: 'text' });                  // <<<---
+  deletePoint(point: Point): Observable<any> {                         
+    return this.http.delete(`${this.baseUrl}point/deletePoint/${point.id_point}`, { responseType: 'text' });                  
   }  
   
 }

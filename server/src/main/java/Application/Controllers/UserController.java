@@ -1,6 +1,5 @@
 package Application.Controllers;
 
-//import Application.DTO.UserDTO;
 import Application.DTO.DefaultUserSettingDTO;
 import Application.DTO.TransportDTO;
 import Application.DTO.UsersDTO.CustomerDTO;
@@ -30,8 +29,6 @@ import java.util.*;
 @RestController
 public class UserController {
 
-//    @Autowired
-//    private UserRepository userRepository;
     @Autowired
     private StaffRepository staffRepository;
     @Autowired

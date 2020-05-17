@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { OrderService } from 'src/app/services/order/order.service';
 import { PointService } from 'src/app/services/point/point.service';
 import { Point } from 'src/app/services/point/point';
-import { DeliveryComponent } from '../delivery.component';
 
 @Component({
   selector: 'app-delivery-details',

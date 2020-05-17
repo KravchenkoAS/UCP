@@ -148,7 +148,4 @@ public class StaffDTO implements UserDTO {
         return user;
     }
 
-//    public static fromModelStaff() {
-//        StaffDTO staffDTO = new StaffDTO();
-//    }
 }

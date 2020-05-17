@@ -101,7 +101,6 @@
 }
 
 .form-label{
-    /* color: #7D6342; */
     grid-area: form-label;
     text-align: right;
     margin-right: .5em;

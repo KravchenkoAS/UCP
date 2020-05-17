@@ -12,17 +12,17 @@ export class CarrierTransportComponent implements OnInit {
   info: any;   
   isList: boolean = false;
   isAdd: boolean = false;
-  isMy: boolean = false;                                                       // <<<---
+  isMy: boolean = false;                                                       
 
   constructor(private token: TokenStorageService,
-    private router: Router,) { }                 // <<<---
+    private router: Router) { }                 
 
-  ngOnInit() {                                                        // <<<---
-    this.info = {                                                     // <<<---
-      token: this.token.getToken(),                                   // <<<---
-      username: this.token.getUsername(),                             // <<<---
-      authorities: this.token.getAuthorities()                        // <<<---
-    };                                                                // <<<---
+  ngOnInit() {                                                        
+    this.info = {                                                     
+      token: this.token.getToken(),                                   
+      username: this.token.getUsername(),                             
+      authorities: this.token.getAuthorities()                        
+    };                                                                
   }   
 
   IsList() {

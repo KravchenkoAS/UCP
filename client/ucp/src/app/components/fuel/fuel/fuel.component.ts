@@ -126,7 +126,6 @@ export class FuelComponent implements OnInit {
     });
   }
 
-
   /** Инициализация формы*/
 
   initForm() {

@@ -23,13 +23,6 @@ public class PointController {
 
         System.out.printf("getAllPoints");
 
-//        List<Point> pointList = new ArrayList<>();
-//        pointRepository.findAll().forEach(pointList::add);
-//
-//        for (Point point: pointList) {
-//            System.out.println(point.toString());
-//        }
-
         System.out.println("...");
         return pointRepository.findAll();
     }

@@ -29,9 +29,6 @@ public class OrderController {
     @Autowired
     CargoRepository cargoRepository;
 
-//    @Autowired
-//    UserRepository userRepository;
-
     @Autowired
     CustomerRepository customerRepository;
 

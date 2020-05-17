@@ -123,26 +123,6 @@ public class RouteController {
         }
     }
 
-//    @PreAuthorize("hasRole('ANALYST')")
-//    @DeleteMapping("/api/test/route/deleteOtherWays/{id_route}/{way}")
-//    public ResponseEntity<WayDTO> deleteOtherWays(@PathVariable("id_route") Long id_route,
-//                                            @PathVariable("way") Integer way) {
-//        System.out.println("Save way = " + way + "...");
-//
-//        Set<Dictionary> dictionaries = routeRepository.findById(id_route).get().getDictionaries();
-//
-//        if (dictionaries.size() > 0) {
-//            for (Dictionary dictionary: dictionaries) {
-//                if(dictionary.getWay() != way) {
-//                    dictionaryRepository.delete(dictionary);
-//                }
-//            }
-//            return new ResponseEntity<>("Способ доставкы выбран", HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//    }
-
     @PreAuthorize("hasRole('CLIENT')")
     @GetMapping("/api/test/route/submit/{id_order}/{id_route}/{way}")
     public ResponseEntity<WayDTO> submit(@PathVariable("id_order") Long id_order,
@@ -183,12 +163,6 @@ public class RouteController {
                 route.setPrice(route.getPrice() + wayDTO.getPrice());
                 route.setTime(wayDTO.getTime());
 
-//                Set<Dictionary> set = new HashSet<>();
-//                for (Dictionary dictionary : dictionaryList) {
-//                    set.add(dictionary);
-//                }
-//
-//                route.setDictionaries(set);
                 routeRepository.save(route);
 
                 Order order = orderRepository.findById(id_order).get();

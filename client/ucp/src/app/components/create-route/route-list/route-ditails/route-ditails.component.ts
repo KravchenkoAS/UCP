@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
 import { SegmentService } from 'src/app/services/segment/segment.service';
-import { SegmentCreate, SegmentDetailsDTO } from 'src/app/services/segment/segment';
+import { SegmentDetailsDTO } from 'src/app/services/segment/segment';
 
 @Component({
   selector: 'app-route-ditails',

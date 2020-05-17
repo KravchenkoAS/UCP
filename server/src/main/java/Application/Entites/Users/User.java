@@ -13,156 +13,40 @@ import java.util.Set;
 
 public interface  User extends Serializable {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id_user;
-//
-//    public Long getId_user() {
-//        return id_user;
-//    }
-//
-//    public void setId_user(Long id_user) {
-//        this.id_user = id_user;
-//    }
-//    Long id_user;
+    Role getRole();
 
-//    @Size(min=1, max = 50)
-//    private String name;
+    void setRole(Role role);
 
-//    @NotBlank(message = "Логин не может быть пустым")
-//    @Size(min=3, max = 50)
-//    private String username;
-//
-////    @NaturalId
-//    @NotBlank(message = "E-mail не может быть пустым")
-//    @Size(max = 50)
-//    @Email
-//    private String email;
+    Long getId_user();
 
-//    @NotBlank(message = "Пароль не может быть пустым")
-//    @Size(min=6, max = 100)
-//    private String password;
-//
-//    @Size(min=1, max = 100)
-//    private String surname;
-//
-//    @NotNull
-//    private Boolean locked;
+    void setId_user(Long id_user);
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_role", foreignKey = @ForeignKey(name = "fk_users_id_role"))
-//    private Role role;
+    String getUsername();
 
-//    public User() {}
+    void setUsername(String username);
 
-//    public User(String password) {
-//        this.password = password;
-//    }
+    String getEmail();
 
-//    public Long getId_user() {
-//        return id_user;
-//    }
-//
-//    public void setId_user(Long id_user) {
-//        this.id_user = id_user;
-//    }
+    void setEmail(String email);
 
-//    public Boolean getLocked() {
-//        return locked;
-//    }
-//
-//    public void setLocked(Boolean locked) {
-//        this.locked = locked;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
+    Boolean getLocked();
 
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
-//
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
+    void setLocked(Boolean locked);
 
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-//
-//    public String getSurname() {
-//        return surname;
-//    }
-//
-//    public void setSurname(String surname) {
-//        this.surname = surname;
-//    }
-//
-//    public Boolean getIsLock() {
-//        return locked;
-//    }
-//
-//    public void setIsLock(Boolean isLock) {
-//        locked = isLock;
-//    }
+    String getName();
 
-    public abstract Role getRole();
-//    {
-//        return role;
-//    }
+    void setName(String name);
 
-    public abstract void setRole(Role role);
-//    {
-//        this.role = role;
-//    }
+    String getPassword();
 
-    public abstract Long getId_user();
+    void setPassword(String password);
 
-    public abstract void setId_user(Long id_user);
+    String getSurname();
 
-    public abstract String getUsername();
+    void setSurname(String surname);
 
-    public abstract void setUsername(String username);
+    Boolean getIsLock();
 
-    public abstract String getEmail();
-
-    public abstract void setEmail(String email);
-
-    public abstract Boolean getLocked();
-
-    public abstract void setLocked(Boolean locked);
-
-    public abstract String getName();
-
-    public abstract void setName(String name);
-
-    public abstract String getPassword();
-
-    public abstract void setPassword(String password);
-
-    public abstract String getSurname();
-
-    public abstract void setSurname(String surname);
-
-    public abstract Boolean getIsLock();
-
-    public abstract void setIsLock(Boolean isLock);
+    void setIsLock(Boolean isLock);
 }
 

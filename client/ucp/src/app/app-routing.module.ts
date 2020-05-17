@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { SignupComponent } from './components/signup/signup.component';    // <<<---
-import { LoginComponent } from './components/login/login.component';       // <<<--
-import { HomeComponent } from './components/home/home.component';          // <<<--
-import { UserComponent } from './components/user/user.component';          // <<<--
-import { AdminComponent } from './components/admin/admin.component';       // <<<--
+import { SignupComponent } from './components/signup/signup.component';   
+import { LoginComponent } from './components/login/login.component';      
+import { HomeComponent } from './components/home/home.component';         
+import { UserComponent } from './components/user/user.component';          
 import { DeliveryComponent } from "./components/delivery/delivery.component";
 import { BidClientComponent } from "./components/bid-client/bid-client.component";
 import { SettingComponent } from "./components/setting/setting.component";
@@ -25,41 +24,37 @@ import { ProfileComponent } from './components/setting/profile/profile.component
 import { CreateUserComponent } from './components/setting/create-user/create-user.component';
 
 const routes: Routes = [
-  {                                                                   // <<<--
-    path: 'home',                                                     // <<<--
-    component: HomeComponent                                          // <<<--
-},                                                                    // <<<--
-{                                                                     // <<<--
-    path: 'user',                                                     // <<<--
-    component: UserComponent                                          // <<<--
-},                                                                    // <<<--
-{                                                                     // <<<--
-    path: 'admin',                                                    // <<<--
-    component: AdminComponent                                         // <<<--
-},                                                                    // <<<--
-{                                                                     // <<<--
-    path: 'auth/login',                                               // <<<--
-    component: LoginComponent                                         // <<<--
-},                                                                    // <<<--
-{                                                                     // <<<--
-    path: 'signup',                                                   // <<<--
-    component: SignupComponent                                        // <<<--
-},                                                                    // <<<--
-{                                                                     // <<<--
-    path: '',                                                         // <<<--
-    redirectTo: 'home',                                               // <<<--
-    pathMatch: 'full'                                                 // <<<--
+  {                                                                   
+    path: 'home',                                                    
+    component: HomeComponent                                          
+},                                                                    
+{                                                                     
+    path: 'user',                                                     
+    component: UserComponent                                          
+},                                                                                                                                       
+{                                                                     
+    path: 'auth/login',                                                
+    component: LoginComponent                                          
+},                                                                     
+{                                                                      
+    path: 'signup',                                                   
+    component: SignupComponent                                        
+},                                                                    
+{                                                                     
+    path: '',                                                         
+    redirectTo: 'home',                                                
+    pathMatch: 'full'                                                  
 }, 
-{                                                                     // <<<--
-    path: 'delivery',                                                   // <<<--
-    component: DeliveryComponent                                     // <<<--
+{                                                                     
+    path: 'delivery',                                                    
+    component: DeliveryComponent                                     
 }, 
 {
     path: 'delivery/routes/:id',
     component: ClientRouteListComponent
 },
-{                                                                     // <<<--
-    path: 'bidClient',                                                   // <<<--
+{                                                                      
+    path: 'bidClient',                                                    
     component: BidClientComponent,
     children: [{
         path: 'details/:id',
@@ -67,11 +62,11 @@ const routes: Routes = [
     },{
         path: 'backpack/:username',
         component: BackpackComponent
-    }]                                        // <<<--
+    }]                                         
 },  
-{                                                                     // <<<--
-    path: 'settings',                                                   // <<<--
-    component: SettingComponent,                                        // <<<--
+{                                                                      
+    path: 'settings',                                                   
+    component: SettingComponent,                                        
     children: [
         { path: 'users-list', component: TableUsersComponent },
         { path: 'profile', component: ProfileComponent },
@@ -88,10 +83,7 @@ const routes: Routes = [
 },
 { 
     path: 'bidClient/routeList/:id', component: RouteListComponent,
-    // children: [{
-    //     path: 'RouteDitails',
-    //     component: RouteDitailsComponent
-    // }]
+
 },
 {
     path: 'carrierTransport', component: CarrierTransportComponent,
@@ -100,22 +92,13 @@ const routes: Routes = [
         { path: 'my-transport/:id', component: MyTrpComponent, }
     ]
 }
-
 ];
 
 @NgModule({
-    // declarations: [
-
-    //     CreateRouteComponent,
-    //     SegmentComponent
-    
-    //   ],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
   entryComponents: [
-
     SegmentComponent,  
-
   ],
 })
 export class AppRoutingModule { }

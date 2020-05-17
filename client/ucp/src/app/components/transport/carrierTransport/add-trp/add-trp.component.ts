@@ -56,7 +56,6 @@ export class AddTrpComponent implements OnInit {
   transportUpdate(newTransport: any){
       this.isAdd = false;
       console.log(newTransport);
-      // this.transports.push(newTransport);
   }
 
 }

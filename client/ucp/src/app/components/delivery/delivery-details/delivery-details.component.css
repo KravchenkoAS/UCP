@@ -1,9 +1,6 @@
  a {
     color: #C9842E;
-    /* padding: 0px .25em;  */
-    
-   display: inline-block;
-
+    display: inline-block;
     line-height: 1.5;
     text-decoration:none;
     cursor: pointer;

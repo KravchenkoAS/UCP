@@ -13,11 +13,11 @@ export class SettingComponent implements OnInit {
 
   constructor(private tokenStorage: TokenStorageService,
     private router: Router,
-    private route: ActivatedRoute) { }                 // <<<---
+    private route: ActivatedRoute) { }                 
 
   ngOnInit() {
-    if (this.tokenStorage.getToken()) {                                   // <<<---
-      this.roles = this.tokenStorage.getAuthorities();                    // <<<---
+    if (this.tokenStorage.getToken()) {                                   
+      this.roles = this.tokenStorage.getAuthorities();                    
     }   
     
     if (this.router.url.toString() == "/settings"){

@@ -27,16 +27,16 @@ export class UserService {
     return this.http.put(`${this.baseUrl}/getUser/${userName}`, role);
   }
 
-  updatePassword(id_user: number, changePassword: ChangePassword): Observable<any> {          // <<<---
-    return this.http.put(`${this.baseUrl}/updatePassword/${id_user}`, changePassword);               // <<<---
+  updatePassword(id_user: number, changePassword: ChangePassword): Observable<any> {          
+    return this.http.put(`${this.baseUrl}/updatePassword/${id_user}`, changePassword);               
   }
   
-  updateUser(user: User): Observable<any> {          // <<<---
-    return this.http.put(`${this.baseUrl}/updateUser/${user.id_user}`, user);               // <<<---
+  updateUser(user: User): Observable<any> {          
+    return this.http.put(`${this.baseUrl}/updateUser/${user.id_user}`, user);               
   } 
   
-  blockUser(id_user: number): Observable<any> {          // <<<---
-    return this.http.get(`${this.baseUrl}/blockUser/${id_user}`);               // <<<---
+  blockUser(id_user: number): Observable<any> {          
+    return this.http.get(`${this.baseUrl}/blockUser/${id_user}`);               
   } 
 
   getAllUser(): Observable<any> {
@@ -44,7 +44,7 @@ export class UserService {
   }  
 
   changeRole(id_user: number, role: string) : Observable<any> {
-    return this.http.put(`${this.baseUrl}/changeRole/${id_user}`, role);               // <<<---
+    return this.http.put(`${this.baseUrl}/changeRole/${id_user}`, role);              
   }
 
   saveUsers(users: any): Observable<any> {

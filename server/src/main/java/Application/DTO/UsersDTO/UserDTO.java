@@ -33,16 +33,7 @@ public interface UserDTO {
     String getRole();
 
     void setRole(String role);
-//    public Integer getCountOrders() {
-//        return countOrders;
-//    }
-//
-//    public void setCountOrders(Integer countOrders) {
-//        this.countOrders = countOrders;
-//    }
-//
-    void init(User user);
 
-//    UserDTO fromModel(User user);
+    void init(User user);
 
 }

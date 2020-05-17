@@ -1,12 +1,9 @@
 import { Component, OnInit, ViewChild, ComponentRef, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Order, OrderCreate } from 'src/app/services/order/order';
-import { switchMap } from 'rxjs/operators';
 import { OrderService } from "../../services/order/order.service";
 import { PointService } from 'src/app/services/point/point.service';
 import { Point } from 'src/app/services/point/point';
-import { Button } from 'protractor';
-import { HtmlTagDefinition } from '@angular/compiler';
 import { SegmentComponent } from './segment/segment.component';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { SegmentCreate } from 'src/app/services/segment/segment';
@@ -40,10 +37,10 @@ export class CreateRouteComponent implements OnInit {
     private segmentService: SegmentService ) { }
 
   ngOnInit() {
-    this.info = {                                                     // <<<---
-      token: this.token.getToken(),                                   // <<<---
-      username: this.token.getUsername(),                             // <<<---
-      authorities: this.token.getAuthorities()                        // <<<---
+    this.info = {                                                     
+      token: this.token.getToken(),                                   
+      username: this.token.getUsername(),                             
+      authorities: this.token.getAuthorities()                        
     };  
 
     this.orderService.getAloneOrder(Number(this.route.snapshot.paramMap.get('id')))
@@ -175,5 +172,4 @@ export class CreateRouteComponent implements OnInit {
     })
     
   }
-
 }

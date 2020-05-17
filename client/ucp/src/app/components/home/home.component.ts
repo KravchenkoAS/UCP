@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import {TokenStorageService } from '../../auth/token-storage.service';
 
 @Component({
@@ -9,22 +8,21 @@ import {TokenStorageService } from '../../auth/token-storage.service';
 })
 export class HomeComponent implements OnInit {
 
-  info: any;                                                          // <<<---
+  info: any;                                                          
 
-  constructor(private token: TokenStorageService) { }                 // <<<---
+  constructor(private token: TokenStorageService) { }                 
 
-  ngOnInit() {                                                        // <<<---
-    this.info = {                                                     // <<<---
-      token: this.token.getToken(),                                   // <<<---
-      username: this.token.getUsername(),                             // <<<---
-      authorities: this.token.getAuthorities()                        // <<<---
-    };                                                                // <<<---
-  }                                                                   // <<<---
+  ngOnInit() {                                                        
+    this.info = {                                                     
+      token: this.token.getToken(),                                   
+      username: this.token.getUsername(),                             
+      authorities: this.token.getAuthorities()                        
+    };                                                                
+  }                                                                   
  
   logout() {  
-    console.log("/home");                                                          // <<<---
-    this.token.signOut();                                             // <<<---
-    window.location.reload();                                         // <<<---
-  }                                                                   // <<<---
-
+    console.log("/home");                                                          
+    this.token.signOut();                                             
+    window.location.reload();                                         
+  }                                                                   
 }

@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Point } from 'src/app/services/point/point';
 import { PointService } from 'src/app/services/point/point.service';
-import { stringify } from '@angular/core/src/util';
 import { Filter } from 'src/app/services/filter/filter';
 
 @Component({

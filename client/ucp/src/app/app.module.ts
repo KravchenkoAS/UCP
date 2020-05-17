@@ -3,7 +3,6 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AdminComponent } from './components/admin/admin.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -43,7 +42,6 @@ import { CreateUserComponent } from './components/setting/create-user/create-use
 @NgModule({
   declarations: [
     AppComponent,
-    AdminComponent,
     HomeComponent,
     LoginComponent,
     SignupComponent,

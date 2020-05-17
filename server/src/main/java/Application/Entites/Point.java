@@ -26,13 +26,6 @@ public class Point implements Serializable {
     @NotBlank(message = "Название страны не может быть пустым")
     private String country;
 
-    //OneToMan
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "start_point")
-//    private Set<Route> start_point = new HashSet<>();
-//
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "end_point")
-//    private Set<Route> end_point = new HashSet<>();
-
     public Point() {
     }
 
@@ -66,19 +59,4 @@ public class Point implements Serializable {
         this.country = country;
     }
 
-//    public Set<Route> getStart_point() {
-//        return start_point;
-//    }
-//
-//    public void setStart_point(Set<Route> start_point) {
-//        this.start_point = start_point;
-//    }
-//
-//    public Set<Route> getEnd_point() {
-//        return end_point;
-//    }
-//
-//    public void setEnd_point(Set<Route> end_point) {
-//        this.end_point = end_point;
-//    }
 }

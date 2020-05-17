@@ -19,7 +19,7 @@ import java.util.Set;
                 "email"
         })
 })
-public class Customer /*extends User */ implements User /*, Serializable*/ {
+public class Customer implements User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,6 @@ public class Customer /*extends User */ implements User /*, Serializable*/ {
     @Size(min=3, max = 50)
     private String username;
 
-    //    @NaturalId
     @NotBlank(message = "E-mail не может быть пустым")
     @Size(max = 50)
     @Email

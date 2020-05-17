@@ -12,8 +12,8 @@ export class EmployeeService {
  
   constructor(private http: HttpClient) { }
 
-  createEmployee(employee: Employee): Observable<any> {          // <<<---
-    return this.http.put(`${this.url}/createEmployee`, employee);               // <<<---
+  createEmployee(employee: Employee): Observable<any> {          
+    return this.http.put(`${this.url}/createEmployee`, employee);               
   }
 
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';                    // <<<---
+import { HttpClient } from '@angular/common/http';                    
 import { Observable } from 'rxjs';  
 import { OrderCreate, Order } from './order';
 import { TokenStorageService } from "../../auth/token-storage.service";
@@ -14,10 +14,10 @@ export class OrderService {
   private baseUrl = 'http://localhost:8080/api/test/client/delivery';
   private baseUrl_2 = 'http://localhost:8080/api/test';
 
-  constructor(private http: HttpClient,private authService: AuthService,                           // <<<---
+  constructor(private http: HttpClient,                          
         private tokenStorage: TokenStorageService) { }
 
-  createOrder(formCreateOrder: any): Observable<Object> {                // <<<---
+  createOrder(formCreateOrder: any): Observable<Object> {                
     let orderCreate: OrderCreate = new OrderCreate();
     orderCreate.type = formCreateOrder.type;
     orderCreate.name = formCreateOrder.name;
@@ -34,7 +34,7 @@ export class OrderService {
     orderCreate.stack = formCreateOrder.stack;
     orderCreate.express = formCreateOrder.express;
     console.log(this.tokenStorage.getUsername());
-    return this.http.post(`${this.baseUrl}` + `/` + this.tokenStorage.getUsername() + `/createOrder`, orderCreate);     // <<<---
+    return this.http.post(`${this.baseUrl}` + `/` + this.tokenStorage.getUsername() + `/createOrder`, orderCreate);     
   }      
   
   getAllOrdersUser(): Observable<any> {
@@ -57,13 +57,13 @@ export class OrderService {
     return this.http.get(`${this.baseUrl_2}/getAloneOrder/${id_order}`);
    }
 
-  updateOrder(id_order: number, orderCreate: OrderCreate): Observable<any> {          // <<<---
-    return this.http.put(`${this.baseUrl}/updateOrder/${this.tokenStorage.getUsername()}/${id_order}`, orderCreate);               // <<<---
-  }                                                                     // <<<---
+  updateOrder(id_order: number, orderCreate: OrderCreate): Observable<any> {          
+    return this.http.put(`${this.baseUrl}/updateOrder/${this.tokenStorage.getUsername()}/${id_order}`, orderCreate);       
+  }                                                                     
  
-  deleteOrder(id_order: number): Observable<any> {                         // <<<---
-    return this.http.delete(`${this.baseUrl}/delete/${id_order}`,                    // <<<--- 
-                            { responseType: 'text' });                  // <<<---
+  deleteOrder(id_order: number): Observable<any> {                         
+    return this.http.delete(`${this.baseUrl}/delete/${id_order}`,                     
+                            { responseType: 'text' });                  
   }  
 
   getStatus(id_order: number): Observable<any> {

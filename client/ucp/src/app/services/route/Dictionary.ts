@@ -1,5 +1,3 @@
-import { SegmentCreate } from '../segment/segment';
-
 export class Dictionary {
     id_dictionary: number;
     way: number;

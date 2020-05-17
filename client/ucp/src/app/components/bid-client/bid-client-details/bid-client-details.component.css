@@ -23,7 +23,6 @@ a:focus:after {
 
 h2 {
     display: inline-block;
-    /* text-align: center; */
     font-size: 25px; 
     padding-bottom: 0.25em;
 }

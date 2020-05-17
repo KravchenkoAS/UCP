@@ -22,20 +22,20 @@ export class BidClientComponent implements OnInit {
 
   constructor(private token: TokenStorageService, private orderService: OrderService) { }
 
-    ngOnInit() {                                                        // <<<---
-      this.info = {                                                     // <<<---
-        token: this.token.getToken(),                                   // <<<---
-        username: this.token.getUsername(),                             // <<<---
-        authorities: this.token.getAuthorities()                        // <<<---
+    ngOnInit() {                                                        
+      this.info = {                                                     
+        token: this.token.getToken(),                                   
+        username: this.token.getUsername(),                             
+        authorities: this.token.getAuthorities()                        
       };   
       this.reloadAllOrders();
       this.orderService.getAllOrCaRoDTO()
       .subscribe(data => this.ordersFilter = data);
-    }                                                                   // <<<---
+    }                                                                   
    
     logout() {  
-      this.token.signOut();                                             // <<<---
-      window.location.reload();                                         // <<<---
+      this.token.signOut();                                             
+      window.location.reload();                                         
     }       
 
     filter(filter: Filter) {

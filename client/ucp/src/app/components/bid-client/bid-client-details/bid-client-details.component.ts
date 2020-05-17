@@ -3,7 +3,6 @@ import { OrderCreate, Order } from 'src/app/services/order/order';
 import { Point } from 'src/app/services/point/point';
 import { OrderService } from 'src/app/services/order/order.service';
 import { PointService } from 'src/app/services/point/point.service';
-import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
@@ -26,10 +25,10 @@ export class BidClientDetailsComponent implements OnInit {
     private token: TokenStorageService) { }
 
   ngOnInit() {
-    this.info = {                                                     // <<<---
-      token: this.token.getToken(),                                   // <<<---
-      username: this.token.getUsername(),                             // <<<---
-      authorities: this.token.getAuthorities()                        // <<<---
+    this.info = {                                                     
+      token: this.token.getToken(),                                   
+      username: this.token.getUsername(),                             
+      authorities: this.token.getAuthorities()                        
     };   
 
     console.log(this.info.authorities);
